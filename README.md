@@ -4,7 +4,7 @@ A planned multi-page app for embroidery hobbyists to track supplies, organize pr
 
 ## Project status
 
-The initial Vite scaffold is in place, including the home page, responsive shared navbar, Bootstrap styling, and multi-page build configuration. Feature pages, Supabase integration, and database migrations are planned but have not been implemented yet.
+The initial Vite scaffold is in place, including the home page, responsive shared navbar, Bootstrap styling, and multi-page build configuration. The initial database schema is defined in `supabase/migrations/`. Row-Level Security, feature pages, and Supabase client integration are planned but have not been implemented yet.
 
 ## Documentation
 
