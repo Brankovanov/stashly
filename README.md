@@ -4,7 +4,7 @@ A planned multi-page app for embroidery hobbyists to track supplies, organize pr
 
 ## Project status
 
-This repository currently contains the project instructions and implementation plan. The application source code and Supabase migrations have not been created yet.
+The initial Vite scaffold is in place, including the home page, responsive shared navbar, Bootstrap styling, and multi-page build configuration. Feature pages, Supabase integration, and database migrations are planned but have not been implemented yet.
 
 ## Documentation
 
@@ -17,3 +17,12 @@ This repository currently contains the project instructions and implementation p
 Vanilla JavaScript ES modules, HTML, CSS, Bootstrap 5, Vite, and Supabase (Postgres, Auth, and Storage).
 
 See the [implementation plan](docs/implementation-plan.md) for the planned build phases and verification steps.
+
+## Local development
+
+```sh
+npm install
+npm run dev
+```
+
+To build the production bundle, run `npm run build`. Copy `.env.example` to `.env` and fill in the Supabase values when backend integration is added.

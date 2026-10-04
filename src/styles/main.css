@@ -1,0 +1,65 @@
+:root {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #302c29;
+  background: #f8f5ef;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --craft-cream: #f8f5ef;
+  --craft-green: #52685a;
+  --craft-rose: #b96e68;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--craft-cream);
+}
+
+.navbar-brand {
+  color: #302c29;
+  letter-spacing: 0.02em;
+}
+
+.navbar-brand:hover {
+  color: var(--craft-green);
+}
+
+.brand-icon {
+  color: var(--craft-rose);
+  font-size: 1.35rem;
+}
+
+.nav-link.active {
+  color: var(--craft-green) !important;
+  font-weight: 600;
+}
+
+.welcome-panel {
+  max-width: 52rem;
+  margin: 4vh auto 0;
+  border: 1px solid #e9e2d7;
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(ellipse at 90% 5%, rgb(185 110 104 / 10%), transparent 35%),
+    #fff;
+  box-shadow: 0 1rem 3rem rgb(48 44 41 / 6%);
+}
+
+.eyebrow {
+  color: var(--craft-green);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.welcome-panel h1 {
+  max-width: 12ch;
+  color: #302c29;
+}
+
+.welcome-panel .lead {
+  max-width: 38rem;
+  color: #655e57;
+}
