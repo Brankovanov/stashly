@@ -10,10 +10,10 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 |---|------|--------|
 | 1 | Scaffold the app | ✅ Done |
 | 2 | Create the database schema | ✅ Done; migration applied |
-| 3 | Add Row-Level Security | ✅ Done; migration applied (access-control behavior still needs manual testing) |
-| 4 | Implement authentication | 🟡 In progress |
-| 5 | Build supply browsing | 🟡 In progress |
-| 6 | Add supply CRUD | ⬜ Not started |
+| 3 | Add Row-Level Security | 🟡 Migration applied; access-control tests pending |
+| 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
+| 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
+| 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | ⬜ Not started |
 | 8 | Build project CRUD | ⬜ Not started |
 | 9 | Implement project supply tracking | ⬜ Not started |
@@ -31,14 +31,14 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Verify:** `npm run dev` starts and every page builds.
 - **Commit:** `chore: scaffold Vite multi-page project with Bootstrap`
 
-### 2. Create the database schema 🟡
+### 2. Create the database schema ✅
 
 - Add migrations for `profiles`, `user_roles`, `categories`, `supplies`, `projects`, and `project_items`.
 - Add constraints, foreign keys, indexes, and a signup trigger that creates a profile and default user role.
 - **Verify:** migration applied with `npx supabase db push`.
 - **Commit:** `feat(db): add initial schema migration`
 
-### 3. Add Row-Level Security ✅
+### 3. Add Row-Level Security 🟡
 
 - Enable RLS on every public table and define owner, parent-project, category, and role policies.
 - Add a server-side `is_admin()` helper; ensure users cannot grant themselves admin privileges.
@@ -50,7 +50,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 - Add the Supabase client, auth service, login and register pages, route guards, and guest/user/admin-aware navbar links.
 - Keep Supabase calls in services and protect pages with guards.
-- **Progress:** Supabase client and auth service, login/register screens, route guards, and auth-aware navbar are implemented. Manual auth testing still requires local Supabase credentials and a running Supabase project. Authentication and sign-out errors are announced visibly in the navbar.
+- **Progress:** Supabase client and auth service, login/register screens, route guards, and auth-aware navbar are implemented and merged into `main`. Manual auth testing against the configured Supabase project remains.
 - **Verify:** build all pages, then register, sign in, sign out, and check protected-page behavior against Supabase. When email confirmation is enabled, verify the confirmation email and subsequent login.
 - **Commit:** `feat(auth): register, login, logout and route guards`
 
@@ -60,13 +60,38 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 - Seed default categories and add the supplies service and listing page.
 - Include category badges, color swatches, search, category filtering, sorting, and loading, empty, and error states.
-- **Progress:** added a default-category migration, RLS-backed supply/category reads, and the responsive protected listing page. Applying the category seed and manually checking with a configured Supabase account remain.
+- **Progress:** the default-category migration, RLS-backed supply/category reads, and responsive protected listing page are implemented and merged into `main`. Applying the migration and verifying real inventory/category reads remain.
 - **Commit:** `feat(supplies): browse supplies with search and filters`
 
-### 6. Add supply CRUD
+### 6. Add supply CRUD — next
 
-- Build a shared create/edit form, validate inputs, and support deletion with confirmation.
-- Provide success and error feedback.
+- **Stage 1 — Data operations and validation** ✅
+  - Extend `src/services/suppliesService.js` with create, get-by-id, update, and delete operations.
+  - Keep query/data access in the service; rely on RLS for ownership enforcement.
+  - Add form validation for required name/category and non-negative numeric quantity. The database already rejects blank names and negative quantities; category is currently nullable, so do not imply the database requires it unless a schema migration is added.
+  - **Done when:** service methods surface Supabase errors and invalid values cannot be submitted from the form.
+- **Stage 2 — Create supply** ✅
+  - Add a supply form page and register it in Vite.
+  - Load categories through the service and provide fields for category, name, brand, color code/hex, quantity, unit, and notes.
+  - Include loading, error, success/navigation, and submit-disabled-while-saving behavior.
+  - **Done when:** a signed-in user can create a supply and see it on the inventory page.
+- **Stage 3 — Edit supply** ✅
+  - Reuse the create form for editing, load the selected supply by ID, and prefill its values.
+  - Handle missing/unauthorized rows without rendering a success state; updates must still be constrained by RLS.
+  - **Done when:** editing persists the changes and the listing reflects them.
+- **Stage 4 — Delete from inventory** ✅
+  - Add per-item edit and delete actions to the listing.
+  - Require confirmation before deletion, disable the action while saving, and report errors visibly.
+  - Refresh the inventory after a successful deletion.
+  - **Done when:** cancel keeps the item; confirming removes it from the database and listing.
+- **Stage 5 — Integration checks and documentation** 🟡
+  - Run the production build and manually test create, edit, delete, invalid values, and service error states.
+  - With two users, verify one user cannot edit or delete the other user's supply.
+  - Update README/setup guidance if the new screens change the user flow.
+  - **Progress:** production build and direct validation assertions pass; live Supabase create/update/delete and two-user RLS tests remain pending.
+- **Overall acceptance checks:** create and edit a supply; verify its list card updates; cancel and confirm deletion; test invalid values; verify cross-user updates/deletes are rejected or affect zero rows.
+- **Out of scope:** supply photo upload and file cleanup (Step 7).
+- **Branch:** `feature/step-6-supply-crud` from latest `main`.
 - **Commit:** `feat(supplies): create, edit and delete supplies`
 
 ### 7. Add supply photo storage

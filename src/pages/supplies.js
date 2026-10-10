@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
 import { createNavbar } from '../components/navbar.js';
-import { getSupplyBrowseData } from '../services/suppliesService.js';
+import { deleteSupply, getSupplyBrowseData } from '../services/suppliesService.js';
 import { requireAuth } from '../utils/guards.js';
 
 document.querySelector('#site-header').append(createNavbar());
@@ -18,6 +18,9 @@ const errorState = document.querySelector('#error-state');
 const emptyState = document.querySelector('#empty-state');
 const noResultsState = document.querySelector('#no-results-state');
 let allSupplies = [];
+
+showActionNotice();
+supplyList.addEventListener('click', handleSupplyAction);
 
 try {
   const user = await requireAuth();
@@ -150,6 +153,23 @@ function createSupplyCard(supply) {
     body.append(notes);
   }
 
+  const actions = document.createElement('div');
+  actions.className = 'd-flex gap-2 mt-3';
+  const editLink = document.createElement('a');
+  editLink.className = 'btn btn-sm btn-outline-secondary';
+  editLink.href = `/pages/supply-form.html?id=${encodeURIComponent(supply.id)}`;
+  editLink.textContent = 'Edit';
+  editLink.setAttribute('aria-label', `Edit ${supply.name}`);
+
+  const deleteButton = document.createElement('button');
+  deleteButton.className = 'btn btn-sm btn-outline-danger';
+  deleteButton.type = 'button';
+  deleteButton.dataset.deleteSupply = supply.id;
+  deleteButton.textContent = 'Delete';
+  deleteButton.setAttribute('aria-label', `Delete ${supply.name}`);
+  actions.append(editLink, deleteButton);
+  body.append(actions);
+
   card.append(body);
   column.append(card);
   return column;
@@ -160,4 +180,51 @@ function createDetail(text, className = '') {
   detail.className = `small mb-1 ${className}`.trim();
   detail.textContent = text;
   return detail;
+}
+
+function showActionNotice() {
+  const params = new URLSearchParams(window.location.search);
+  const messages = {
+    created: 'Supply added to your inventory.',
+    updated: 'Supply changes saved.',
+    deleted: 'Supply removed from your inventory.',
+  };
+  const action = Object.keys(messages).find((key) => params.has(key));
+  if (!action) return;
+
+  const notice = document.createElement('div');
+  notice.className = 'alert alert-success';
+  notice.setAttribute('role', 'status');
+  notice.textContent = messages[action];
+  document.querySelector('main').prepend(notice);
+  window.history.replaceState({}, '', window.location.pathname);
+}
+
+async function handleSupplyAction(event) {
+  const button = event.target.closest('button[data-delete-supply]');
+  if (!button || !supplyList.contains(button)) return;
+
+  const supply = allSupplies.find((item) => item.id === button.dataset.deleteSupply);
+  if (!supply) return;
+
+  const confirmed = window.confirm(`Delete "${supply.name}" from your inventory?`);
+  if (!confirmed) return;
+
+  button.disabled = true;
+  button.textContent = 'Deleting…';
+  errorState.hidden = true;
+  try {
+    await deleteSupply(supply.id);
+    allSupplies = allSupplies.filter((item) => item.id !== supply.id);
+    renderSupplies();
+    const notice = new URLSearchParams(window.location.search);
+    notice.set('deleted', '1');
+    window.history.replaceState({}, '', `${window.location.pathname}?${notice}`);
+    showActionNotice();
+  } catch (error) {
+    errorState.textContent = error.message;
+    errorState.hidden = false;
+    button.disabled = false;
+    button.textContent = 'Delete';
+  }
 }

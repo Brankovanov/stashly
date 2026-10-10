@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Add a supply to your embroidery inventory." />
+    <meta name="theme-color" content="#f8f5ef" />
+    <title>Add supply — Stashly</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="site-header"></header>
+      <main class="container py-5">
+        <section class="auth-panel supply-form-panel p-4 p-md-5 mx-auto">
+          <p class="eyebrow mb-2">Your inventory</p>
+          <h1 class="h2 fw-semibold mb-4" id="form-title">Add a supply</h1>
+          <p id="form-loading" class="text-muted" role="status">Loading categories…</p>
+          <div id="form-error" class="alert alert-danger" role="alert" hidden></div>
+          <form id="supply-form" hidden novalidate>
+            <div class="mb-3">
+              <label class="form-label" for="category-id">Category</label>
+              <select class="form-select" id="category-id" name="category_id" required>
+                <option value="">Choose a category</option>
+              </select>
+              <div class="invalid-feedback">Choose a category.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="name">Name</label>
+              <input class="form-control" id="name" name="name" type="text" required />
+              <div class="invalid-feedback">Enter a supply name.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="brand">Brand</label>
+              <input class="form-control" id="brand" name="brand" type="text" />
+            </div>
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
+                <label class="form-label" for="color-code">Color code</label>
+                <input class="form-control" id="color-code" name="color_code" type="text" />
+              </div>
+              <div class="col-12 col-sm-6">
+                <label class="form-label" for="color-hex">Color swatch (hex)</label>
+                <input
+                  class="form-control"
+                  id="color-hex"
+                  name="color_hex"
+                  type="text"
+                  inputmode="text"
+                  placeholder="#4A6B52"
+                  aria-describedby="color-hex-feedback"
+                />
+                <div class="invalid-feedback" id="color-hex-feedback">
+                  Enter a six-digit hex color, for example #4A6B52.
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 mt-0">
+              <div class="col-12 col-sm-6">
+                <label class="form-label" for="quantity">Quantity</label>
+                <input
+                  class="form-control"
+                  id="quantity"
+                  name="quantity"
+                  type="number"
+                  min="0"
+                  step="any"
+                  value="0"
+                  required
+                />
+                <div class="invalid-feedback">Enter a quantity of zero or more.</div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <label class="form-label" for="unit">Unit</label>
+                <input
+                  class="form-control"
+                  id="unit"
+                  name="unit"
+                  type="text"
+                  placeholder="skeins, meters, pieces"
+                />
+              </div>
+            </div>
+            <div class="mt-3 mb-3">
+              <label class="form-label" for="notes">Notes</label>
+              <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+            </div>
+            <div id="form-message" role="status" aria-live="polite"></div>
+            <div class="d-flex flex-column flex-sm-row gap-2">
+              <button class="btn btn-primary" type="submit">Save supply</button>
+              <a class="btn btn-outline-secondary" href="/pages/supplies.html">Cancel</a>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/supplyForm.js"></script>
+  </body>
+</html>
