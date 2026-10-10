@@ -30,6 +30,7 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 - `src/services/projectsService.js` provides RLS-backed project CRUD and resolves private cover/pattern paths to short-lived signed URLs.
 - `src/services/projectItemsService.js` loads project needs and owner inventory, calculates owned/partial/missing quantities, and calls the transactional purchase operation.
 - `src/services/dashboardService.js` loads the signed-in user's inventory/project counts, incomplete project needs, and recent projects; `src/services/profileService.js` reads and updates the current user's profile under RLS.
+- `src/services/adminService.js` reads administrator totals/users and manages categories through RLS-protected operations and narrowly granted role-management RPCs.
 - `src/services/storageService.js` validates supply images, project files, and profile avatars; it uploads to private user-scoped buckets and creates short-lived signed URLs for display.
 
 ## Request flow
@@ -49,3 +50,4 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 - Project-item policies require linked inventory to belong to the project owner; `mark_project_item_purchased` performs the inventory update and item link atomically after checking authorization and unit compatibility.
 - Profile updates are restricted to the signed-in user's `profiles` row by the existing owner-only policy.
 - Admin actions are restricted server-side via `public.is_admin()`.
+- The admin page is guarded in the frontend for navigation, while database RLS and the authenticated-only role RPCs enforce administrator access.

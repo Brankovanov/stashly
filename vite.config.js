@@ -14,6 +14,7 @@ export default defineConfig({
         projectForm: resolve(import.meta.dirname, 'pages/project-form.html'),
         projectDetail: resolve(import.meta.dirname, 'pages/project-detail.html'),
         profile: resolve(import.meta.dirname, 'pages/profile.html'),
+        admin: resolve(import.meta.dirname, 'pages/admin.html'),
       },
     },
   },

@@ -18,7 +18,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
 | 9 | Implement project supply tracking | 🟡 Stages 1–4 complete; Stage 5 in progress |
 | 10 | Add profile and dashboard | ✅ Implemented; cross-user storage isolation remains to verify |
-| 11 | Build the admin panel | ⬜ Not started |
+| 11 | Build the admin panel | ✅ Implemented and verified; cross-user deletion tested; editing remains untested |
 | 12 | Polish, document, and deploy | ⬜ Not started |
 
 ## Phase 1 — Foundation and security
@@ -210,10 +210,26 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 11. Build the admin panel
 
-- Add an admin-guarded page for category management, user and role management, and overall statistics.
-- Rely on RLS for enforcement; client-side hiding is only for UX.
-- **Verify:** test admin actions and confirm normal users cannot perform them through the API.
-- **Commit:** `feat(admin): admin panel for categories and users`
+- **Stage 1 — Secure admin data operations** ✅
+  - Add an admin service for aggregate statistics, user listings, and category CRUD.
+  - Add a privileged, authenticated-only RPC to list users with account email and safely change roles, including protection against removing the last administrator.
+  - **Progress:** admin statistics/user/category services and migrations `20261010160000_secure_admin_operations.sql` and `20261010162000_fix_last_admin_guard.sql` are implemented and applied. Direct role-table writes are removed in favor of authenticated, administrator-checked RPCs; browser verification confirmed the last administrator cannot be demoted. Migration dry run, production build, and editor diagnostics pass.
+  - **Commit:** `feat(admin): add secure admin data operations`
+- **Stage 2 — Admin overview and category management** ✅
+  - Register a protected admin page with loading, empty, and error states.
+  - Show account, supply, and project totals; add category create/edit/delete with visible outcomes.
+  - **Progress:** admin-guarded page, platform totals, and category create/edit/delete UI are implemented. Under an approved temporary admin role, browser checks confirmed the panel loaded, category create/edit/delete worked, and totals refreshed.
+  - **Commit:** `feat(admin): manage categories and view platform totals`
+- **Stage 3 — User roles and content moderation** 🟡
+  - List users and allow safe role changes with confirmation and explicit failure handling.
+  - Provide admin access to all supplies and projects with edit links and confirmed delete/cleanup feedback.
+  - **Progress:** user listing/role controls and supply/project confirmed-delete tables are implemented. Under an approved temporary admin role, user listing and deletion of a separate ordinary user's supply and project succeeded; moderation displayed the other account as owner and refreshed totals. Cross-user editing and storage-cleanup failure handling remain unverified.
+  - **Commit:** `feat(admin): manage users and moderate content`
+- **Stage 4 — Navigation, verification, and documentation** 🟡
+  - Ensure admin navigation and guards behave consistently, and document setup/manual checks and migration behavior.
+  - Verify admin operations, role boundaries, and normal-user denial via UI and server-side policies/RPC checks.
+  - **Progress:** the admin page is registered and guarded; normal-user browser access redirects to the dashboard. Live checks confirmed category create/edit/delete, admin user listing, and confirmed deletion of a separate ordinary user's supply and project. Both temporary records were removed and refreshed totals reached zero. The last-admin demotion attempt was rejected with the expected error and the selector reverted to the persisted role. Role RPCs remain admin-checked and authenticated-only; ordinary-user attempts to list users or promote themselves returned SQLSTATE `42501`. Both test accounts now have the `user` role. README, architecture, and database documentation include the first-admin bootstrap and manual checks. Cross-user editing, ownership isolation, and storage-cleanup failure behavior still need testing.
+  - **Commit:** `docs(admin): document panel and access verification`
 
 ### 12. Polish, document, and deploy
 

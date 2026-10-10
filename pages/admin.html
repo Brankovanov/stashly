@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Manage Stashly categories, accounts, and content." />
+    <meta name="theme-color" content="#f8f5ef" />
+    <title>Admin panel — Stashly</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="site-header"></header>
+      <main class="container py-5">
+        <div class="mb-4">
+          <p class="eyebrow mb-2">Administration</p>
+          <h1 class="display-6 fw-semibold">Admin panel</h1>
+          <p class="text-muted mb-0">Manage shared categories, accounts, and community content.</p>
+        </div>
+
+        <p class="text-muted py-4 text-center" id="loading-state" role="status">
+          Loading administration data…
+        </p>
+        <div class="alert alert-danger" id="error-state" role="alert" hidden></div>
+
+        <div id="admin-content" hidden>
+          <section class="row g-3 mb-5" aria-label="Platform totals">
+            <div class="col-12 col-sm-4">
+              <article class="admin-stat p-4 h-100">
+                <p class="text-muted mb-1">Accounts</p>
+                <p class="display-6 fw-semibold mb-0" id="user-total">0</p>
+              </article>
+            </div>
+            <div class="col-12 col-sm-4">
+              <article class="admin-stat p-4 h-100">
+                <p class="text-muted mb-1">Supplies</p>
+                <p class="display-6 fw-semibold mb-0" id="supply-total">0</p>
+              </article>
+            </div>
+            <div class="col-12 col-sm-4">
+              <article class="admin-stat p-4 h-100">
+                <p class="text-muted mb-1">Projects</p>
+                <p class="display-6 fw-semibold mb-0" id="project-total">0</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="filter-panel p-3 p-md-4 mb-5" aria-labelledby="categories-heading">
+            <h2 class="h3" id="categories-heading">Supply categories</h2>
+            <form id="category-form" class="row g-3 align-items-end mb-4" novalidate>
+              <div class="col-12 col-md-5">
+                <label class="form-label" for="category-name">Category name</label>
+                <input class="form-control" id="category-name" name="name" type="text" maxlength="40" required />
+              </div>
+              <div class="col-12 col-md-4">
+                <label class="form-label" for="category-icon">Bootstrap icon class</label>
+                <input class="form-control" id="category-icon" name="icon" type="text" placeholder="bi-palette" />
+              </div>
+              <div class="col-12 col-md-3 d-flex gap-2">
+                <button class="btn btn-primary" id="save-category" type="submit">Add category</button>
+                <button class="btn btn-outline-secondary" id="cancel-category-edit" type="button" hidden>
+                  Cancel
+                </button>
+              </div>
+            </form>
+            <div id="category-message" class="small mb-3" role="status" aria-live="polite"></div>
+            <div id="category-empty" class="empty-state p-4 text-center" hidden>
+              <p class="mb-0">No categories have been created yet.</p>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle" id="category-table" hidden>
+                <thead>
+                  <tr><th scope="col">Name</th><th scope="col">Icon</th><th scope="col">Actions</th></tr>
+                </thead>
+                <tbody id="category-list"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="filter-panel p-3 p-md-4 mb-5" aria-labelledby="users-heading">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+              <h2 class="h3 mb-0" id="users-heading">User accounts</h2>
+              <span class="small text-muted" id="user-list-count"></span>
+            </div>
+            <div id="user-message" class="small mb-3" role="status" aria-live="polite"></div>
+            <div id="user-empty" class="empty-state p-4 text-center" hidden>
+              <p class="mb-0">No user accounts were found.</p>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle" id="user-table" hidden>
+                <thead>
+                  <tr>
+                    <th scope="col">Account</th>
+                    <th scope="col">Joined</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="user-list"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="filter-panel p-3 p-md-4 mb-5" aria-labelledby="supplies-heading">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+              <h2 class="h3 mb-0" id="supplies-heading">Supply moderation</h2>
+              <span class="small text-muted" id="admin-supply-count"></span>
+            </div>
+            <div id="supply-moderation-empty" class="empty-state p-4 text-center" hidden>
+              <p class="mb-0">No supplies have been added.</p>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle" id="admin-supply-table" hidden>
+                <thead>
+                  <tr>
+                    <th scope="col">Supply</th>
+                    <th scope="col">Owner</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-supply-list"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="filter-panel p-3 p-md-4" aria-labelledby="projects-heading">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+              <h2 class="h3 mb-0" id="projects-heading">Project moderation</h2>
+              <span class="small text-muted" id="admin-project-count"></span>
+            </div>
+            <div id="project-moderation-empty" class="empty-state p-4 text-center" hidden>
+              <p class="mb-0">No projects have been created.</p>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle" id="admin-project-table" hidden>
+                <thead>
+                  <tr>
+                    <th scope="col">Project</th>
+                    <th scope="col">Owner ID</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-project-list"></tbody>
+              </table>
+            </div>
+            <div id="moderation-message" class="small mt-3" role="status" aria-live="polite"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/admin.js"></script>
+  </body>
+</html>
