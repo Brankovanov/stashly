@@ -60,3 +60,13 @@ export async function getSupplyPhotoUrls(paths) {
   }
   return urls;
 }
+
+export async function deleteSupplyPhoto(path) {
+  if (!path) return;
+
+  const { error } = await getSupabaseClient()
+    .storage.from(SUPPLY_PHOTO_BUCKET)
+    .remove([path]);
+
+  if (error) throw new Error(`Unable to delete supply photo: ${error.message}`);
+}

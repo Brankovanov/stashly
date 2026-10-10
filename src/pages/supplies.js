@@ -198,12 +198,16 @@ function showActionNotice() {
     deleted: 'Supply removed from your inventory.',
   };
   const action = Object.keys(messages).find((key) => params.has(key));
-  if (!action) return;
+  if (!action && !params.has('photoCleanup')) return;
 
   const notice = document.createElement('div');
-  notice.className = 'alert alert-success';
+  notice.className = params.has('photoCleanup')
+    ? 'alert alert-warning'
+    : 'alert alert-success';
   notice.setAttribute('role', 'status');
-  notice.textContent = messages[action];
+  notice.textContent = params.has('photoCleanup')
+    ? `${messages[action] ?? 'Supply changes saved.'} The previous photo could not be removed; contact an administrator to clean up the orphaned file.`
+    : messages[action];
   document.querySelector('main').prepend(notice);
   window.history.replaceState({}, '', window.location.pathname);
 }

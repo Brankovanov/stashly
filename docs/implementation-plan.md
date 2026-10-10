@@ -14,7 +14,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
-| 7 | Add supply photo storage | 🟡 Stages 1–2 complete; Stage 3 in progress |
+| 7 | Add supply photo storage | 🟡 Stages 1–3 complete; Stage 4 in progress |
 | 8 | Build project CRUD | ⬜ Not started |
 | 9 | Implement project supply tracking | ⬜ Not started |
 | 10 | Add profile and dashboard | ⬜ Not started |
@@ -104,7 +104,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Validate image MIME type and size before upload; use unique `{user_id}/{uuid}.{ext}` paths.
   - Create short-lived signed URLs for private images and render them on supply cards.
   - **Done when:** valid images upload and display; unsupported/oversized files fail with a user-visible error.
-- **Stage 3 — Create and replace photos**
+- **Stage 3 — Create and replace photos** ✅
   - Add optional photo selection and local preview to the shared supply form.
   - On create, upload before inserting the row and remove the newly uploaded file if the database insert fails.
   - On edit, upload the replacement, update the row's path, then clean the old file; compensate by removing the new file if the row update fails.
