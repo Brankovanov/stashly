@@ -97,7 +97,7 @@ function deleteButton(action, id, label) {
   const button = document.createElement('button');
   button.className = 'btn btn-sm btn-outline-danger';
   button.type = 'button';
-  button.dataset[action] = id;
+  button.setAttribute(`data-${action}`, id);
   button.textContent = 'Delete';
   button.setAttribute('aria-label', label);
   return button;

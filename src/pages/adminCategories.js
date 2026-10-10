@@ -57,7 +57,7 @@ function createButton(action, id, text, name) {
   const button = document.createElement('button');
   button.className = `btn btn-sm btn-outline-${action.startsWith('delete') ? 'danger' : 'secondary'}`;
   button.type = 'button';
-  button.dataset[action] = id;
+  button.setAttribute(`data-${action}`, id);
   button.textContent = text;
   if (name) button.setAttribute('aria-label', `${text} ${name}`);
   return button;
