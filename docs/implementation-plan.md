@@ -16,7 +16,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
-| 9 | Implement project supply tracking | 🟡 Stages 1–3 complete; Stage 4 in progress |
+| 9 | Implement project supply tracking | 🟡 Stages 1–4 complete; Stage 5 in progress |
 | 10 | Add profile and dashboard | ⬜ Not started |
 | 11 | Build the admin panel | ⬜ Not started |
 | 12 | Polish, document, and deploy | ⬜ Not started |
@@ -170,11 +170,13 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Show missing/short quantities and a focused shopping list, with counts and accessible progress.
   - **Progress:** editable items, confirmed removal, partial/missing shortfall details, and shopping-list filtering are implemented. Local production build, editor diagnostics, and whitespace checks pass; live item CRUD awaits the new project-item security migration.
   - **Done when:** edits/removals refresh progress and only incomplete items appear on the shopping list.
-- **Stage 4 — Mark as purchased** 🟡
+- **Stage 4 — Mark as purchased** ✅
   - Add a transactional, RLS-safe database function to create/link a supply for a missing need or increase a linked partial supply by only its shortfall.
   - Make repeat calls safe: a fully covered need must not inflate inventory again.
+  - **Progress:** `mark_project_item_purchased` runs atomically, checks project-owner/admin authorization and compatible units, creates and links missing inventory, and increments partial inventory by only the locked current shortfall.
+  - **Verification:** UI build, editor diagnostics, whitespace checks, and local exact-shortfall assertions pass. Database behavior is pending migration application and authenticated integration tests.
   - **Done when:** purchased needs become owned and the shopping list/progress update without split database writes.
-- **Stage 5 — Integration checks and documentation**
+- **Stage 5 — Integration checks and documentation** 🟡
   - Test missing, fully owned, partial, unit mismatch, add/edit/delete, purchase, repeated purchase, and cross-user access.
   - Run the production build and update README, architecture/database documentation, and manual test guidance.
   - **Progress:** implementation has not started; project supply tracking has no dedicated live integration checks yet.

@@ -7,6 +7,7 @@ import {
   createProjectItem,
   deleteProjectItem,
   getProjectSupplyData,
+  markProjectItemPurchased,
   updateProjectItem,
 } from '../services/projectItemsService.js';
 import { getSupplyCategories } from '../services/suppliesService.js';
@@ -52,6 +53,7 @@ supplyChoice.addEventListener('change', populateSupplyFields);
 form.addEventListener('submit', handleAddItem);
 cancelEditButton.addEventListener('click', resetItemForm);
 document.querySelector('#project-item-groups').addEventListener('click', handleItemAction);
+document.querySelector('#shopping-items').addEventListener('click', handlePurchaseAction);
 
 function renderProject(data) {
   document.title = `${data.project.title} supplies — Stashly`;
@@ -204,6 +206,16 @@ function createShoppingListRow(item) {
     warning.textContent = `Unit mismatch: inventory is measured in ${item.supplies.unit ?? 'unspecified units'}.`;
     row.append(warning);
   }
+  const purchaseButton = document.createElement('button');
+  purchaseButton.className = 'btn btn-sm btn-success mt-2';
+  purchaseButton.type = 'button';
+  purchaseButton.dataset.purchaseProjectItem = item.id;
+  purchaseButton.textContent = 'Mark as purchased';
+  purchaseButton.disabled = item.unit_mismatch || !item.unit;
+  if (item.unit_mismatch || !item.unit) {
+    purchaseButton.title = 'Set a matching unit before marking this supply as purchased.';
+  }
+  row.append(purchaseButton);
   return row;
 }
 
@@ -247,6 +259,25 @@ async function handleItemAction(event) {
     const item = projectData.items.find((candidate) => candidate.id === editButton.dataset.editProjectItem);
     if (item) beginItemEdit(item);
     return;
+  }
+
+  async function handlePurchaseAction(event) {
+    const button = event.target.closest('button[data-purchase-project-item]');
+    if (!button) return;
+
+    button.disabled = true;
+    button.textContent = 'Updating inventory…';
+    try {
+      await markProjectItemPurchased(button.dataset.purchaseProjectItem);
+      projectData = await getProjectSupplyData(projectId);
+      renderSupplyOptions(projectData.supplies);
+      renderProject(projectData);
+      showFormMessage('Inventory updated and project progress refreshed.', 'success');
+    } catch (error) {
+      showFormMessage(error.message, 'danger');
+      button.disabled = false;
+      button.textContent = 'Mark as purchased';
+    }
   }
 
   const deleteButton = event.target.closest('button[data-delete-project-item]');

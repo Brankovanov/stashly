@@ -78,3 +78,12 @@ export async function deleteProjectItem(itemId) {
   if (error) throw new Error(`Unable to remove project supply: ${error.message}`);
   if (!data) throw new Error('Project supply not found or you do not have permission to remove it.');
 }
+
+export async function markProjectItemPurchased(itemId) {
+  const { data, error } = await getSupabaseClient().rpc('mark_project_item_purchased', {
+    p_project_item_id: itemId,
+  });
+
+  if (error) throw new Error(`Unable to mark project supply as purchased: ${error.message}`);
+  return data;
+}
