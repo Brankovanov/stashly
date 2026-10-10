@@ -93,6 +93,12 @@ body {
   object-fit: cover;
 }
 
+.admin-stat {
+  border: 1px solid #e9e2d7;
+  border-radius: 1rem;
+  background: #fff;
+}
+
 .dashboard-stat,
 .dashboard-project {
   position: relative;
