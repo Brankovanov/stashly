@@ -19,6 +19,21 @@ The application stores user data, inventory records, project information, and ad
 - A non-null `project_items.supply_id` must refer to inventory owned by the parent project's owner; one owned supply can be linked once per project.
 - `categories` are readable by authenticated users and writable only by admins.
 - `user_roles` is admin-controlled; normal users can access only their own row.
+- Client roles cannot directly insert, update, or delete `user_roles`; `admin_list_users()` and `admin_set_user_role(uuid, text)` are authenticated-only, admin-checked RPCs. Role changes are serialized and the final administrator cannot be demoted.
+
+## Initial administrator bootstrap
+
+New accounts always receive the `user` role. Promote the first administrator using the trusted Supabase SQL Editor as the project owner: find the intended account UUID in Authentication > Users, then replace the placeholder below with that UUID:
+
+```sql
+UPDATE public.user_roles
+SET role = 'admin'
+WHERE user_id = '<auth-user-uuid>'::uuid;
+```
+
+Verify exactly one row was updated. This bootstrap step must never be exposed through the browser client or an unauthenticated endpoint. After an administrator exists, manage roles from the admin panel; its RPC rejects unauthenticated/non-admin callers and prevents demoting the last administrator. Migration `20261010160000_secure_admin_operations.sql` removes direct client role-write policies.
+
+The same migration defines `admin_list_users()` for administrator-only account listing (including auth email) and `admin_set_user_role(uuid, text)` for serialized role changes. The functions run as security definer, use a fixed search path, and have execute permission only for `authenticated`; their bodies check `public.is_admin()`.
 
 ## Supply photo storage
 

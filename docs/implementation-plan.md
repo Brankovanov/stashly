@@ -225,9 +225,10 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Provide admin access to all supplies and projects with edit links and confirmed delete/cleanup feedback.
   - **Progress:** user listing/role controls and cross-owner supply/project edit and confirmed-delete tables are implemented. RLS scopes writes, storage policies allow admin file access, and role updates use the protected RPC. Browser verification still requires an administrator session.
   - **Commit:** `feat(admin): manage users and moderate content`
-- **Stage 4 — Navigation, verification, and documentation** ⬜
+- **Stage 4 — Navigation, verification, and documentation** 🟡
   - Ensure admin navigation and guards behave consistently, and document setup/manual checks and migration behavior.
   - Verify admin operations, role boundaries, and normal-user denial via UI and server-side policies/RPC checks.
+  - **Progress:** the admin page is registered and guarded; normal-user browser access redirects to the dashboard. Live checks confirmed category writes are admin-policy protected, role write policies are absent, admin RPCs are security-definer and not executable by `anon`, and ordinary authenticated-user attempts to list users or promote themselves return SQLSTATE `42501`. README, architecture, and database documentation include the first-admin bootstrap and manual checks. The linked project currently has zero administrator accounts, so the positive admin UI workflows and last-admin scenario still require a bootstrapped admin session.
   - **Commit:** `docs(admin): document panel and access verification`
 
 ### 12. Polish, document, and deploy
