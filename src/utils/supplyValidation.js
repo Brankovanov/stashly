@@ -2,12 +2,13 @@ export function validateSupplyInput(values) {
   const errors = {};
   const name = values.name.trim();
   const categoryId = values.category_id.trim();
-  const quantity = Number(values.quantity);
+  const quantityText = values.quantity.trim();
+  const quantity = Number(quantityText);
   const colorHex = values.color_hex.trim();
 
   if (!name) errors.name = 'Enter a supply name.';
   if (!categoryId) errors.category_id = 'Choose a category.';
-  if (values.quantity === '' || !Number.isFinite(quantity) || quantity < 0) {
+  if (!quantityText || !Number.isFinite(quantity) || quantity < 0) {
     errors.quantity = 'Enter a quantity of zero or more.';
   }
   if (colorHex && !/^#[0-9A-Fa-f]{6}$/.test(colorHex)) {

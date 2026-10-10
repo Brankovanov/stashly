@@ -13,7 +13,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 3 | Add Row-Level Security | 🟡 Migration applied; access-control tests pending |
 | 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
-| 6 | Add supply CRUD | 🟡 Stages 1–4 implemented; integration checks pending |
+| 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | ⬜ Not started |
 | 8 | Build project CRUD | ⬜ Not started |
 | 9 | Implement project supply tracking | ⬜ Not started |
@@ -84,10 +84,11 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Require confirmation before deletion, disable the action while saving, and report errors visibly.
   - Refresh the inventory after a successful deletion.
   - **Done when:** cancel keeps the item; confirming removes it from the database and listing.
-- **Stage 5 — Integration checks and documentation**
+- **Stage 5 — Integration checks and documentation** 🟡
   - Run the production build and manually test create, edit, delete, invalid values, and service error states.
   - With two users, verify one user cannot edit or delete the other user's supply.
   - Update README/setup guidance if the new screens change the user flow.
+  - **Progress:** production build and direct validation assertions pass; live Supabase create/update/delete and two-user RLS tests remain pending.
 - **Overall acceptance checks:** create and edit a supply; verify its list card updates; cancel and confirm deletion; test invalid values; verify cross-user updates/deletes are rejected or affect zero rows.
 - **Out of scope:** supply photo upload and file cleanup (Step 7).
 - **Branch:** `feature/step-6-supply-crud` from latest `main`.
