@@ -50,8 +50,8 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 - Add the Supabase client, auth service, login and register pages, route guards, and guest/user/admin-aware navbar links.
 - Keep Supabase calls in services and protect pages with guards.
-- **Progress:** Supabase client and auth service, login/register screens, route guards, and auth-aware navbar are implemented. Manual auth testing still requires local Supabase credentials and a running Supabase project.
-- **Verify:** build all pages, then register, sign in, sign out, and check protected-page behavior against Supabase.
+- **Progress:** Supabase client and auth service, login/register screens, route guards, and auth-aware navbar are implemented. Manual auth testing still requires local Supabase credentials and a running Supabase project. Authentication and sign-out errors are announced visibly in the navbar.
+- **Verify:** build all pages, then register, sign in, sign out, and check protected-page behavior against Supabase. When email confirmation is enabled, verify the confirmation email and subsequent login.
 - **Commit:** `feat(auth): register, login, logout and route guards`
 
 ## Phase 2 — Core inventory and project workflows

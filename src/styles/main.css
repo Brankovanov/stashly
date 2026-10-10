@@ -16,6 +16,10 @@ body {
   background: var(--craft-cream);
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .navbar-brand {
   color: #302c29;
   letter-spacing: 0.02em;
