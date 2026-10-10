@@ -15,7 +15,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
-| 8 | Build project CRUD | 🟡 Stages 1–2 complete |
+| 8 | Build project CRUD | 🟡 Stages 1–3 complete |
 | 9 | Implement project supply tracking | ⬜ Not started |
 | 10 | Add profile and dashboard | ⬜ Not started |
 | 11 | Build the admin panel | ⬜ Not started |
@@ -128,7 +128,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Show title, description excerpt, status badge, and optional cover; include navigation to create/edit.
   - Add filtering by planned/in-progress/completed status and an understandable empty state.
   - **Done when:** signed-in users see only their own projects and can navigate into project CRUD.
-- **Stage 3 — Create and edit projects**
+- **Stage 3 — Create and edit projects** ✅
   - Add a shared project form with title, description, and status (`planned`, `in_progress`, `completed`).
   - Reuse the form for create/edit, prefill existing data, validate title/status, and disable submit while saving.
   - **Done when:** create/edit persists valid values and the project list reflects them.

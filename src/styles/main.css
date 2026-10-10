@@ -95,6 +95,10 @@ body {
   max-width: 24rem;
 }
 
+.project-form-panel {
+  max-width: 42rem;
+}
+
 .project-card {
   border-color: #e9e2d7;
   border-radius: 1rem;

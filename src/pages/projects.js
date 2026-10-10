@@ -17,6 +17,8 @@ const emptyState = document.querySelector('#empty-state');
 const noResultsState = document.querySelector('#no-results-state');
 let projects = [];
 
+showActionNotice();
+
 try {
   const user = await requireAuth();
   if (user) {
@@ -95,4 +97,18 @@ function createStatusBadge(status) {
   badge.className = `badge ${badgeClass} flex-shrink-0`;
   badge.textContent = label;
   return badge;
+}
+
+function showActionNotice() {
+  const params = new URLSearchParams(window.location.search);
+  const action = ['created', 'updated'].find((key) => params.has(key));
+  if (!action) return;
+
+  const notice = document.createElement('div');
+  notice.className = 'alert alert-success';
+  notice.setAttribute('role', 'status');
+  notice.textContent =
+    action === 'created' ? 'Project created.' : 'Project changes saved.';
+  document.querySelector('main').prepend(notice);
+  window.history.replaceState({}, '', window.location.pathname);
 }
