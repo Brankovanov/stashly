@@ -260,26 +260,6 @@ async function handleItemAction(event) {
     if (item) beginItemEdit(item);
     return;
   }
-
-  async function handlePurchaseAction(event) {
-    const button = event.target.closest('button[data-purchase-project-item]');
-    if (!button) return;
-
-    button.disabled = true;
-    button.textContent = 'Updating inventory…';
-    try {
-      await markProjectItemPurchased(button.dataset.purchaseProjectItem);
-      projectData = await getProjectSupplyData(projectId);
-      renderSupplyOptions(projectData.supplies);
-      renderProject(projectData);
-      showFormMessage('Inventory updated and project progress refreshed.', 'success');
-    } catch (error) {
-      showFormMessage(error.message, 'danger');
-      button.disabled = false;
-      button.textContent = 'Mark as purchased';
-    }
-  }
-
   const deleteButton = event.target.closest('button[data-delete-project-item]');
   if (!deleteButton || !window.confirm('Remove this supply from the project?')) return;
 
@@ -294,6 +274,25 @@ async function handleItemAction(event) {
     errorState.textContent = error.message;
     errorState.hidden = false;
     deleteButton.disabled = false;
+  }
+}
+
+async function handlePurchaseAction(event) {
+  const button = event.target.closest('button[data-purchase-project-item]');
+  if (!button) return;
+
+  button.disabled = true;
+  button.textContent = 'Updating inventory…';
+  try {
+    await markProjectItemPurchased(button.dataset.purchaseProjectItem);
+    projectData = await getProjectSupplyData(projectId);
+    renderSupplyOptions(projectData.supplies);
+    renderProject(projectData);
+    showFormMessage('Inventory updated and project progress refreshed.', 'success');
+  } catch (error) {
+    showFormMessage(error.message, 'danger');
+    button.disabled = false;
+    button.textContent = 'Mark as purchased';
   }
 }
 
