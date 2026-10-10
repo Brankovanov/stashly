@@ -16,7 +16,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
-| 9 | Implement project supply tracking | 🟡 Stage plan recorded |
+| 9 | Implement project supply tracking | 🟡 Stage 1 in progress |
 | 10 | Add profile and dashboard | ⬜ Not started |
 | 11 | Build the admin panel | ⬜ Not started |
 | 12 | Polish, document, and deploy | ⬜ Not started |
@@ -152,14 +152,15 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 9. Implement project supply tracking
 
-- **Stage 1 — Secure item operations and quantity calculations**
-  - Add a protected project-detail page and service methods to load a project with its project items and visible owned supplies.
+- **Stage 1 — Secure item operations and quantity calculations** ✅
+  - Add service methods to load a project with its project items and visible owned supplies.
   - Add service-layer item creation/update/deletion and calculate `owned`, `partial`, or `missing` plus shortage quantities.
   - Add a migration that enforces linked supplies belong to the project owner (or the caller is an admin); preserve project-item RLS and foreign-key behavior.
   - Treat differing or unspecified units as incomparable rather than claiming an item is owned; surface the full need as missing until a compatible supply is linked.
-  - **Done when:** query/service outputs report correct ownership quantities and unauthorized links are rejected server-side.
+  - **Progress:** project-item read/write service methods and service-layer quantity calculations are implemented; migration `20261010142000` tightens project-item linkage policies and prevents duplicate links to the same owned supply within a project. Local calculation/validation assertions and the production build pass; live RLS enforcement awaits applying and checking the new migration.
+  - **Done when:** service outputs report correct ownership quantities and unauthorized links are rejected server-side.
 - **Stage 2 — Project detail and supply-item entry**
-  - Add `pages/project-detail.html`, its Vite entry, and a link from each project card.
+  - Add a protected `pages/project-detail.html`, its Vite entry, and a link from each project card.
   - Render project information, progress, owned/partial/missing groups, and loading, empty, and error states.
   - Let users add an item by linking one of their supplies or describing a new need (category, name, brand/color, quantity, unit).
   - **Done when:** an item can be added and shown under the correct ownership state without data access in the page layer.
