@@ -18,7 +18,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
 | 9 | Implement project supply tracking | 🟡 Stages 1–4 complete; Stage 5 in progress |
 | 10 | Add profile and dashboard | ✅ Implemented; cross-user storage isolation remains to verify |
-| 11 | Build the admin panel | ✅ Implemented and verified; cross-user moderation remains untested |
+| 11 | Build the admin panel | ✅ Implemented and verified; cross-user deletion tested; editing remains untested |
 | 12 | Polish, document, and deploy | ⬜ Not started |
 
 ## Phase 1 — Foundation and security
@@ -223,12 +223,12 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Stage 3 — User roles and content moderation** 🟡
   - List users and allow safe role changes with confirmation and explicit failure handling.
   - Provide admin access to all supplies and projects with edit links and confirmed delete/cleanup feedback.
-  - **Progress:** user listing/role controls and supply/project confirmed-delete tables are implemented. Under the approved temporary admin role, user listing and deletion of temporary supply and project records succeeded; project moderation showed the record and refreshed totals after deletion. Cross-user editing/deletion and storage-cleanup failure handling remain unverified.
+  - **Progress:** user listing/role controls and supply/project confirmed-delete tables are implemented. Under an approved temporary admin role, user listing and deletion of a separate ordinary user's supply and project succeeded; moderation displayed the other account as owner and refreshed totals. Cross-user editing and storage-cleanup failure handling remain unverified.
   - **Commit:** `feat(admin): manage users and moderate content`
 - **Stage 4 — Navigation, verification, and documentation** 🟡
   - Ensure admin navigation and guards behave consistently, and document setup/manual checks and migration behavior.
   - Verify admin operations, role boundaries, and normal-user denial via UI and server-side policies/RPC checks.
-  - **Progress:** the admin page is registered and guarded; normal-user browser access redirects to the dashboard. Live checks confirmed category create/edit/delete, admin user listing, and temporary supply/project deletion. The last-admin demotion attempt was rejected with the expected error and the selector reverted to the persisted role. Role RPCs remain admin-checked and authenticated-only; ordinary-user attempts to list users or promote themselves returned SQLSTATE `42501`. The temporary QA account role was restored to `user`, and temporary test records were removed. README, architecture, and database documentation include the first-admin bootstrap and manual checks. Cross-user moderation and storage-cleanup failure behavior still need testing.
+  - **Progress:** the admin page is registered and guarded; normal-user browser access redirects to the dashboard. Live checks confirmed category create/edit/delete, admin user listing, and confirmed deletion of a separate ordinary user's supply and project. Both temporary records were removed and refreshed totals reached zero. The last-admin demotion attempt was rejected with the expected error and the selector reverted to the persisted role. Role RPCs remain admin-checked and authenticated-only; ordinary-user attempts to list users or promote themselves returned SQLSTATE `42501`. Both test accounts now have the `user` role. README, architecture, and database documentation include the first-admin bootstrap and manual checks. Cross-user editing, ownership isolation, and storage-cleanup failure behavior still need testing.
   - **Commit:** `docs(admin): document panel and access verification`
 
 ### 12. Polish, document, and deploy
