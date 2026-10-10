@@ -48,7 +48,7 @@ The app reads Supabase credentials from `.env`. Configure the project URL and br
 
 ### Supabase integration smoke tests
 
-The supply-photo migration is recorded as applied on the linked Supabase project. Read-only checks confirmed its owner/admin policies and private access. Signed-in supply and project storage workflows and cross-user isolation still require manual testing with two accounts. Apply pending migrations before testing project file storage.
+The supply-photo and project-files migrations are recorded as applied on the linked Supabase project. Read-only checks confirmed both buckets are private and have owner/admin storage policies; the project-files bucket has its expected 10 MB limit and JPEG/PNG/WebP/PDF allowlist. Anonymous project-files listing returned no objects. Signed-in supply and project workflows and cross-user isolation still require manual testing with two accounts.
 
 1. Start the app with `npm run dev` after configuring `.env`.
 2. Open `/pages/register.html`, create an account, and follow the email confirmation link if confirmation is enabled in Supabase Auth.
@@ -59,11 +59,11 @@ The supply-photo migration is recorded as applied on the linked Supabase project
 7. Add a supply, edit it, cancel a delete confirmation, then confirm deletion. Verify quantity/color validation and visible errors.
 8. Upload JPG/PNG/WebP photos up to 5 MB on create and edit; verify preview and inventory display, replace or remove a photo, and delete the supply.
 9. Verify unsupported/oversized files are rejected and a second user cannot access another user's photo object.
-10. Apply the pending project-files migration, then create projects in all three statuses and verify status filtering, edits, and delete confirmation behavior.
+10. Create projects in all three statuses and verify status filtering, edits, and delete confirmation behavior.
 11. Upload an image cover and an image or PDF pattern; verify previews, signed links, replacement/removal, and visible cleanup warnings. Reject unsupported and oversized files.
 12. With two users, verify projects and project files remain isolated; if testing as an admin, verify authorized moderation actions on another user's project.
 
-Verify migration status against the intended Supabase project before relying on categories or file storage. The `supply-photos` and `project-files` buckets are private; object paths are stored in the database and displayed through expiring signed URLs. Never share or commit `.env` values.
+Verify migration status against the intended Supabase project before relying on categories or file storage. The linked project checked on 2026-10-10 has both storage migrations applied. The `supply-photos` and `project-files` buckets are private; object paths are stored in the database and displayed through expiring signed URLs. Never share or commit `.env` values.
 
 ## Next implementation milestone
 

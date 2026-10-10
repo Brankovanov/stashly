@@ -144,7 +144,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Stage 6 — Integration tests and documentation** 🟡
   - Run the production build; test every status, create/edit/delete, invalid input, file type/size validation, and cross-user project/file isolation.
   - Update README, architecture, database, and manual test documentation.
-  - **Progress:** production build, editor diagnostics, whitespace checks, and local project/file validation assertions pass. Signed-in CRUD/storage workflows, cleanup-failure handling, admin moderation, and two-user project/file isolation still need testing against Supabase.
+  - **Progress:** production build, editor diagnostics, whitespace checks, and local project/file validation assertions pass. The linked Supabase project records migration `20261010104047` as applied; read-only SQL confirms a private 10 MB bucket with the expected MIME allowlist and four authenticated owner/admin policies. Anonymous listing returns an empty result, and the local guest route redirects to login. Signed-in CRUD/storage workflows, cleanup-failure handling, admin moderation, and two-user project/file isolation still need testing against Supabase.
 - **Acceptance checks:** users cannot read or modify another user's project or project files; all three statuses display correctly; uploads and replacements persist the right paths; deletion and failures are explicit.
 - **Out of scope:** project-item lists, owned/partial/missing calculations, and shopping lists (Step 9).
 - **Branch:** `feature/step-8-project-crud` from latest `main`.
