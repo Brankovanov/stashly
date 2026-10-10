@@ -59,6 +59,15 @@ function createProjectCard(project) {
   const body = document.createElement('div');
   body.className = 'card-body d-flex flex-column';
 
+  if (project.cover_url) {
+    const cover = document.createElement('img');
+    cover.className = 'project-cover mb-3';
+    cover.src = project.cover_url;
+    cover.alt = `${project.title} cover`;
+    cover.loading = 'lazy';
+    body.append(cover);
+  }
+
   const heading = document.createElement('div');
   heading.className = 'd-flex align-items-start justify-content-between gap-2';
   const title = document.createElement('h2');
@@ -72,6 +81,15 @@ function createProjectCard(project) {
     description.className = 'small text-muted project-description';
     description.textContent = project.description;
     body.append(description);
+  }
+  if (project.pattern_url) {
+    const patternLink = document.createElement('a');
+    patternLink.className = 'small mb-3';
+    patternLink.href = project.pattern_url;
+    patternLink.target = '_blank';
+    patternLink.rel = 'noopener';
+    patternLink.textContent = 'Open pattern file';
+    body.append(patternLink);
   }
 
   const editLink = document.createElement('a');
@@ -102,13 +120,17 @@ function createStatusBadge(status) {
 function showActionNotice() {
   const params = new URLSearchParams(window.location.search);
   const action = ['created', 'updated'].find((key) => params.has(key));
-  if (!action) return;
+  const cleanupPaths = params.get('fileCleanup')?.split(',').filter(Boolean) ?? [];
+  if (!action && cleanupPaths.length === 0) return;
 
   const notice = document.createElement('div');
-  notice.className = 'alert alert-success';
-  notice.setAttribute('role', 'status');
-  notice.textContent =
-    action === 'created' ? 'Project created.' : 'Project changes saved.';
+  notice.className = cleanupPaths.length ? 'alert alert-warning' : 'alert alert-success';
+  notice.setAttribute('role', cleanupPaths.length ? 'alert' : 'status');
+  notice.textContent = cleanupPaths.length
+    ? `Project saved, but these old files could not be removed: ${cleanupPaths.join(', ')}.`
+    : action === 'created'
+      ? 'Project created.'
+      : 'Project changes saved.';
   document.querySelector('main').prepend(notice);
   window.history.replaceState({}, '', window.location.pathname);
 }

@@ -1,4 +1,5 @@
 import { getSupabaseClient } from '../lib/supabaseClient.js';
+import { getProjectFileUrls } from './storageService.js';
 
 const PROJECT_FIELDS =
   'id, user_id, title, description, status, cover_path, pattern_path, created_at, updated_at';
@@ -10,7 +11,15 @@ export async function getProjects() {
     .order('updated_at', { ascending: false });
 
   if (error) throw new Error(`Unable to load projects: ${error.message}`);
-  return data;
+  const fileUrls = await getProjectFileUrls(
+    data.flatMap((project) => [project.cover_path, project.pattern_path]),
+  );
+
+  return data.map((project) => ({
+    ...project,
+    cover_url: fileUrls.get(project.cover_path) ?? null,
+    pattern_url: fileUrls.get(project.pattern_path) ?? null,
+  }));
 }
 
 export async function getProjectById(projectId) {
@@ -22,7 +31,12 @@ export async function getProjectById(projectId) {
 
   if (error) throw new Error(`Unable to load project: ${error.message}`);
   if (!data) throw new Error('Project not found or you do not have access to it.');
-  return data;
+  const fileUrls = await getProjectFileUrls([data.cover_path, data.pattern_path]);
+  return {
+    ...data,
+    cover_url: fileUrls.get(data.cover_path) ?? null,
+    pattern_url: fileUrls.get(data.pattern_path) ?? null,
+  };
 }
 
 export async function createProject(project) {

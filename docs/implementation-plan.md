@@ -15,7 +15,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
-| 8 | Build project CRUD | 🟡 Stages 1–3 complete |
+| 8 | Build project CRUD | 🟡 Stages 1–3 complete; Stage 4 in progress |
 | 9 | Implement project supply tracking | ⬜ Not started |
 | 10 | Add profile and dashboard | ⬜ Not started |
 | 11 | Build the admin panel | ⬜ Not started |
@@ -132,7 +132,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Add a shared project form with title, description, and status (`planned`, `in_progress`, `completed`).
   - Reuse the form for create/edit, prefill existing data, validate title/status, and disable submit while saving.
   - **Done when:** create/edit persists valid values and the project list reflects them.
-- **Stage 4 — Private project file storage**
+- **Stage 4 — Private project file storage** 🟡
   - Create a private `project-files` bucket with documented size/type limits and policies restricting objects to each owner's `{user_id}/` folder; admins retain authorized moderation access.
   - Store object paths in `cover_path` and `pattern_path`, never public URLs; render private files using signed URLs.
   - Validate cover image and pattern-file types/sizes, generate unique paths, and compensate for failed database writes during upload/replacement.
