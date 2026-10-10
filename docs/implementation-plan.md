@@ -2,9 +2,28 @@
 
 This plan follows the project requirements in `copilot-instructions.md` and the staged build sequence in `copilot-guide.md`.
 
+## Progress
+
+Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
+
+| # | Step | Status |
+|---|------|--------|
+| 1 | Scaffold the app | ✅ Done |
+| 2 | Create the database schema | ✅ Done |
+| 3 | Add Row-Level Security | ✅ Done in migration; local DB push pending verification |
+| 4 | Implement authentication | ⬜ Not started |
+| 5 | Build supply browsing | ⬜ Not started |
+| 6 | Add supply CRUD | ⬜ Not started |
+| 7 | Add supply photo storage | ⬜ Not started |
+| 8 | Build project CRUD | ⬜ Not started |
+| 9 | Implement project supply tracking | ⬜ Not started |
+| 10 | Add profile and dashboard | ⬜ Not started |
+| 11 | Build the admin panel | ⬜ Not started |
+| 12 | Polish, document, and deploy | ⬜ Not started |
+
 ## Phase 1 — Foundation and security
 
-### 1. Scaffold the app
+### 1. Scaffold the app ✅
 
 - Set up Vite as a vanilla JavaScript, multi-page app.
 - Add Bootstrap and Bootstrap Icons, shared styling, a navbar, and `.env.example`.
@@ -12,18 +31,19 @@ This plan follows the project requirements in `copilot-instructions.md` and the 
 - **Verify:** `npm run dev` starts and every page builds.
 - **Commit:** `chore: scaffold Vite multi-page project with Bootstrap`
 
-### 2. Create the database schema
+### 2. Create the database schema 🟡
 
 - Add migrations for `profiles`, `user_roles`, `categories`, `supplies`, `projects`, and `project_items`.
 - Add constraints, foreign keys, indexes, and a signup trigger that creates a profile and default user role.
-- **Verify:** apply migrations to the local or linked Supabase database.
+- **Verify:** apply migrations to the local or linked Supabase database. *(Pending: link the project and run `supabase db push`.)*
 - **Commit:** `feat(db): add initial schema migration`
 
-### 3. Add Row-Level Security
+### 3. Add Row-Level Security ✅
 
 - Enable RLS on every public table and define owner, parent-project, category, and role policies.
 - Add a server-side `is_admin()` helper; ensure users cannot grant themselves admin privileges.
-- **Verify:** test with two users and an admin, including attempts to access or modify another user's data.
+- **Migration:** `supabase/migrations/20261010085523_add_rls_policies.sql`
+- **Verify:** test with two users and an admin, including attempts to access or modify another user's data. Local DB push is the next validation step.
 - **Commit:** `feat(db): enable RLS policies`
 
 ### 4. Implement authentication

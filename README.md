@@ -1,28 +1,48 @@
 # Embroidery Supplies Manager
 
-A planned multi-page app for embroidery hobbyists to track supplies, organize projects, and see which materials they still need.
+Embroidery Supplies Manager is a multi-page app for hobbyists to track their inventory, plan projects, and check which materials they still need to buy. Users manage their own supplies and projects, while admins can manage categories and user roles.
 
 ## Project status
 
-The initial Vite scaffold is in place, including the home page, responsive shared navbar, Bootstrap styling, and multi-page build configuration. The initial database schema is defined in `supabase/migrations/`. Row-Level Security, feature pages, and Supabase client integration are planned but have not been implemented yet.
+The project foundation is in place and the database security layer has been added in the latest migration:
+
+- Vite multi-page app scaffold complete
+- Bootstrap and shared styling configured
+- Initial schema created in `supabase/migrations/`
+- Row-level security policies added for profiles, user roles, categories, supplies, projects, and project items
+- Security helper `public.is_admin()` added for admin-only writes
+
+The next implementation focus is authentication and protected page flow, followed by supplies and project CRUD.
 
 ## Documentation
 
 - [Implementation plan](docs/implementation-plan.md)
 - [Build guide](docs/copilot-guide.md)
 - [Project instructions](docs/copilot-instructions.md)
+- [Architecture overview](docs/architecture.md)
+- [Database schema](docs/database.md)
 
 ## Planned technology
 
 Vanilla JavaScript ES modules, HTML, CSS, Bootstrap 5, Vite, and Supabase (Postgres, Auth, and Storage).
 
-See the [implementation plan](docs/implementation-plan.md) for the planned build phases and verification steps.
-
 ## Local development
 
 ```sh
 npm install
+cp .env.example .env
 npm run dev
 ```
 
-To build the production bundle, run `npm run build`. Copy `.env.example` to `.env` and fill in the Supabase values when backend integration is added.
+To build the production bundle, run:
+
+```sh
+npm run build
+```
+
+The project uses Supabase credentials from `.env` once backend integration is enabled.
+
+## Roles
+
+- User: manages their own supplies and projects
+- Admin: full access plus category and role management
