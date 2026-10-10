@@ -4,7 +4,7 @@ Embroidery Supplies Manager is a multi-page app for hobbyists to track their inv
 
 ## Project status
 
-The project foundation, database schema and RLS migrations, email/password authentication, supply browsing, and supply CRUD are implemented:
+The project foundation, database schema and RLS migrations, email/password authentication, supply browsing and CRUD, and project CRUD are implemented:
 
 - Vite multi-page app scaffold complete
 - Bootstrap and shared styling configured
@@ -14,8 +14,9 @@ The project foundation, database schema and RLS migrations, email/password authe
 - Supabase auth client, login/register screens, session-aware navigation, sign-out, and route guards
 - Protected supplies browsing with category filtering, search, sorting, and loading/empty/error states
 - Supply create/edit forms and confirmed deletion from the inventory list
+- Protected project listing with status filtering, create/edit/delete, and private cover/pattern file handling
 
-Live integration checks still need to be completed against the configured Supabase project, including writes and cross-user ownership. The next feature milestone is supply photo storage.
+Live integration checks still need to be completed against the configured Supabase project, including writes, cross-user ownership, and signed-in project file workflows. The next feature milestone is project supply tracking.
 
 ## Documentation
 
@@ -47,7 +48,7 @@ The app reads Supabase credentials from `.env`. Configure the project URL and br
 
 ### Supabase integration smoke tests
 
-Step 7's storage migration is recorded as applied on the linked Supabase project. Read-only checks confirmed the expected owner/admin storage policies; anonymous listing exposed no objects, and the public-object endpoint did not serve the private bucket. Signed-in storage workflows and cross-user isolation still require manual testing with two accounts.
+The supply-photo migration is recorded as applied on the linked Supabase project. Read-only checks confirmed its owner/admin policies and private access. Signed-in supply and project storage workflows and cross-user isolation still require manual testing with two accounts. Apply pending migrations before testing project file storage.
 
 1. Start the app with `npm run dev` after configuring `.env`.
 2. Open `/pages/register.html`, create an account, and follow the email confirmation link if confirmation is enabled in Supabase Auth.
@@ -58,12 +59,15 @@ Step 7's storage migration is recorded as applied on the linked Supabase project
 7. Add a supply, edit it, cancel a delete confirmation, then confirm deletion. Verify quantity/color validation and visible errors.
 8. Upload JPG/PNG/WebP photos up to 5 MB on create and edit; verify preview and inventory display, replace or remove a photo, and delete the supply.
 9. Verify unsupported/oversized files are rejected and a second user cannot access another user's photo object.
+10. Apply the pending project-files migration, then create projects in all three statuses and verify status filtering, edits, and delete confirmation behavior.
+11. Upload an image cover and an image or PDF pattern; verify previews, signed links, replacement/removal, and visible cleanup warnings. Reject unsupported and oversized files.
+12. With two users, verify projects and project files remain isolated; if testing as an admin, verify authorized moderation actions on another user's project.
 
-Verify migration status against the intended Supabase project before relying on categories or photo storage. The storage bucket is private; photo paths are stored in the database and displayed through expiring signed URLs. Never share or commit `.env` values.
+Verify migration status against the intended Supabase project before relying on categories or file storage. The `supply-photos` and `project-files` buckets are private; object paths are stored in the database and displayed through expiring signed URLs. Never share or commit `.env` values.
 
 ## Next implementation milestone
 
-Build project CRUD, including private cover/pattern file handling, after completing the live Supabase supply-storage and ownership checks. Project items and owned/partial/missing supply tracking remain a separate following milestone. See [the implementation plan](docs/implementation-plan.md).
+Implement project supply tracking, including owned/partial/missing quantities and shopping lists. See [the implementation plan](docs/implementation-plan.md).
 
 ## Roles
 

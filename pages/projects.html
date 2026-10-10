@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Plan and manage your embroidery projects." />
+    <meta name="theme-color" content="#f8f5ef" />
+    <title>My projects — Stashly</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="site-header"></header>
+      <main class="container py-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4">
+          <div>
+            <p class="eyebrow mb-2">Your creative plans</p>
+            <h1 class="display-6 fw-semibold mb-0">My projects</h1>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <p class="text-muted mb-0" id="project-count" aria-live="polite"></p>
+            <a class="btn btn-primary" href="/pages/project-form.html">
+              <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Add project
+            </a>
+          </div>
+        </div>
+
+        <section class="filter-panel p-3 p-md-4 mb-4" aria-label="Filter projects">
+          <label class="form-label" for="status-filter">Project status</label>
+          <select class="form-select project-status-filter" id="status-filter">
+            <option value="">All statuses</option>
+            <option value="planned">Planned</option>
+            <option value="in_progress">In progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </section>
+
+        <p class="text-muted py-4 text-center" id="loading-state" role="status">
+          Loading your projects…
+        </p>
+        <div class="alert alert-danger" id="error-state" role="alert" hidden></div>
+        <div class="empty-state py-5 text-center" id="empty-state" hidden>
+          <i class="bi bi-journal-plus display-4 text-secondary" aria-hidden="true"></i>
+          <h2 class="h4 mt-3">No projects yet</h2>
+          <p class="text-muted mb-0">Create a project to start planning your next stitch.</p>
+          <a class="btn btn-primary mt-3" href="/pages/project-form.html">Create your first project</a>
+        </div>
+        <div class="empty-state py-5 text-center" id="no-results-state" hidden>
+          <h2 class="h4">No projects with this status</h2>
+          <button class="btn btn-outline-secondary" id="clear-filter" type="button">
+            Show all projects
+          </button>
+        </div>
+        <div class="row g-3" id="project-list" aria-live="polite"></div>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/projects.js"></script>
+  </body>
+</html>

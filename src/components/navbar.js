@@ -36,6 +36,9 @@ export function createNavbar() {
           <li class="nav-item" data-supplies-link hidden>
             <a class="nav-link" href="/pages/supplies.html">My supplies</a>
           </li>
+          <li class="nav-item" data-projects-link hidden>
+            <a class="nav-link" href="/pages/projects.html">My projects</a>
+          </li>
           <li class="nav-item" data-admin-link hidden>
             <a class="nav-link" href="/pages/admin.html">Admin</a>
           </li>
@@ -92,6 +95,7 @@ async function updateAccountNavigation(nav) {
   const email = nav.querySelector('[data-account-email]');
   const adminLink = nav.querySelector('[data-admin-link]');
   const suppliesLink = nav.querySelector('[data-supplies-link]');
+  const projectsLink = nav.querySelector('[data-projects-link]');
   const guestLinks = nav.querySelectorAll('[data-guest-links]');
   const signOutButton = nav.querySelector('[data-sign-out]');
 
@@ -105,6 +109,7 @@ async function updateAccountNavigation(nav) {
       accountLinks.hidden = true;
       adminLink.hidden = true;
       suppliesLink.hidden = true;
+      projectsLink.hidden = true;
       return;
     }
 
@@ -113,6 +118,7 @@ async function updateAccountNavigation(nav) {
     });
     accountLinks.hidden = false;
     suppliesLink.hidden = false;
+    projectsLink.hidden = false;
     email.textContent = session.user.email ?? '';
     adminLink.hidden = (await getUserRole(session.user.id)) !== 'admin';
 
