@@ -52,7 +52,12 @@ export function createNavbar() {
             </button>
           </li>
         </ul>
-        <span class="visually-hidden" role="status" data-account-status></span>
+        <span
+          class="small text-danger ms-3"
+          role="alert"
+          aria-live="polite"
+          data-account-status
+        ></span>
       </div>
     </div>
   `;
@@ -92,6 +97,7 @@ async function updateAccountNavigation(nav) {
 
   try {
     const session = await getSession();
+    status.textContent = '';
     if (!session) {
       guestLinks.forEach((item) => {
         item.hidden = false;
