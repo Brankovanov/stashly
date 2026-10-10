@@ -14,7 +14,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
-| 7 | Add supply photo storage | 🟡 Implemented; live storage checks pending |
+| 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | ⬜ Not started |
 | 9 | Implement project supply tracking | ⬜ Not started |
 | 10 | Add profile and dashboard | ⬜ Not started |
@@ -113,15 +113,40 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Stage 5 — Integration checks and documentation** 🟡
   - Test upload, display, replacement, delete cleanup, invalid type/size, and cross-user storage isolation.
   - Run the production build and update setup and manual test guidance.
-  - **Progress:** build and local file-validation assertions pass. The migration has not been applied to the remote project; live storage and two-user policy checks remain pending.
+  - **Progress:** migration `20261010101407` is recorded as applied remotely. Read-only policy inspection confirms the four `supply_photos_*` object policies target authenticated users and constrain access to the caller's folder or admins. Anonymous listing returns no rows, and the public-object endpoint reports the bucket as unavailable. Production build and local file-validation assertions pass. Signed-in upload/display/replacement/deletion, configured bucket limit/MIME metadata, and two-user access tests remain pending; the linked DB metadata query could not authenticate as its temporary CLI role.
 - **Migration:** `supabase/migrations/20261010101407_add_supply_photos_storage.sql`
-- **Commit:** `feat(storage): supply photo upload and display`
 - **Commit:** `feat(storage): supply photo upload and display`
 
 ### 8. Build project CRUD
 
-- Add the projects service, project list and create/edit pages, status badges, and cover-file upload.
-- **Verify:** test each project status and owner isolation.
+- **Stage 1 — Project data service**
+  - Add RLS-backed list, get-by-ID, create, update, and delete operations in `src/services/projectsService.js`.
+  - Include owner identity on create; let project RLS enforce access on every operation.
+  - **Done when:** service errors are explicit, missing/inaccessible records are not reported as success, and project queries return associated cover/pattern paths.
+- **Stage 2 — Project list**
+  - Add `pages/projects.html` and its Vite entry with loading, error, empty, and populated states.
+  - Show title, description excerpt, status badge, and optional cover; include navigation to create/edit.
+  - Add filtering by planned/in-progress/completed status and an understandable empty state.
+  - **Done when:** signed-in users see only their own projects and can navigate into project CRUD.
+- **Stage 3 — Create and edit projects**
+  - Add a shared project form with title, description, and status (`planned`, `in_progress`, `completed`).
+  - Reuse the form for create/edit, prefill existing data, validate title/status, and disable submit while saving.
+  - **Done when:** create/edit persists valid values and the project list reflects them.
+- **Stage 4 — Private project file storage**
+  - Create a private `project-files` bucket with documented size/type limits and policies restricting objects to each owner's `{user_id}/` folder; admins retain authorized moderation access.
+  - Store object paths in `cover_path` and `pattern_path`, never public URLs; render private files using signed URLs.
+  - Validate cover image and pattern-file types/sizes, generate unique paths, and compensate for failed database writes during upload/replacement.
+  - **Done when:** file access is owner-scoped, replacement preserves the old file until the row update succeeds, and cleanup errors are visible.
+- **Stage 5 — Delete and file cleanup**
+  - Add confirmed project deletion and clean up its cover/pattern files after the database row is deleted.
+  - If storage cleanup fails, report the orphaned path explicitly without claiming all cleanup succeeded.
+  - **Done when:** cancel preserves the project; confirmed deletion removes it and reports any file-cleanup failure.
+- **Stage 6 — Integration tests and documentation**
+  - Run the production build; test every status, create/edit/delete, invalid input, file type/size validation, and cross-user project/file isolation.
+  - Update README, architecture, database, and manual test documentation.
+- **Acceptance checks:** users cannot read or modify another user's project or project files; all three statuses display correctly; uploads and replacements persist the right paths; deletion and failures are explicit.
+- **Out of scope:** project-item lists, owned/partial/missing calculations, and shopping lists (Step 9).
+- **Branch:** `feature/step-8-project-crud` from latest `main`.
 - **Commit:** `feat(projects): manage projects with cover images`
 
 ### 9. Implement project supply tracking
