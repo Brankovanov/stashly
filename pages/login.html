@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sign in to your Stashly account." />
+    <meta name="theme-color" content="#f8f5ef" />
+    <title>Log in — Stashly</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="site-header"></header>
+      <main class="container py-5">
+        <section class="auth-panel p-4 p-md-5 mx-auto">
+          <p class="eyebrow mb-2">Welcome back</p>
+          <h1 class="h2 fw-semibold mb-4">Log in to Stashly</h1>
+          <form id="login-form">
+            <div class="mb-3">
+              <label class="form-label" for="email">Email</label>
+              <input
+                class="form-control"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input
+                class="form-control"
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+              />
+            </div>
+            <p class="text-danger" id="form-message" role="alert" aria-live="polite"></p>
+            <button class="btn btn-primary w-100" type="submit">Log in</button>
+          </form>
+          <p class="mt-4 mb-0">
+            New to Stashly? <a href="/pages/register.html">Create an account</a>
+          </p>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/login.js"></script>
+  </body>
+</html>

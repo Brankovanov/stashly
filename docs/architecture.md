@@ -24,6 +24,8 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 - Supabase Postgres stores app data.
 - Auth uses Supabase Auth for sign up, sign in, and session tracking.
 - Row-level security ensures each user can only reach their own data unless they are an admin.
+- `src/lib/supabaseClient.js` creates the single Supabase client from `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+- `src/services/authService.js` wraps auth operations and role lookup; `src/utils/guards.js` exposes authenticated-user and admin guards.
 
 ## Request flow
 

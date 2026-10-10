@@ -9,9 +9,9 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | # | Step | Status |
 |---|------|--------|
 | 1 | Scaffold the app | ✅ Done |
-| 2 | Create the database schema | ✅ Done |
-| 3 | Add Row-Level Security | ✅ Done in migration; local DB push pending verification |
-| 4 | Implement authentication | ⬜ Not started |
+| 2 | Create the database schema | ✅ Done; migration applied |
+| 3 | Add Row-Level Security | ✅ Done; migration applied (access-control behavior still needs manual testing) |
+| 4 | Implement authentication | 🟡 In progress |
 | 5 | Build supply browsing | ⬜ Not started |
 | 6 | Add supply CRUD | ⬜ Not started |
 | 7 | Add supply photo storage | ⬜ Not started |
@@ -35,7 +35,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 - Add migrations for `profiles`, `user_roles`, `categories`, `supplies`, `projects`, and `project_items`.
 - Add constraints, foreign keys, indexes, and a signup trigger that creates a profile and default user role.
-- **Verify:** apply migrations to the local or linked Supabase database. *(Pending: link the project and run `supabase db push`.)*
+- **Verify:** migration applied with `npx supabase db push`.
 - **Commit:** `feat(db): add initial schema migration`
 
 ### 3. Add Row-Level Security ✅
@@ -43,14 +43,15 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - Enable RLS on every public table and define owner, parent-project, category, and role policies.
 - Add a server-side `is_admin()` helper; ensure users cannot grant themselves admin privileges.
 - **Migration:** `supabase/migrations/20261010085523_add_rls_policies.sql`
-- **Verify:** test with two users and an admin, including attempts to access or modify another user's data. Local DB push is the next validation step.
+- **Verify:** migration applied with `npx supabase db push`. Test with two users and an admin, including attempts to access or modify another user's data, before production release.
 - **Commit:** `feat(db): enable RLS policies`
 
-### 4. Implement authentication
+### 4. Implement authentication 🟡
 
 - Add the Supabase client, auth service, login and register pages, route guards, and guest/user/admin-aware navbar links.
 - Keep Supabase calls in services and protect pages with guards.
-- **Verify:** register, sign in, sign out, and check protected-page behavior.
+- **Progress:** Supabase client and auth service, login/register screens, route guards, and auth-aware navbar are implemented. Manual auth testing still requires local Supabase credentials and a running Supabase project.
+- **Verify:** build all pages, then register, sign in, sign out, and check protected-page behavior against Supabase.
 - **Commit:** `feat(auth): register, login, logout and route guards`
 
 ## Phase 2 — Core inventory and project workflows

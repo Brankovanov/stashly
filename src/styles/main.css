@@ -63,3 +63,11 @@ body {
   max-width: 38rem;
   color: #655e57;
 }
+
+.auth-panel {
+  max-width: 34rem;
+  border: 1px solid #e9e2d7;
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(48 44 41 / 6%);
+}
