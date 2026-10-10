@@ -200,15 +200,7 @@ function showActionNotice() {
   const action = Object.keys(messages).find((key) => params.has(key));
   if (!action && !params.has('photoCleanup')) return;
 
-  const notice = document.createElement('div');
-  notice.className = params.has('photoCleanup')
-    ? 'alert alert-warning'
-    : 'alert alert-success';
-  notice.setAttribute('role', 'status');
-  notice.textContent = params.has('photoCleanup')
-    ? `${messages[action] ?? 'Supply changes saved.'} The previous photo could not be removed; contact an administrator to clean up the orphaned file.`
-    : messages[action];
-  document.querySelector('main').prepend(notice);
+  showInventoryNotice(messages[action], 'success');
   window.history.replaceState({}, '', window.location.pathname);
 }
 
@@ -226,17 +218,28 @@ async function handleSupplyAction(event) {
   button.textContent = 'Deleting…';
   errorState.hidden = true;
   try {
-    await deleteSupply(supply.id);
+    const result = await deleteSupply(supply.id);
     allSupplies = allSupplies.filter((item) => item.id !== supply.id);
     renderSupplies();
-    const notice = new URLSearchParams(window.location.search);
-    notice.set('deleted', '1');
-    window.history.replaceState({}, '', `${window.location.pathname}?${notice}`);
-    showActionNotice();
+    showInventoryNotice('Supply removed from your inventory.', 'success');
+    if (result.photoCleanupError) {
+      showInventoryNotice(
+        `The supply was deleted, but its photo could not be removed. Stored path: ${result.photoPath}. ${result.photoCleanupError}`,
+        'warning',
+      );
+    }
   } catch (error) {
     errorState.textContent = error.message;
     errorState.hidden = false;
     button.disabled = false;
     button.textContent = 'Delete';
   }
+}
+
+function showInventoryNotice(text, kind) {
+  const notice = document.createElement('div');
+  notice.className = `alert alert-${kind}`;
+  notice.setAttribute('role', kind === 'warning' ? 'alert' : 'status');
+  notice.textContent = text;
+  document.querySelector('main').prepend(notice);
 }

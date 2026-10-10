@@ -14,7 +14,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
-| 7 | Add supply photo storage | 🟡 Stages 1–3 complete; Stage 4 in progress |
+| 7 | Add supply photo storage | 🟡 Stages 1–4 complete; integration checks pending |
 | 8 | Build project CRUD | ⬜ Not started |
 | 9 | Implement project supply tracking | ⬜ Not started |
 | 10 | Add profile and dashboard | ⬜ Not started |
@@ -108,7 +108,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Add optional photo selection and local preview to the shared supply form.
   - On create, upload before inserting the row and remove the newly uploaded file if the database insert fails.
   - On edit, upload the replacement, update the row's path, then clean the old file; compensate by removing the new file if the row update fails.
-- **Stage 4 — Delete cleanup**
+- **Stage 4 — Delete cleanup** ✅
   - On supply deletion, remove the database row and its photo; report cleanup failures explicitly so orphaned storage objects can be cleaned up.
 - **Stage 5 — Integration checks and documentation**
   - Test upload, display, replacement, delete cleanup, invalid type/size, and cross-user storage isolation.
