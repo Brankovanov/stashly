@@ -68,6 +68,67 @@ body {
   color: #655e57;
 }
 
+.dashboard-heading {
+  max-width: 54rem;
+}
+
+.profile-panel {
+  max-width: 38rem;
+  border: 1px solid #e9e2d7;
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(48 44 41 / 6%);
+}
+
+.profile-avatar-section {
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9e2d7;
+}
+
+.profile-avatar {
+  width: 7rem;
+  height: 7rem;
+  border: 1px solid #e9e2d7;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dashboard-stat,
+.dashboard-project {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #e9e2d7;
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.dashboard-stat {
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.dashboard-stat:hover,
+.dashboard-stat:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--craft-green);
+}
+
+.dashboard-stat .stretched-link:focus-visible {
+  outline: 3px solid var(--craft-green);
+  outline-offset: -3px;
+  border-radius: 1rem;
+}
+
+.dashboard-project h3 a {
+  color: inherit;
+  text-decoration-color: transparent;
+}
+
+.dashboard-project h3 a:hover,
+.dashboard-project h3 a:focus-visible {
+  color: var(--craft-green);
+  text-decoration-color: currentColor;
+}
+
 .auth-panel {
   max-width: 34rem;
   border: 1px solid #e9e2d7;

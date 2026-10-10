@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="View and update your Stashly profile." />
+    <meta name="theme-color" content="#f8f5ef" />
+    <title>My profile — Stashly</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="site-header"></header>
+      <main class="container py-5">
+        <section class="profile-panel p-4 p-md-5 mx-auto">
+          <p class="eyebrow mb-2">Your account</p>
+          <h1 class="display-6 fw-semibold mb-4">My profile</h1>
+
+          <p class="text-muted py-4 text-center" id="loading-state" role="status">
+            Loading your profile…
+          </p>
+          <div class="alert alert-danger" id="error-state" role="alert" hidden></div>
+
+          <form id="profile-form" novalidate hidden>
+            <div class="mb-3">
+              <label class="form-label" for="profile-email">Email address</label>
+              <input class="form-control" id="profile-email" type="email" readonly />
+              <div class="form-text">Your sign-in email cannot be changed here.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="display-name">Display name</label>
+              <input
+                class="form-control"
+                id="display-name"
+                name="display_name"
+                type="text"
+                maxlength="80"
+                autocomplete="name"
+                required
+              />
+              <div class="invalid-feedback">Enter a display name of up to 80 characters.</div>
+            </div>
+            <div id="profile-message" role="status" aria-live="polite"></div>
+            <button class="btn btn-primary" type="submit">Save profile</button>
+          </form>
+
+          <section class="profile-avatar-section mt-5" aria-labelledby="avatar-heading" hidden>
+            <h2 class="h4" id="avatar-heading">Profile photo</h2>
+            <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-3">
+              <img
+                class="profile-avatar"
+                id="avatar-preview"
+                alt="Your profile photo"
+                hidden
+              />
+              <div class="flex-grow-1">
+                <form id="avatar-form" novalidate>
+                  <label class="form-label" for="avatar-file">Choose a photo</label>
+                  <input
+                    class="form-control"
+                    id="avatar-file"
+                    name="avatar"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    aria-describedby="avatar-help"
+                  />
+                  <div class="form-text" id="avatar-help">
+                    JPG, PNG, or WebP; maximum size 5 MB.
+                  </div>
+                  <div id="avatar-message" class="small mt-2" role="status" aria-live="polite"></div>
+                  <div class="d-flex flex-wrap gap-2 mt-3">
+                    <button class="btn btn-primary" id="save-avatar" type="submit">Upload photo</button>
+                    <button class="btn btn-outline-danger" id="remove-avatar" type="button" hidden>
+                      Remove photo
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/profile.js"></script>
+  </body>
+</html>

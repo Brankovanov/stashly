@@ -29,7 +29,8 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 - `src/services/suppliesService.js` loads the current RLS-visible inventory and categories for the supplies listing page.
 - `src/services/projectsService.js` provides RLS-backed project CRUD and resolves private cover/pattern paths to short-lived signed URLs.
 - `src/services/projectItemsService.js` loads project needs and owner inventory, calculates owned/partial/missing quantities, and calls the transactional purchase operation.
-- `src/services/storageService.js` validates supply images and project files, uploads them to private user-scoped buckets, and creates short-lived signed URLs for display.
+- `src/services/dashboardService.js` loads the signed-in user's inventory/project counts, incomplete project needs, and recent projects; `src/services/profileService.js` reads and updates the current user's profile under RLS.
+- `src/services/storageService.js` validates supply images, project files, and profile avatars; it uploads to private user-scoped buckets and creates short-lived signed URLs for display.
 
 ## Request flow
 
@@ -44,5 +45,7 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 - Client-side guards and UI hiding are only UX conveniences.
 - Database RLS remains the source of truth for access control.
 - Storage object policies restrict supply photos and project files to the owning user's folder, with admin access following the server-side admin helper.
+- Profile avatars use a private bucket and user-scoped object paths; uploads replace the profile's stored path before removing the old object.
 - Project-item policies require linked inventory to belong to the project owner; `mark_project_item_purchased` performs the inventory update and item link atomically after checking authorization and unit compatibility.
+- Profile updates are restricted to the signed-in user's `profiles` row by the existing owner-only policy.
 - Admin actions are restricted server-side via `public.is_admin()`.
