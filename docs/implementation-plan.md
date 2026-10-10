@@ -210,9 +210,10 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 11. Build the admin panel
 
-- **Stage 1 — Secure admin data operations** ⬜
+- **Stage 1 — Secure admin data operations** 🟡
   - Add an admin service for aggregate statistics, user listings, and category CRUD.
   - Add a privileged, authenticated-only RPC to list users with account email and safely change roles, including protection against removing the last administrator.
+  - **Progress:** admin statistics/user/category services and migration `20261010160000_secure_admin_operations.sql` are implemented. Direct role-table writes are removed in favor of authenticated, administrator-checked RPCs; role changes are transaction-serialized and cannot demote the last administrator. Build and editor diagnostics pass; migration deployment and live authorization checks remain.
   - **Commit:** `feat(admin): add secure admin data operations`
 - **Stage 2 — Admin overview and category management** ⬜
   - Register a protected admin page with loading, empty, and error states.
