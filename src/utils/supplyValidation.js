@@ -10,7 +10,7 @@ export function validateSupplyInput(values) {
   if (values.quantity === '' || !Number.isFinite(quantity) || quantity < 0) {
     errors.quantity = 'Enter a quantity of zero or more.';
   }
-  if (colorHex && !/^#[0-9A-Fa-F]{6}$/.test(colorHex)) {
+  if (colorHex && !/^#[0-9A-Fa-f]{6}$/.test(colorHex)) {
     errors.color_hex = 'Enter a six-digit hex color, for example #4A6B52.';
   }
 

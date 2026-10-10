@@ -30,6 +30,16 @@ export async function getSupplyBrowseData() {
   };
 }
 
+export async function getSupplyCategories() {
+  const { data, error } = await getSupabaseClient()
+    .from('categories')
+    .select('id, name, icon')
+    .order('name');
+
+  if (error) throw new Error(`Unable to load categories: ${error.message}`);
+  return data;
+}
+
 export async function getSupplyById(supplyId) {
   const { data, error } = await getSupabaseClient()
     .from('supplies')

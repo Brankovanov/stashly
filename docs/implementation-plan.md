@@ -13,7 +13,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 3 | Add Row-Level Security | 🟡 Migration applied; access-control tests pending |
 | 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
-| 6 | Add supply CRUD | 🟡 Stage 1 in progress |
+| 6 | Add supply CRUD | 🟡 Stages 1–2 implemented; live checks pending |
 | 7 | Add supply photo storage | ⬜ Not started |
 | 8 | Build project CRUD | ⬜ Not started |
 | 9 | Implement project supply tracking | ⬜ Not started |
@@ -65,12 +65,12 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 6. Add supply CRUD — next
 
-- **Stage 1 — Data operations and validation** 🟡
+- **Stage 1 — Data operations and validation** ✅
   - Extend `src/services/suppliesService.js` with create, get-by-id, update, and delete operations.
   - Keep query/data access in the service; rely on RLS for ownership enforcement.
   - Add form validation for required name/category and non-negative numeric quantity. The database already rejects blank names and negative quantities; category is currently nullable, so do not imply the database requires it unless a schema migration is added.
   - **Done when:** service methods surface Supabase errors and invalid values cannot be submitted from the form.
-- **Stage 2 — Create supply**
+- **Stage 2 — Create supply** ✅
   - Add a supply form page and register it in Vite.
   - Load categories through the service and provide fields for category, name, brand, color code/hex, quantity, unit, and notes.
   - Include loading, error, success/navigation, and submit-disabled-while-saving behavior.

@@ -19,6 +19,8 @@ const emptyState = document.querySelector('#empty-state');
 const noResultsState = document.querySelector('#no-results-state');
 let allSupplies = [];
 
+showActionNotice();
+
 try {
   const user = await requireAuth();
   if (user) {
@@ -160,4 +162,16 @@ function createDetail(text, className = '') {
   detail.className = `small mb-1 ${className}`.trim();
   detail.textContent = text;
   return detail;
+}
+
+function showActionNotice() {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has('created')) return;
+
+  const notice = document.createElement('div');
+  notice.className = 'alert alert-success';
+  notice.setAttribute('role', 'status');
+  notice.textContent = 'Supply added to your inventory.';
+  document.querySelector('main').prepend(notice);
+  window.history.replaceState({}, '', window.location.pathname);
 }

@@ -9,6 +9,7 @@ export default defineConfig({
         login: resolve(import.meta.dirname, 'pages/login.html'),
         register: resolve(import.meta.dirname, 'pages/register.html'),
         supplies: resolve(import.meta.dirname, 'pages/supplies.html'),
+        supplyForm: resolve(import.meta.dirname, 'pages/supply-form.html'),
       },
     },
   },
