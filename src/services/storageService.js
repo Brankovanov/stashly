@@ -66,11 +66,11 @@ export async function getProfileAvatarUrl(path) {
 
 export async function deleteProfileAvatar(path) {
   if (!path) return;
-  const { error } = await getSupabaseClient()
-    .storage.from(AVATAR_BUCKET)
-    .remove([path]);
-
-  if (error) throw new Error(`Unable to delete your previous profile photo: ${error.message}`);
+  await removeStorageObject(
+    AVATAR_BUCKET,
+    path,
+    'Unable to delete your previous profile photo',
+  );
 }
 
 export function validateSupplyPhoto(file) {
@@ -132,12 +132,7 @@ export async function getSupplyPhotoUrls(paths) {
 
 export async function deleteSupplyPhoto(path) {
   if (!path) return;
-
-  const { error } = await getSupabaseClient()
-    .storage.from(SUPPLY_PHOTO_BUCKET)
-    .remove([path]);
-
-  if (error) throw new Error(`Unable to delete supply photo: ${error.message}`);
+  await removeStorageObject(SUPPLY_PHOTO_BUCKET, path, 'Unable to delete supply photo');
 }
 
 export function validateProjectFile(file, kind) {
@@ -210,10 +205,30 @@ export async function getProjectFileUrls(paths) {
 
 export async function deleteProjectFile(path) {
   if (!path) return;
+  await removeStorageObject(PROJECT_FILE_BUCKET, path, 'Unable to delete project file');
+}
 
+async function removeStorageObject(bucket, path, message) {
   const { error } = await getSupabaseClient()
-    .storage.from(PROJECT_FILE_BUCKET)
+    .storage.from(bucket)
     .remove([path]);
 
-  if (error) throw new Error(`Unable to delete project file: ${error.message}`);
+  if (error) throw new Error(`${message}: ${error.message}`);
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    if (!(await objectExists(bucket, path))) return;
+    if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+  throw new Error(`${message}: the storage object was not removed.`);
+}
+
+async function objectExists(bucket, path) {
+  const { data, error } = await getSupabaseClient()
+    .storage.from(bucket)
+    .list(path.slice(0, path.lastIndexOf('/')), {
+      search: path.slice(path.lastIndexOf('/') + 1),
+      limit: 1,
+    });
+
+  if (error) throw new Error(`Unable to verify storage cleanup: ${error.message}`);
+  return data?.some((object) => `${path.slice(0, path.lastIndexOf('/'))}/${object.name}` === path);
 }
