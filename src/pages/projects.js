@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
 import { createNavbar } from '../components/navbar.js';
-import { getProjects } from '../services/projectsService.js';
+import { deleteProject, getProjects } from '../services/projectsService.js';
 import { requireAuth } from '../utils/guards.js';
 
 document.querySelector('#site-header').append(createNavbar());
@@ -18,6 +18,7 @@ const noResultsState = document.querySelector('#no-results-state');
 let projects = [];
 
 showActionNotice();
+projectList.addEventListener('click', handleProjectAction);
 
 try {
   const user = await requireAuth();
@@ -98,6 +99,13 @@ function createProjectCard(project) {
   editLink.textContent = 'Edit project';
   editLink.setAttribute('aria-label', `Edit ${project.title}`);
   body.append(editLink);
+  const deleteButton = document.createElement('button');
+  deleteButton.className = 'btn btn-sm btn-outline-danger mt-2 align-self-start';
+  deleteButton.type = 'button';
+  deleteButton.dataset.deleteProject = project.id;
+  deleteButton.textContent = 'Delete project';
+  deleteButton.setAttribute('aria-label', `Delete ${project.title}`);
+  body.append(deleteButton);
 
   card.append(body);
   column.append(card);
@@ -119,7 +127,7 @@ function createStatusBadge(status) {
 
 function showActionNotice() {
   const params = new URLSearchParams(window.location.search);
-  const action = ['created', 'updated'].find((key) => params.has(key));
+  const action = ['created', 'updated', 'deleted'].find((key) => params.has(key));
   const cleanupPaths = params.get('fileCleanup')?.split(',').filter(Boolean) ?? [];
   if (!action && cleanupPaths.length === 0) return;
 
@@ -130,7 +138,47 @@ function showActionNotice() {
     ? `Project saved, but these old files could not be removed: ${cleanupPaths.join(', ')}.`
     : action === 'created'
       ? 'Project created.'
-      : 'Project changes saved.';
+      : action === 'deleted'
+        ? 'Project deleted.'
+        : 'Project changes saved.';
   document.querySelector('main').prepend(notice);
   window.history.replaceState({}, '', window.location.pathname);
+}
+
+async function handleProjectAction(event) {
+  const button = event.target.closest('button[data-delete-project]');
+  if (!button || !projectList.contains(button)) return;
+
+  const project = projects.find((item) => item.id === button.dataset.deleteProject);
+  if (!project) return;
+  if (!window.confirm(`Delete "${project.title}" and its project items?`)) return;
+
+  button.disabled = true;
+  button.textContent = 'Deleting…';
+  errorState.hidden = true;
+  try {
+    const { cleanupFailures } = await deleteProject(project.id);
+    projects = projects.filter((item) => item.id !== project.id);
+    renderProjects();
+    showInventoryNotice('Project deleted.', 'success');
+    for (const failure of cleanupFailures) {
+      showInventoryNotice(
+        `The project was deleted, but this file could not be removed: ${failure.path}. ${failure.message}`,
+        'warning',
+      );
+    }
+  } catch (error) {
+    errorState.textContent = error.message;
+    errorState.hidden = false;
+    button.disabled = false;
+    button.textContent = 'Delete project';
+  }
+}
+
+function showInventoryNotice(text, kind) {
+  const notice = document.createElement('div');
+  notice.className = `alert alert-${kind}`;
+  notice.setAttribute('role', kind === 'warning' ? 'alert' : 'status');
+  notice.textContent = text;
+  document.querySelector('main').prepend(notice);
 }

@@ -15,7 +15,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
-| 8 | Build project CRUD | 🟡 Stages 1–3 complete; Stage 4 in progress |
+| 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
 | 9 | Implement project supply tracking | ⬜ Not started |
 | 10 | Add profile and dashboard | ⬜ Not started |
 | 11 | Build the admin panel | ⬜ Not started |
@@ -132,12 +132,12 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Add a shared project form with title, description, and status (`planned`, `in_progress`, `completed`).
   - Reuse the form for create/edit, prefill existing data, validate title/status, and disable submit while saving.
   - **Done when:** create/edit persists valid values and the project list reflects them.
-- **Stage 4 — Private project file storage** 🟡
+- **Stage 4 — Private project file storage** ✅
   - Create a private `project-files` bucket with documented size/type limits and policies restricting objects to each owner's `{user_id}/` folder; admins retain authorized moderation access.
   - Store object paths in `cover_path` and `pattern_path`, never public URLs; render private files using signed URLs.
   - Validate cover image and pattern-file types/sizes, generate unique paths, and compensate for failed database writes during upload/replacement.
   - **Done when:** file access is owner-scoped, replacement preserves the old file until the row update succeeds, and cleanup errors are visible.
-- **Stage 5 — Delete and file cleanup**
+- **Stage 5 — Delete and file cleanup** ✅
   - Add confirmed project deletion and clean up its cover/pattern files after the database row is deleted.
   - If storage cleanup fails, report the orphaned path explicitly without claiming all cleanup succeeded.
   - **Done when:** cancel preserves the project; confirmed deletion removes it and reports any file-cleanup failure.

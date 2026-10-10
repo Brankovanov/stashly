@@ -1,5 +1,5 @@
 import { getSupabaseClient } from '../lib/supabaseClient.js';
-import { getProjectFileUrls } from './storageService.js';
+import { deleteProjectFile, getProjectFileUrls } from './storageService.js';
 
 const PROJECT_FIELDS =
   'id, user_id, title, description, status, cover_path, pattern_path, created_at, updated_at';
@@ -84,7 +84,13 @@ export async function deleteProject(projectId) {
     throw new Error('Project not found or you do not have permission to delete it.');
   }
 
-  return {
-    filePaths: [project.cover_path, project.pattern_path].filter(Boolean),
-  };
+  const cleanupFailures = [];
+  for (const path of [project.cover_path, project.pattern_path].filter(Boolean)) {
+    try {
+      await deleteProjectFile(path);
+    } catch (cleanupError) {
+      cleanupFailures.push({ path, message: cleanupError.message });
+    }
+  }
+  return { cleanupFailures };
 }
