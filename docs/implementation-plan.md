@@ -174,12 +174,12 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Add a transactional, RLS-safe database function to create/link a supply for a missing need or increase a linked partial supply by only its shortfall.
   - Make repeat calls safe: a fully covered need must not inflate inventory again.
   - **Progress:** `mark_project_item_purchased` runs atomically, checks project-owner/admin authorization and compatible units, creates and links missing inventory, and increments partial inventory by only the locked current shortfall.
-  - **Verification:** migrations `20261010142000`, `20261010143500`, and `20261010150000` are applied to the linked project. The RPC is security definer and executable by authenticated users only. UI build, editor diagnostics, whitespace checks, and local exact-shortfall assertions pass. Authenticated database behavior and cross-user isolation still need integration testing.
+  - **Verification:** migrations `20261010142000`, `20261010143500`, and `20261010150000` are applied to the linked project. The RPC is security definer and executable by authenticated users only; an anonymous RPC attempt returns HTTP 401. Authenticated browser checks cover missing and partial purchases, exact shortfalls, repeat-purchase safety, unit-mismatch rejection, and refreshed inventory/progress.
   - **Done when:** purchased needs become owned and the shopping list/progress update without split database writes.
 - **Stage 5 — Integration checks and documentation** 🟡
   - Test missing, fully owned, partial, unit mismatch, add/edit/delete, purchase, repeated purchase, and cross-user access.
   - Run the production build and update README, architecture/database documentation, and manual test guidance.
-  - **Progress:** implementation and documentation are complete. Authenticated project-item CRUD, purchase RPC, repeated-purchase idempotence, unit mismatch handling, and cross-user policy tests remain to be run.
+  - **Progress:** README, architecture, database, and this implementation plan describe the feature and migration behavior. Authenticated browser checks passed for item add/edit/remove, missing/partial/owned calculations, shopping-list output, purchases, repeated purchases, and unit-mismatch rejection. Temporary test projects and supplies were removed. `npm run build`, editor diagnostics, and `git diff --check` pass; cross-user isolation remains unverified.
 - **Acceptance checks:** missing needs show the full quantity to buy, partial needs show only the shortfall, fully owned needs show zero to buy, and a purchase updates the linked inventory and project progress atomically.
 - **Commit:** `feat(projects): track needed vs owned supplies`
 
