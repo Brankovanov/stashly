@@ -80,6 +80,19 @@ body {
   box-shadow: 0 1rem 3rem rgb(48 44 41 / 6%);
 }
 
+.profile-avatar-section {
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9e2d7;
+}
+
+.profile-avatar {
+  width: 7rem;
+  height: 7rem;
+  border: 1px solid #e9e2d7;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .dashboard-stat,
 .dashboard-project {
   position: relative;

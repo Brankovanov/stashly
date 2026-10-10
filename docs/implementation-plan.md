@@ -17,7 +17,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
 | 9 | Implement project supply tracking | 🟡 Stages 1–4 complete; Stage 5 in progress |
-| 10 | Add profile and dashboard | 🟡 Stages 1–3 in progress |
+| 10 | Add profile and dashboard | 🟡 Stage 4 in progress |
 | 11 | Build the admin panel | ⬜ Not started |
 | 12 | Polish, document, and deploy | ⬜ Not started |
 
@@ -197,11 +197,12 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Build a protected profile page with validation, save feedback, and account email.
   - **Progress:** the page is registered as a Vite entry and uses the existing owner-only profile policies; browser checks confirmed account details load and a profile update succeeds. The dashboard greeting now reads the saved profile display name.
   - **Commit:** `feat(profile): view and update account details`
-- **Stage 3 — Profile avatar storage** 🟡
+- **Stage 3 — Profile avatar storage** ✅
   - Add a migration for a private avatar bucket and user-folder storage policies.
   - Support validated JPG/PNG/WebP avatar upload, signed display URLs, and safe replacement/removal cleanup; store only the object path in `profiles.avatar_path`.
+  - **Progress:** migration `20261010153000_add_private_avatars_storage.sql` and client upload/display/replacement/removal flows are implemented. Files are limited to 5 MB and cleanup failures are shown to the user. The migration has not yet been applied to the linked Supabase project, so live storage checks remain pending.
   - **Commit:** `feat(profile): add private avatar uploads`
-- **Stage 4 — Navigation, verification, and documentation** ⬜
+- **Stage 4 — Navigation, verification, and documentation** 🟡
   - Link the profile from signed-in navigation and ensure dashboard/profile links and signed-out routes behave consistently.
   - Verify profile/dashboard states, responsive build, RLS/storage policy behavior, and document setup/manual checks.
   - **Commit:** `docs(profile): document dashboard and profile workflows`

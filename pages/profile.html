@@ -42,6 +42,41 @@
             <div id="profile-message" role="status" aria-live="polite"></div>
             <button class="btn btn-primary" type="submit">Save profile</button>
           </form>
+
+          <section class="profile-avatar-section mt-5" aria-labelledby="avatar-heading" hidden>
+            <h2 class="h4" id="avatar-heading">Profile photo</h2>
+            <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-3">
+              <img
+                class="profile-avatar"
+                id="avatar-preview"
+                alt="Your profile photo"
+                hidden
+              />
+              <div class="flex-grow-1">
+                <form id="avatar-form" novalidate>
+                  <label class="form-label" for="avatar-file">Choose a photo</label>
+                  <input
+                    class="form-control"
+                    id="avatar-file"
+                    name="avatar"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    aria-describedby="avatar-help"
+                  />
+                  <div class="form-text" id="avatar-help">
+                    JPG, PNG, or WebP; maximum size 5 MB.
+                  </div>
+                  <div id="avatar-message" class="small mt-2" role="status" aria-live="polite"></div>
+                  <div class="d-flex flex-wrap gap-2 mt-3">
+                    <button class="btn btn-primary" id="save-avatar" type="submit">Upload photo</button>
+                    <button class="btn btn-outline-danger" id="remove-avatar" type="button" hidden>
+                      Remove photo
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
         </section>
       </main>
     </div>
