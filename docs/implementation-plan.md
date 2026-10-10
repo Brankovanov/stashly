@@ -12,7 +12,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 2 | Create the database schema | ✅ Done; migration applied |
 | 3 | Add Row-Level Security | ✅ Done; migration applied (access-control behavior still needs manual testing) |
 | 4 | Implement authentication | 🟡 In progress |
-| 5 | Build supply browsing | ⬜ Not started |
+| 5 | Build supply browsing | 🟡 In progress |
 | 6 | Add supply CRUD | ⬜ Not started |
 | 7 | Add supply photo storage | ⬜ Not started |
 | 8 | Build project CRUD | ⬜ Not started |
@@ -56,10 +56,11 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ## Phase 2 — Core inventory and project workflows
 
-### 5. Build supply browsing
+### 5. Build supply browsing 🟡
 
 - Seed default categories and add the supplies service and listing page.
 - Include category badges, color swatches, search, category filtering, sorting, and loading, empty, and error states.
+- **Progress:** added a default-category migration, RLS-backed supply/category reads, and the responsive protected listing page. Applying the category seed and manually checking with a configured Supabase account remain.
 - **Commit:** `feat(supplies): browse supplies with search and filters`
 
 ### 6. Add supply CRUD

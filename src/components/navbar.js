@@ -33,6 +33,9 @@ export function createNavbar() {
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
+          <li class="nav-item" data-supplies-link hidden>
+            <a class="nav-link" href="/pages/supplies.html">My supplies</a>
+          </li>
           <li class="nav-item" data-admin-link hidden>
             <a class="nav-link" href="/pages/admin.html">Admin</a>
           </li>
@@ -54,6 +57,15 @@ export function createNavbar() {
     </div>
   `;
 
+  for (const link of nav.querySelectorAll('.nav-link')) {
+    const isCurrentPage =
+      new URL(link.href, window.location.origin).pathname ===
+      window.location.pathname;
+    link.classList.toggle('active', isCurrentPage);
+    if (isCurrentPage) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
+
   if (hasSupabaseConfig()) {
     void updateAccountNavigation(nav);
     const subscription = onAuthStateChange(() => {
@@ -74,6 +86,7 @@ async function updateAccountNavigation(nav) {
   const accountLinks = nav.querySelector('[data-account-links]');
   const email = nav.querySelector('[data-account-email]');
   const adminLink = nav.querySelector('[data-admin-link]');
+  const suppliesLink = nav.querySelector('[data-supplies-link]');
   const guestLinks = nav.querySelectorAll('[data-guest-links]');
   const signOutButton = nav.querySelector('[data-sign-out]');
 
@@ -85,6 +98,7 @@ async function updateAccountNavigation(nav) {
       });
       accountLinks.hidden = true;
       adminLink.hidden = true;
+      suppliesLink.hidden = true;
       return;
     }
 
@@ -92,6 +106,7 @@ async function updateAccountNavigation(nav) {
       item.hidden = true;
     });
     accountLinks.hidden = false;
+    suppliesLink.hidden = false;
     email.textContent = session.user.email ?? '';
     adminLink.hidden = (await getUserRole(session.user.id)) !== 'admin';
 
