@@ -5,7 +5,9 @@ import '../styles/main.css';
 import { createNavbar } from '../components/navbar.js';
 import {
   createProjectItem,
+  deleteProjectItem,
   getProjectSupplyData,
+  updateProjectItem,
 } from '../services/projectItemsService.js';
 import { getSupplyCategories } from '../services/suppliesService.js';
 import { requireAuth } from '../utils/guards.js';
@@ -20,8 +22,10 @@ const form = document.querySelector('#project-item-form');
 const supplyChoice = form.elements.supply_id;
 const categoryChoice = form.elements.category_id;
 const submitButton = form.querySelector('button[type="submit"]');
+const cancelEditButton = document.querySelector('#cancel-item-edit');
 const projectId = new URLSearchParams(window.location.search).get('id');
 let projectData;
+let editingItemId = null;
 
 try {
   const user = await requireAuth();
@@ -46,6 +50,8 @@ try {
 
 supplyChoice.addEventListener('change', populateSupplyFields);
 form.addEventListener('submit', handleAddItem);
+cancelEditButton.addEventListener('click', resetItemForm);
+document.querySelector('#project-item-groups').addEventListener('click', handleItemAction);
 
 function renderProject(data) {
   document.title = `${data.project.title} supplies — Stashly`;
@@ -86,6 +92,13 @@ function renderProject(data) {
     partial: document.querySelector('#partial-items'),
     missing: document.querySelector('#missing-items'),
   };
+  const shoppingItems = data.items.filter((item) => item.quantity_missing > 0);
+  const shoppingList = document.querySelector('#shopping-items');
+  shoppingList.replaceChildren(...shoppingItems.map(createShoppingListRow));
+  document.querySelector('#shopping-count').textContent =
+    `${shoppingItems.length} ${shoppingItems.length === 1 ? 'item' : 'items'}`;
+  document.querySelector('#shopping-empty').hidden = shoppingItems.length > 0;
+
   for (const list of Object.values(groups)) list.replaceChildren();
   for (const item of data.items) {
     groups[item.ownership_status].append(createItemRow(item));
@@ -112,10 +125,17 @@ function renderCategoryOptions(categories) {
 }
 
 function renderSupplyOptions(supplies) {
-  const linkedSupplyIds = new Set(projectData.items.map((item) => item.supply_id).filter(Boolean));
+  const linkedSupplyIds = new Set(
+    projectData.items
+      .filter((item) => item.id !== editingItemId)
+      .map((item) => item.supply_id)
+      .filter(Boolean),
+  );
   const firstOption = supplyChoice.options[0];
   supplyChoice.replaceChildren(firstOption);
-  for (const supply of supplies.filter((item) => !linkedSupplyIds.has(item.id))) {
+  for (const supply of supplies.filter(
+    (item) => !linkedSupplyIds.has(item.id) || item.id === currentEditingSupplyId(),
+  )) {
     const option = document.createElement('option');
     option.value = supply.id;
     option.textContent = `${supply.name}${supply.color_code ? ` (${supply.color_code})` : ''} — ${supply.quantity} ${supply.unit ?? ''}`;
@@ -128,7 +148,7 @@ function populateSupplyFields() {
   for (const name of ['category_id', 'name', 'brand', 'color_code', 'unit']) {
     const field = form.elements[name];
     field.value = supply ? (name === 'category_id' ? supply.category_id ?? '' : supply[name] ?? '') : '';
-    field.disabled = Boolean(supply);
+    field.disabled = Boolean(supply) && name !== 'unit';
   }
 }
 
@@ -151,6 +171,39 @@ function createItemRow(item) {
     warning.textContent = `Linked inventory unit differs (${item.supplies.unit ?? 'unspecified'}).`;
     row.append(warning);
   }
+  const actions = document.createElement('div');
+  actions.className = 'd-flex gap-2 mt-2';
+  const edit = document.createElement('button');
+  edit.className = 'btn btn-sm btn-outline-secondary';
+  edit.type = 'button';
+  edit.dataset.editProjectItem = item.id;
+  edit.textContent = 'Edit';
+  const remove = document.createElement('button');
+  remove.className = 'btn btn-sm btn-outline-danger';
+  remove.type = 'button';
+  remove.dataset.deleteProjectItem = item.id;
+  remove.textContent = 'Remove';
+  actions.append(edit, remove);
+  row.append(actions);
+  return row;
+}
+
+function createShoppingListRow(item) {
+  const row = document.createElement('li');
+  row.className = 'list-group-item px-0';
+  const name = document.createElement('p');
+  name.className = 'fw-semibold mb-1';
+  name.textContent = `${item.name}${item.color_code ? ` · ${item.color_code}` : ''}`;
+  const quantity = document.createElement('p');
+  quantity.className = 'small text-muted mb-0';
+  quantity.textContent = `Buy ${item.quantity_missing} ${item.unit ?? ''}${item.brand ? ` · ${item.brand}` : ''}`;
+  row.append(name, quantity);
+  if (item.unit_mismatch) {
+    const warning = document.createElement('p');
+    warning.className = 'small text-warning-emphasis mb-0';
+    warning.textContent = `Unit mismatch: inventory is measured in ${item.supplies.unit ?? 'unspecified units'}.`;
+    row.append(warning);
+  }
   return row;
 }
 
@@ -170,22 +223,78 @@ async function handleAddItem(event) {
   if (Object.keys(errors).length) return;
 
   submitButton.disabled = true;
-  submitButton.textContent = 'Adding…';
+  const wasEditing = Boolean(editingItemId);
+  submitButton.textContent = wasEditing ? 'Saving…' : 'Adding…';
   try {
-    await createProjectItem(projectId, value);
+    if (wasEditing) await updateProjectItem(editingItemId, value);
+    else await createProjectItem(projectId, value);
     projectData = await getProjectSupplyData(projectId);
     renderSupplyOptions(projectData.supplies);
     renderProject(projectData);
-    form.reset();
-    form.elements.quantity_needed.value = '1';
-    populateSupplyFields();
-    showFormMessage('Supply added to this project.', 'success');
+    resetItemForm();
+    showFormMessage(wasEditing ? 'Project supply updated.' : 'Supply added to this project.', 'success');
   } catch (error) {
     showFormMessage(error.message, 'danger');
   } finally {
     submitButton.disabled = false;
-    submitButton.textContent = 'Add to project';
+    submitButton.textContent = editingItemId ? 'Save changes' : 'Add to project';
   }
+}
+
+async function handleItemAction(event) {
+  const editButton = event.target.closest('button[data-edit-project-item]');
+  if (editButton) {
+    const item = projectData.items.find((candidate) => candidate.id === editButton.dataset.editProjectItem);
+    if (item) beginItemEdit(item);
+    return;
+  }
+
+  const deleteButton = event.target.closest('button[data-delete-project-item]');
+  if (!deleteButton || !window.confirm('Remove this supply from the project?')) return;
+
+  deleteButton.disabled = true;
+  try {
+    await deleteProjectItem(deleteButton.dataset.deleteProjectItem);
+    projectData = await getProjectSupplyData(projectId);
+    renderSupplyOptions(projectData.supplies);
+    renderProject(projectData);
+    showFormMessage('Supply removed from the project.', 'success');
+  } catch (error) {
+    errorState.textContent = error.message;
+    errorState.hidden = false;
+    deleteButton.disabled = false;
+  }
+}
+
+function beginItemEdit(item) {
+  editingItemId = item.id;
+  renderSupplyOptions(projectData.supplies);
+  supplyChoice.value = item.supply_id ?? '';
+  populateSupplyFields();
+  for (const name of ['category_id', 'name', 'brand', 'color_code', 'unit']) {
+    if (name === 'unit' || !item.supply_id) form.elements[name].value = item[name] ?? '';
+  }
+  form.elements.quantity_needed.value = String(item.quantity_needed);
+  submitButton.textContent = 'Save changes';
+  cancelEditButton.hidden = false;
+  document.querySelector('#add-item-heading').textContent = 'Edit project supply';
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetItemForm() {
+  editingItemId = null;
+  form.reset();
+  form.elements.quantity_needed.value = '1';
+  renderSupplyOptions(projectData.supplies);
+  populateSupplyFields();
+  submitButton.textContent = 'Add to project';
+  cancelEditButton.hidden = true;
+  document.querySelector('#add-item-heading').textContent = 'Add a needed supply';
+  clearErrors();
+}
+
+function currentEditingSupplyId() {
+  return projectData.items.find((item) => item.id === editingItemId)?.supply_id;
 }
 
 function clearErrors() {

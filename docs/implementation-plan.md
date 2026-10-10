@@ -16,7 +16,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
-| 9 | Implement project supply tracking | 🟡 Stages 1–2 complete; Stage 3 in progress |
+| 9 | Implement project supply tracking | 🟡 Stages 1–3 complete; Stage 4 in progress |
 | 10 | Add profile and dashboard | ⬜ Not started |
 | 11 | Build the admin panel | ⬜ Not started |
 | 12 | Polish, document, and deploy | ⬜ Not started |
@@ -165,11 +165,12 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Let users add an item by linking one of their supplies or describing a new need (category, name, brand/color, quantity, unit).
   - **Progress:** protected detail screen, project summary, progress bar, ownership groups, and add-item form are implemented. The page calls the item and category services; source text is rendered with DOM text APIs.
   - **Done when:** an item can be added and shown under the correct ownership state without data access in the page layer.
-- **Stage 3 — Item maintenance and shopping list** 🟡
+- **Stage 3 — Item maintenance and shopping list** ✅
   - Allow editing needed quantity/details and removing an item with confirmation.
   - Show missing/short quantities and a focused shopping list, with counts and accessible progress.
+  - **Progress:** editable items, confirmed removal, partial/missing shortfall details, and shopping-list filtering are implemented. Local production build, editor diagnostics, and whitespace checks pass; live item CRUD awaits the new project-item security migration.
   - **Done when:** edits/removals refresh progress and only incomplete items appear on the shopping list.
-- **Stage 4 — Mark as purchased**
+- **Stage 4 — Mark as purchased** 🟡
   - Add a transactional, RLS-safe database function to create/link a supply for a missing need or increase a linked partial supply by only its shortfall.
   - Make repeat calls safe: a fully covered need must not inflate inventory again.
   - **Done when:** purchased needs become owned and the shopping list/progress update without split database writes.
