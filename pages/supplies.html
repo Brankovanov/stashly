@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Browse and organize your embroidery supplies." />
+    <meta name="theme-color" content="#f8f5ef" />
+    <title>My supplies — Stashly</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="site-header"></header>
+      <main class="container py-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4">
+          <div>
+            <p class="eyebrow mb-2">Your inventory</p>
+            <h1 class="display-6 fw-semibold mb-0">My supplies</h1>
+          </div>
+          <p class="text-muted mb-0" id="supply-count" aria-live="polite"></p>
+        </div>
+
+        <section class="filter-panel p-3 p-md-4 mb-4" aria-label="Filter supplies">
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label" for="supply-search">Search</label>
+              <input
+                class="form-control"
+                id="supply-search"
+                type="search"
+                placeholder="Name, brand, or color code"
+                autocomplete="off"
+              />
+            </div>
+            <div class="col-12 col-md-3">
+              <label class="form-label" for="category-filter">Category</label>
+              <select class="form-select" id="category-filter">
+                <option value="">All categories</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-3">
+              <label class="form-label" for="sort-supplies">Sort by</label>
+              <select class="form-select" id="sort-supplies">
+                <option value="name">Name (A–Z)</option>
+                <option value="recent">Recently added</option>
+                <option value="category">Category</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <p class="text-muted py-4 text-center" id="loading-state" role="status">
+          Loading your supplies…
+        </p>
+        <div class="alert alert-danger" id="error-state" role="alert" hidden></div>
+        <div class="empty-state py-5 text-center" id="empty-state" hidden>
+          <i class="bi bi-basket2 display-4 text-secondary" aria-hidden="true"></i>
+          <h2 class="h4 mt-3">No supplies yet</h2>
+          <p class="text-muted mb-0">
+            Your inventory is ready for your first supplies. Adding and editing supplies will be available in the next step.
+          </p>
+        </div>
+        <div class="empty-state py-5 text-center" id="no-results-state" hidden>
+          <h2 class="h4">No matching supplies</h2>
+          <p class="text-muted">Try a different search term or category.</p>
+          <button class="btn btn-outline-secondary" id="clear-filters" type="button">
+            Clear filters
+          </button>
+        </div>
+        <div class="row g-3" id="supply-list" aria-live="polite"></div>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/supplies.js"></script>
+  </body>
+</html>

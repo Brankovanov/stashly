@@ -71,3 +71,35 @@ body {
   background: #fff;
   box-shadow: 0 1rem 3rem rgb(48 44 41 / 6%);
 }
+
+.filter-panel {
+  border: 1px solid #e9e2d7;
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.supply-card {
+  border-color: #e9e2d7;
+  border-radius: 1rem;
+}
+
+.supply-card .card-body {
+  padding: 1.25rem;
+}
+
+.color-swatch {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid rgb(48 44 41 / 20%);
+  border-radius: 50%;
+}
+
+.supply-notes {
+  overflow-wrap: anywhere;
+}
+
+.empty-state {
+  border: 1px dashed #d9d0c4;
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 65%);
+}

@@ -12,6 +12,7 @@ The project foundation and database security layer are in place. Authentication 
 - Row-level security policies added for profiles, user roles, categories, supplies, projects, and project items
 - Security helper `public.is_admin()` added for admin-only writes
 - Supabase auth client, login/register screens, and route guards in progress
+- Protected supplies browsing with category filtering, search, and sorting in progress
 
 The next implementation focus is authentication and protected page flow, followed by supplies and project CRUD.
 
