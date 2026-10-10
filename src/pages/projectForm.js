@@ -32,11 +32,13 @@ const fileState = {
   pattern: { existingPath: null, objectUrl: null },
 };
 let currentUser;
+let projectOwnerId;
 
 try {
   currentUser = await requireAuth();
   if (currentUser) {
     const project = isEditing ? await getProjectById(projectId) : null;
+    projectOwnerId = project?.user_id ?? currentUser.id;
     if (project) await populateForm(project);
     loading.hidden = true;
     form.hidden = false;
@@ -181,7 +183,7 @@ async function uploadSelectedFile(file, kind, targetProjectId, uploadedPaths) {
   if (!file) return null;
   const path = await uploadProjectFile(
     file,
-    currentUser.id,
+    projectOwnerId,
     targetProjectId,
     kind,
   );

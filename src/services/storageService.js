@@ -1,4 +1,5 @@
 import { getSupabaseClient } from '../lib/supabaseClient.js';
+import { getUserRole } from './authService.js';
 
 const SUPPLY_PHOTO_BUCKET = 'supply-photos';
 const MAX_SUPPLY_PHOTO_SIZE = 5 * 1024 * 1024;
@@ -106,7 +107,7 @@ export async function uploadProjectFile(file, ownerId, projectId, kind) {
   const { data: authData, error: authError } = await supabase.auth.getUser();
   if (authError) throw new Error(`Unable to verify your account: ${authError.message}`);
   if (!authData.user) throw new Error('You must be signed in to upload project files.');
-  if (ownerId !== authData.user.id) {
+  if (ownerId !== authData.user.id && (await getUserRole(authData.user.id)) !== 'admin') {
     throw new Error('You can only upload files to your own projects.');
   }
 
