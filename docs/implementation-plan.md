@@ -16,7 +16,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
-| 9 | Implement project supply tracking | ⬜ Not started |
+| 9 | Implement project supply tracking | 🟡 Stage plan recorded |
 | 10 | Add profile and dashboard | ⬜ Not started |
 | 11 | Build the admin panel | ⬜ Not started |
 | 12 | Polish, document, and deploy | ⬜ Not started |
@@ -152,10 +152,30 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 9. Implement project supply tracking
 
-- Build project details and let users add items linked to owned supplies or entered as new needs.
-- Compute owned, partial, and missing quantities outside the UI; show completeness progress and a shopping list.
-- Implement “Mark as purchased” to create and link an owned supply.
-- **Verify:** test missing, fully owned, partial, and purchased flows.
+- **Stage 1 — Secure item operations and quantity calculations**
+  - Add a protected project-detail page and service methods to load a project with its project items and visible owned supplies.
+  - Add service-layer item creation/update/deletion and calculate `owned`, `partial`, or `missing` plus shortage quantities.
+  - Add a migration that enforces linked supplies belong to the project owner (or the caller is an admin); preserve project-item RLS and foreign-key behavior.
+  - Treat differing or unspecified units as incomparable rather than claiming an item is owned; surface the full need as missing until a compatible supply is linked.
+  - **Done when:** query/service outputs report correct ownership quantities and unauthorized links are rejected server-side.
+- **Stage 2 — Project detail and supply-item entry**
+  - Add `pages/project-detail.html`, its Vite entry, and a link from each project card.
+  - Render project information, progress, owned/partial/missing groups, and loading, empty, and error states.
+  - Let users add an item by linking one of their supplies or describing a new need (category, name, brand/color, quantity, unit).
+  - **Done when:** an item can be added and shown under the correct ownership state without data access in the page layer.
+- **Stage 3 — Item maintenance and shopping list**
+  - Allow editing needed quantity/details and removing an item with confirmation.
+  - Show missing/short quantities and a focused shopping list, with counts and accessible progress.
+  - **Done when:** edits/removals refresh progress and only incomplete items appear on the shopping list.
+- **Stage 4 — Mark as purchased**
+  - Add a transactional, RLS-safe database function to create/link a supply for a missing need or increase a linked partial supply by only its shortfall.
+  - Make repeat calls safe: a fully covered need must not inflate inventory again.
+  - **Done when:** purchased needs become owned and the shopping list/progress update without split database writes.
+- **Stage 5 — Integration checks and documentation**
+  - Test missing, fully owned, partial, unit mismatch, add/edit/delete, purchase, repeated purchase, and cross-user access.
+  - Run the production build and update README, architecture/database documentation, and manual test guidance.
+  - **Progress:** implementation has not started; project supply tracking has no dedicated live integration checks yet.
+- **Acceptance checks:** missing needs show the full quantity to buy, partial needs show only the shortfall, fully owned needs show zero to buy, and a purchase updates the linked inventory and project progress atomically.
 - **Commit:** `feat(projects): track needed vs owned supplies`
 
 ## Phase 3 — Account, administration, and delivery
