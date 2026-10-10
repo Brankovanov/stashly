@@ -14,7 +14,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
-| 7 | Add supply photo storage | 🟡 Stage 1 in progress |
+| 7 | Add supply photo storage | 🟡 Stages 1–2 complete; Stage 3 in progress |
 | 8 | Build project CRUD | ⬜ Not started |
 | 9 | Implement project supply tracking | ⬜ Not started |
 | 10 | Add profile and dashboard | ⬜ Not started |
@@ -96,11 +96,11 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 7. Add supply photo storage
 
-- **Stage 1 — Private bucket and policies** 🟡
+- **Stage 1 — Private bucket and policies** ✅
   - Create the private `supply-photos` bucket with a 5 MB size limit and JPEG/PNG/WebP MIME allowlist.
   - Add storage object policies restricting read/write/delete to the authenticated user's `{user_id}/` folder.
   - **Done when:** migration builds and policy paths match the storage service convention.
-- **Stage 2 — Storage service and display**
+- **Stage 2 — Storage service and display** ✅
   - Validate image MIME type and size before upload; use unique `{user_id}/{uuid}.{ext}` paths.
   - Create short-lived signed URLs for private images and render them on supply cards.
   - **Done when:** valid images upload and display; unsupported/oversized files fail with a user-visible error.

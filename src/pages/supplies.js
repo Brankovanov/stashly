@@ -133,6 +133,14 @@ function createSupplyCard(supply) {
   }
 
   body.append(heading);
+  if (supply.photo_url) {
+    const photo = document.createElement('img');
+    photo.className = 'supply-photo mb-3';
+    photo.src = supply.photo_url;
+    photo.alt = `${supply.name} photo`;
+    photo.loading = 'lazy';
+    body.prepend(photo);
+  }
   if (supply.brand) body.append(createDetail(supply.brand, 'text-muted'));
   if (supply.color_code) body.append(createDetail(`Color: ${supply.color_code}`));
 
