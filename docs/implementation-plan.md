@@ -10,13 +10,13 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 |---|------|--------|
 | 1 | Scaffold the app | ✅ Done |
 | 2 | Create the database schema | ✅ Done; migration applied |
-| 3 | Add Row-Level Security | 🟡 Migration applied; access-control tests pending |
+| 3 | Add Row-Level Security | 🟡 Targeted two-user checks pass for supplies, projects, and project items; more tables/storage remain |
 | 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
-| 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
-| 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
-| 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
-| 9 | Implement project supply tracking | 🟡 Stages 1–4 complete; Stage 5 in progress |
+| 6 | Add supply CRUD | 🟡 Create/delete and cross-user read/update/delete denial verified; own edit and validation/error checks remain |
+| 7 | Add supply photo storage | 🟡 Owner upload and cross-user read/delete isolation verified; display/replacement and validation/error checks remain |
+| 8 | Build project CRUD | 🟡 CRUD smoke tests and cross-user row read/update/delete denial verified; project-file isolation remains |
+| 9 | Implement project supply tracking | 🟡 Core flows and cross-user project-item read/update/delete/purchase denial verified; additional edge cases remain |
 | 10 | Add profile and dashboard | ✅ Implemented; cross-user storage isolation remains to verify |
 | 11 | Build the admin panel | ✅ Implemented and verified; cross-user deletion tested; editing remains untested |
 | 12 | Polish, document, and deploy | ⬜ Not started |
@@ -88,7 +88,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Run the production build and manually test create, edit, delete, invalid values, and service error states.
   - With two users, verify one user cannot edit or delete the other user's supply.
   - Update README/setup guidance if the new screens change the user flow.
-  - **Progress:** production build and direct validation assertions pass; live Supabase create/update/delete and two-user RLS tests remain pending.
+  - **Progress:** a live temporary supply was created and removed. A second authenticated account saw no supplies and could not retrieve, update, or delete the owner's record; direct mutation attempts returned the expected no-access errors and a database check confirmed the row was unchanged. Own-record edit, invalid-input, and error-state checks remain.
 - **Overall acceptance checks:** create and edit a supply; verify its list card updates; cancel and confirm deletion; test invalid values; verify cross-user updates/deletes are rejected or affect zero rows.
 - **Out of scope:** supply photo upload and file cleanup (Step 7).
 - **Branch:** `feature/step-6-supply-crud` from latest `main`.
@@ -113,7 +113,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Stage 5 — Integration checks and documentation** 🟡
   - Test upload, display, replacement, delete cleanup, invalid type/size, and cross-user storage isolation.
   - Run the production build and update setup and manual test guidance.
-  - **Progress:** migration `20261010101407` is recorded as applied remotely. Read-only policy inspection confirms the four `supply_photos_*` object policies target authenticated users and constrain access to the caller's folder or admins. Anonymous listing returns no rows, and the public-object endpoint reports the bucket as unavailable. Production build and local file-validation assertions pass. Signed-in upload/display/replacement/deletion, configured bucket limit/MIME metadata, and two-user access tests remain pending; the linked DB metadata query could not authenticate as its temporary CLI role.
+  - **Progress:** migration `20261010101407` is recorded as applied remotely. Read-only policy inspection confirms the four `supply_photos_*` object policies target authenticated users and constrain access to the caller's folder or admins. On 2026-10-10, an authenticated owner uploaded a temporary PNG; a second ordinary account could not create a signed display URL, and its delete request left the object intact. The owner then removed it, with a database check confirming cleanup. The non-owner storage delete call returned no API error despite making no change. Supply-photo rendering/replacement, invalid type/size UI checks, and configured bucket limit/MIME metadata remain pending.
 - **Migration:** `supabase/migrations/20261010101407_add_supply_photos_storage.sql`
 - **Commit:** `feat(storage): supply photo upload and display`
 
@@ -144,7 +144,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Stage 6 — Integration tests and documentation** 🟡
   - Run the production build; test every status, create/edit/delete, invalid input, file type/size validation, and cross-user project/file isolation.
   - Update README, architecture, database, and manual test documentation.
-  - **Progress:** production build, editor diagnostics, whitespace checks, local project/file validation assertions, and authenticated project CRUD/storage smoke tests pass. The linked Supabase project records migration `20261010104047` as applied; read-only SQL confirms a private 10 MB bucket with the expected MIME allowlist and four authenticated owner/admin policies. Anonymous listing returns an empty result, and the local guest route redirects to login. An authenticated temporary project exercised all three statuses and filtering, create/edit, cover PNG preview and replacement, PDF upload and signed access (HTTP 200), pattern removal, cancel/confirm deletion, and file cleanup; a post-delete SQL check found no project, project-item, or project-file rows. Two-user isolation, admin moderation, and simulated storage-cleanup failures remain untested.
+  - **Progress:** production build, editor diagnostics, whitespace checks, local project/file validation assertions, and authenticated project CRUD/storage smoke tests pass. The linked Supabase project records migration `20261010104047` as applied; read-only SQL confirms a private 10 MB bucket with the expected MIME allowlist and four authenticated owner/admin policies. Anonymous listing returns an empty result, and the local guest route redirects to login. An authenticated temporary project exercised all three statuses and filtering, create/edit, cover PNG preview and replacement, PDF upload and signed access (HTTP 200), pattern removal, cancel/confirm deletion, and file cleanup. A second ordinary account saw no project and received explicit no-access errors when reading/updating/deleting it; the row remained unchanged. Cross-user project-file access and simulated storage-cleanup failures remain untested.
 - **Acceptance checks:** users cannot read or modify another user's project or project files; all three statuses display correctly; uploads and replacements persist the right paths; deletion and failures are explicit.
 - **Out of scope:** project-item lists, owned/partial/missing calculations, and shopping lists (Step 9).
 - **Branch:** `feature/step-8-project-crud` from latest `main`.
@@ -179,7 +179,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Stage 5 — Integration checks and documentation** 🟡
   - Test missing, fully owned, partial, unit mismatch, add/edit/delete, purchase, repeated purchase, and cross-user access.
   - Run the production build and update README, architecture/database documentation, and manual test guidance.
-  - **Progress:** README, architecture, database, and this implementation plan describe the feature and migration behavior. Authenticated browser checks passed for item add/edit/remove, missing/partial/owned calculations, shopping-list output, purchases, repeated purchases, and unit-mismatch rejection. Temporary test projects and supplies were removed. `npm run build`, editor diagnostics, and `git diff --check` pass; cross-user isolation remains unverified.
+  - **Progress:** README, architecture, database, and this implementation plan describe the feature and migration behavior. Authenticated browser checks passed for item add/edit/remove, missing/partial/owned calculations, shopping-list output, purchases, repeated purchases, and unit-mismatch rejection. On 2026-10-10, a second ordinary account's direct item query returned no rows; loading the project, updating/deleting the item, and marking it purchased were denied, with database verification that the item and linked supply remained unchanged. All temporary test rows were removed. Additional project-item edge cases and cross-user supply-link attempts remain to verify.
 - **Acceptance checks:** missing needs show the full quantity to buy, partial needs show only the shortfall, fully owned needs show zero to buy, and a purchase updates the linked inventory and project progress atomically.
 - **Commit:** `feat(projects): track needed vs owned supplies`
 
@@ -200,12 +200,12 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Stage 3 — Profile avatar storage** ✅
   - Add a migration for a private avatar bucket and user-folder storage policies.
   - Support validated JPG/PNG/WebP avatar upload, signed display URLs, and safe replacement/removal cleanup; store only the object path in `profiles.avatar_path`.
-  - **Progress:** migration `20261010153000_add_private_avatars_storage.sql` and client upload/display/replacement/removal flows are implemented. Files are limited to 5 MB and cleanup failures are shown to the user. The migration is applied to the linked project; catalog checks confirmed a private 5 MB JPG/PNG/WebP bucket and authenticated read/upload/update/delete policies. An authenticated browser upload, signed preview, and removal succeeded; cross-user storage isolation remains unverified.
+  - **Progress:** migration `20261010153000_add_private_avatars_storage.sql` and client upload/display/replacement/removal flows are implemented. Files are limited to 5 MB and cleanup failures are shown to the user. The migration is applied to the linked project; catalog checks confirmed a private 5 MB JPG/PNG/WebP bucket and authenticated read/upload/update/delete policies. An authenticated browser upload, signed preview, and removal succeeded; cross-user avatar storage isolation remains unverified.
   - **Commit:** `feat(profile): add private avatar uploads`
 - **Stage 4 — Navigation, verification, and documentation** ✅
   - Link the profile from signed-in navigation and ensure dashboard/profile links and signed-out routes behave consistently.
   - Verify profile/dashboard states, responsive build, RLS/storage policy behavior, and document setup/manual checks.
-  - **Progress:** signed-in navigation now links to the profile, and README, architecture, database, and manual verification guidance describe Step 10. Dashboard and profile page loads, display-name save, avatar upload/preview/removal, production build, editor diagnostics, and whitespace checks pass. Two-account/cross-user storage isolation remains unverified.
+  - **Progress:** signed-in navigation now links to the profile, and README, architecture, database, and manual verification guidance describe Step 10. Dashboard and profile page loads, display-name save, avatar upload/preview/removal, production build, editor diagnostics, and whitespace checks pass. Two-account profile-row and avatar storage isolation remain unverified.
   - **Commit:** `docs(profile): document dashboard and profile workflows`
 
 ### 11. Build the admin panel
@@ -228,7 +228,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Stage 4 — Navigation, verification, and documentation** 🟡
   - Ensure admin navigation and guards behave consistently, and document setup/manual checks and migration behavior.
   - Verify admin operations, role boundaries, and normal-user denial via UI and server-side policies/RPC checks.
-  - **Progress:** the admin page is registered and guarded; normal-user browser access redirects to the dashboard. Live checks confirmed category create/edit/delete, admin user listing, and confirmed deletion of a separate ordinary user's supply and project. Both temporary records were removed and refreshed totals reached zero. The last-admin demotion attempt was rejected with the expected error and the selector reverted to the persisted role. Role RPCs remain admin-checked and authenticated-only; ordinary-user attempts to list users or promote themselves returned SQLSTATE `42501`. Both test accounts now have the `user` role. README, architecture, and database documentation include the first-admin bootstrap and manual checks. Cross-user editing, ownership isolation, and storage-cleanup failure behavior still need testing.
+  - **Progress:** the admin page is registered and guarded; normal-user browser access redirects to the dashboard. Live checks confirmed category create/edit/delete, admin user listing, and confirmed deletion of a separate ordinary user's supply and project. Both temporary records were removed and refreshed totals reached zero. The last-admin demotion attempt was rejected with the expected error and the selector reverted to the persisted role. Role RPCs remain admin-checked and authenticated-only; ordinary-user attempts to list users or promote themselves returned SQLSTATE `42501`. Both test accounts now have the `user` role. README, architecture, and database documentation include the first-admin bootstrap and manual checks. Admin edits to another user's content and storage-cleanup failure behavior remain untested; ordinary-user row isolation for supplies/projects/project items has now been verified.
   - **Commit:** `docs(admin): document panel and access verification`
 
 ### 12. Polish, document, and deploy
