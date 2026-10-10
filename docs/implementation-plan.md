@@ -141,9 +141,10 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Add confirmed project deletion and clean up its cover/pattern files after the database row is deleted.
   - If storage cleanup fails, report the orphaned path explicitly without claiming all cleanup succeeded.
   - **Done when:** cancel preserves the project; confirmed deletion removes it and reports any file-cleanup failure.
-- **Stage 6 — Integration tests and documentation**
+- **Stage 6 — Integration tests and documentation** 🟡
   - Run the production build; test every status, create/edit/delete, invalid input, file type/size validation, and cross-user project/file isolation.
   - Update README, architecture, database, and manual test documentation.
+  - **Progress:** production build, editor diagnostics, whitespace checks, and local project/file validation assertions pass. Signed-in CRUD/storage workflows, cleanup-failure handling, admin moderation, and two-user project/file isolation still need testing against Supabase.
 - **Acceptance checks:** users cannot read or modify another user's project or project files; all three statuses display correctly; uploads and replacements persist the right paths; deletion and failures are explicit.
 - **Out of scope:** project-item lists, owned/partial/missing calculations, and shopping lists (Step 9).
 - **Branch:** `feature/step-8-project-crud` from latest `main`.
