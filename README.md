@@ -16,7 +16,7 @@ The project foundation, database schema and RLS migrations, email/password authe
 - Supply create/edit forms and confirmed deletion from the inventory list
 - Protected project listing with status filtering, create/edit/delete, and private cover/pattern file handling
 
-Live integration checks still need to be completed against the configured Supabase project, including writes, cross-user ownership, and signed-in project file workflows. The next feature milestone is project supply tracking.
+Live integration checks still need to cover supply workflows, cross-user ownership, project admin moderation, and storage-cleanup failure handling. The next feature milestone is project supply tracking.
 
 ## Documentation
 
@@ -48,7 +48,9 @@ The app reads Supabase credentials from `.env`. Configure the project URL and br
 
 ### Supabase integration smoke tests
 
-The supply-photo and project-files migrations are recorded as applied on the linked Supabase project. Read-only checks confirmed both buckets are private and have owner/admin storage policies; the project-files bucket has its expected 10 MB limit and JPEG/PNG/WebP/PDF allowlist. Anonymous project-files listing returned no objects. Signed-in supply and project workflows and cross-user isolation still require manual testing with two accounts.
+The supply-photo and project-files migrations are recorded as applied on the linked Supabase project. Read-only checks confirmed both buckets are private and have owner/admin storage policies; the project-files bucket has its expected 10 MB limit and JPEG/PNG/WebP/PDF allowlist. Anonymous project-files listing returned no objects. Signed-in supply workflows and cross-user isolation still require manual testing with two accounts.
+
+On 2026-10-10, authenticated project smoke tests passed in the local browser: create/edit in all three statuses, status filtering, cover PNG preview and replacement, PDF pattern upload and signed access (HTTP 200), pattern removal, cancel/confirm deletion, and cleanup of the project's cover/pattern objects. A post-delete database check found no temporary project, project items, or project files. Two-user isolation, admin moderation, and simulated storage-cleanup failures remain untested.
 
 1. Start the app with `npm run dev` after configuring `.env`.
 2. Open `/pages/register.html`, create an account, and follow the email confirmation link if confirmation is enabled in Supabase Auth.
