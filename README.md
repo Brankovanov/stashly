@@ -4,7 +4,7 @@ Embroidery Supplies Manager is a multi-page app for hobbyists to track their inv
 
 ## Project status
 
-The project foundation, database schema and RLS migrations, email/password authentication, supply browsing and CRUD, project CRUD, and project supply tracking are implemented:
+The project foundation, database schema and RLS migrations, email/password authentication, supply browsing and CRUD, project CRUD, project supply tracking, and the personal dashboard/profile experience are implemented:
 
 - Vite multi-page app scaffold complete
 - Bootstrap and shared styling configured
@@ -16,6 +16,8 @@ The project foundation, database schema and RLS migrations, email/password authe
 - Supply create/edit forms and confirmed deletion from the inventory list
 - Protected project listing with status filtering, create/edit/delete, and private cover/pattern file handling
 - Project supply lists with owned/partial/missing states, progress, and shopping lists
+- A signed-in dashboard with personal inventory/project counts, shopping needs, and recent projects
+- A protected profile page for display-name updates and private profile-photo management
 
 Live integration checks still need to cover supply workflows, cross-user ownership, project admin moderation, and storage-cleanup failure handling. Project-item flows need authenticated verification against the deployed migrations.
 
@@ -49,7 +51,7 @@ The app reads Supabase credentials from `.env`. Configure the project URL and br
 
 ### Supabase integration smoke tests
 
-The supply-photo and project-files migrations are recorded as applied on the linked Supabase project. Read-only checks confirmed both buckets are private and have owner/admin storage policies; the project-files bucket has its expected 10 MB limit and JPEG/PNG/WebP/PDF allowlist. Anonymous project-files listing returned no objects. Signed-in supply workflows and cross-user isolation still require manual testing with two accounts.
+The supply-photo, project-files, and avatar migrations are recorded as applied on the linked Supabase project. Read-only checks confirmed these buckets are private and have owner-folder storage policies; the project-files bucket has its expected 10 MB limit and JPEG/PNG/WebP/PDF allowlist, and the avatars bucket allows JPG/PNG/WebP up to 5 MB. Anonymous project-files listing returned no objects. Signed-in avatar upload, signed preview, and removal passed a local browser check. Signed-in supply workflows and two-account/cross-user isolation still require manual testing.
 
 On 2026-10-10, authenticated project smoke tests passed in the local browser: create/edit in all three statuses, status filtering, cover PNG preview and replacement, PDF pattern upload and signed access (HTTP 200), pattern removal, cancel/confirm deletion, and cleanup of the project's cover/pattern objects. A post-delete database check found no temporary project, project items, or project files. Two-user isolation, admin moderation, and simulated storage-cleanup failures remain untested.
 
@@ -69,12 +71,15 @@ On 2026-10-10, authenticated project smoke tests passed in the local browser: cr
 14. Lower/raise quantities and edit/remove items; verify partial shortfalls, unit mismatch handling, and progress update immediately.
 15. Mark an unlinked need as purchased and verify a new supply is created and linked. Mark a partially owned item as purchased and verify only the shortfall is added. Repeat the purchase request and verify inventory does not increase again.
 16. Verify an item with missing or incompatible units cannot be marked purchased until corrected, and verify a user cannot link another user's supply to their project through the API.
+17. Sign in and review the dashboard counts, recent projects, empty-project call to action, and links to your supplies and projects. Verify the items-to-buy count includes missing and partially owned needs but excludes fully owned items.
+18. Open My profile, verify the account email and display name, then save a valid display name and confirm the dashboard greeting reflects it.
+19. Upload JPG/PNG/WebP avatars up to 5 MB, replace and remove the photo, and verify the UI reports any storage-cleanup failure. Reject unsupported or oversized files and verify another user cannot access the avatar object.
 
-Verify migration status against the intended Supabase project before relying on database and storage features. The linked project checked on 2026-10-10 has the project-item security, atomic-purchase, and anonymous-grant correction migrations applied. The purchase RPC is executable by authenticated users only. The `supply-photos` and `project-files` buckets are private; object paths are stored in the database and displayed through expiring signed URLs. Never share or commit `.env` values.
+Verify migration status against the intended Supabase project before relying on database and storage features. The linked project checked on 2026-10-10 has the project-item security, atomic-purchase, and anonymous-grant correction migrations applied. The purchase RPC is executable by authenticated users only. The `supply-photos` and `project-files` buckets are private; object paths are stored in the database and displayed through expiring signed URLs. The `avatars` bucket and policies are defined in migration `20261010153000_add_private_avatars_storage.sql`; check deployment status before using avatar uploads. Never share or commit `.env` values.
 
 ## Next implementation milestone
 
-Add the profile and dashboard screens. See [the implementation plan](docs/implementation-plan.md).
+Build the admin panel. See [the implementation plan](docs/implementation-plan.md).
 
 ## Roles
 

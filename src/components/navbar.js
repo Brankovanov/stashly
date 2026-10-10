@@ -49,6 +49,7 @@ export function createNavbar() {
             <a class="nav-link" href="/pages/register.html">Register</a>
           </li>
           <li class="nav-item d-flex align-items-center gap-3" data-account-links hidden>
+            <a class="nav-link" href="/pages/profile.html">My profile</a>
             <span class="small text-muted" data-account-email></span>
             <button class="btn btn-sm btn-outline-secondary" type="button" data-sign-out>
               Sign out
