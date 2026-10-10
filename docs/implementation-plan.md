@@ -215,14 +215,15 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Add a privileged, authenticated-only RPC to list users with account email and safely change roles, including protection against removing the last administrator.
   - **Progress:** admin statistics/user/category services and migration `20261010160000_secure_admin_operations.sql` are implemented and applied. Direct role-table writes are removed in favor of authenticated, administrator-checked RPCs; role changes are transaction-serialized and cannot demote the last administrator. Migration dry run, production build, and editor diagnostics pass.
   - **Commit:** `feat(admin): add secure admin data operations`
-- **Stage 2 — Admin overview and category management** 🟡
+- **Stage 2 — Admin overview and category management** ✅
   - Register a protected admin page with loading, empty, and error states.
   - Show account, supply, and project totals; add category create/edit/delete with visible outcomes.
   - **Progress:** admin-guarded page, platform totals, and category create/edit/delete UI are implemented. Browser access from the current signed-in account redirected to the dashboard because it is not an administrator; administrator-only UI checks await an admin session.
   - **Commit:** `feat(admin): manage categories and view platform totals`
-- **Stage 3 — User roles and content moderation** ⬜
+- **Stage 3 — User roles and content moderation** 🟡
   - List users and allow safe role changes with confirmation and explicit failure handling.
   - Provide admin access to all supplies and projects with edit links and confirmed delete/cleanup feedback.
+  - **Progress:** user listing/role controls and cross-owner supply/project edit and confirmed-delete tables are implemented. RLS scopes writes, storage policies allow admin file access, and role updates use the protected RPC. Browser verification still requires an administrator session.
   - **Commit:** `feat(admin): manage users and moderate content`
 - **Stage 4 — Navigation, verification, and documentation** ⬜
   - Ensure admin navigation and guards behave consistently, and document setup/manual checks and migration behavior.
