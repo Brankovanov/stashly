@@ -35,6 +35,7 @@ function createUserRow(user) {
   const select = document.createElement('select');
   select.className = 'form-select form-select-sm admin-role-select';
   select.dataset.roleForUser = user.user_id;
+  select.setAttribute('aria-label', `Role for ${user.email || user.display_name || 'account'}`);
   for (const [value, label] of [['user', 'User'], ['admin', 'Admin']]) {
     const option = document.createElement('option');
     option.value = value;

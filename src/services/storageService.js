@@ -66,11 +66,11 @@ export async function getProfileAvatarUrl(path) {
 
 export async function deleteProfileAvatar(path) {
   if (!path) return;
-  const { error } = await getSupabaseClient()
-    .storage.from(AVATAR_BUCKET)
-    .remove([path]);
-
-  if (error) throw new Error(`Unable to delete your previous profile photo: ${error.message}`);
+  await removeStorageObject(
+    AVATAR_BUCKET,
+    path,
+    'Unable to delete your previous profile photo',
+  );
 }
 
 export function validateSupplyPhoto(file) {
@@ -132,12 +132,7 @@ export async function getSupplyPhotoUrls(paths) {
 
 export async function deleteSupplyPhoto(path) {
   if (!path) return;
-
-  const { error } = await getSupabaseClient()
-    .storage.from(SUPPLY_PHOTO_BUCKET)
-    .remove([path]);
-
-  if (error) throw new Error(`Unable to delete supply photo: ${error.message}`);
+  await removeStorageObject(SUPPLY_PHOTO_BUCKET, path, 'Unable to delete supply photo');
 }
 
 export function validateProjectFile(file, kind) {
@@ -210,10 +205,16 @@ export async function getProjectFileUrls(paths) {
 
 export async function deleteProjectFile(path) {
   if (!path) return;
+  await removeStorageObject(PROJECT_FILE_BUCKET, path, 'Unable to delete project file');
+}
 
-  const { error } = await getSupabaseClient()
-    .storage.from(PROJECT_FILE_BUCKET)
+async function removeStorageObject(bucket, path, message) {
+  const { data, error } = await getSupabaseClient()
+    .storage.from(bucket)
     .remove([path]);
 
-  if (error) throw new Error(`Unable to delete project file: ${error.message}`);
+  if (error) throw new Error(`${message}: ${error.message}`);
+  if (!data?.some((object) => object.name === path)) {
+    throw new Error(`${message}: the storage object was not removed.`);
+  }
 }
