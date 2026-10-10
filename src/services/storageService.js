@@ -209,26 +209,12 @@ export async function deleteProjectFile(path) {
 }
 
 async function removeStorageObject(bucket, path, message) {
-  const { error } = await getSupabaseClient()
+  const { data, error } = await getSupabaseClient()
     .storage.from(bucket)
     .remove([path]);
 
   if (error) throw new Error(`${message}: ${error.message}`);
-  for (let attempt = 0; attempt < 3; attempt += 1) {
-    if (!(await objectExists(bucket, path))) return;
-    if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 200));
+  if (!data?.some((object) => object.name === path)) {
+    throw new Error(`${message}: the storage object was not removed.`);
   }
-  throw new Error(`${message}: the storage object was not removed.`);
-}
-
-async function objectExists(bucket, path) {
-  const { data, error } = await getSupabaseClient()
-    .storage.from(bucket)
-    .list(path.slice(0, path.lastIndexOf('/')), {
-      search: path.slice(path.lastIndexOf('/') + 1),
-      limit: 1,
-    });
-
-  if (error) throw new Error(`Unable to verify storage cleanup: ${error.message}`);
-  return data?.some((object) => `${path.slice(0, path.lastIndexOf('/'))}/${object.name}` === path);
 }

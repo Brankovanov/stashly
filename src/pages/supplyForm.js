@@ -52,12 +52,6 @@ try {
       populateForm(supply, existingPhotoUrl);
     }
 
-    function showPhotoPreviewAfterInvalidSelection(errorMessage) {
-      if (form.elements.remove_photo.checked) photoPreview.hidden = true;
-      else if (existingPhotoUrl) showPhotoPreview(existingPhotoUrl, 'Current photo');
-      else photoPreview.hidden = true;
-      showMessage(errorMessage, 'danger');
-    }
     loading.hidden = true;
     form.hidden = false;
     if (isEditing) {
@@ -75,6 +69,13 @@ try {
   loading.hidden = true;
   error.textContent = loadError.message;
   error.hidden = false;
+}
+
+function showPhotoPreviewAfterInvalidSelection(errorMessage) {
+  if (form.elements.remove_photo.checked) photoPreview.hidden = true;
+  else if (existingPhotoUrl) showPhotoPreview(existingPhotoUrl, 'Current photo');
+  else photoPreview.hidden = true;
+  showMessage(errorMessage, 'danger');
 }
 
 form.addEventListener('submit', async (event) => {
