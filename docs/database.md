@@ -16,6 +16,7 @@ The application stores user data, inventory records, project information, and ad
 - All tables in `public` use Row-Level Security.
 - `supplies` and `projects` are owner-scoped by `user_id`.
 - `project_items` can only be read or modified when the parent project belongs to the current user.
+- A non-null `project_items.supply_id` must refer to inventory owned by the parent project's owner; one owned supply can be linked once per project.
 - `categories` are readable by authenticated users and writable only by admins.
 - `user_roles` is admin-controlled; normal users can access only their own row.
 
@@ -24,6 +25,8 @@ The application stores user data, inventory records, project information, and ad
 The private `supply-photos` bucket stores JPG, PNG, and WebP images up to 5 MB. Object names follow `{user_id}/{uuid}.{ext}` and the `supplies.photo_path` column stores the object path, not a URL. Authenticated users can access objects in their own folder; admins can access objects for authorized moderation. The client creates expiring signed URLs when rendering private photos. Bucket configuration and object policies are managed by `supabase/migrations/20261010101407_add_supply_photos_storage.sql`.
 
 The private `project-files` bucket stores project cover images (JPG/PNG/WebP, up to 5 MB) and pattern images or PDFs (JPG/PNG/WebP/PDF, up to 10 MB). Project object paths follow `{user_id}/{project_id}/{kind}/{uuid}.{ext}`; `projects.cover_path` and `projects.pattern_path` store paths, never URLs. Authenticated users can access files in their own user folder, and admins can access files for authorized moderation. The client creates expiring signed URLs for display. Bucket configuration and object policies are managed by `supabase/migrations/20261010104047_add_project_files_storage.sql`.
+
+For project supply tracking, `project_items.supply_id` links an item need to the project owner's inventory; otherwise the item remains a shopping need. `src/services/projectItemsService.js` computes owned, partial, and missing states, comparing quantities only when both units are specified and match case-insensitively. A unit mismatch is treated as fully missing until corrected. Migration `20261010142000_secure_project_items.sql` enforces owner-matched links and prevents duplicate links to the same supply within a project. Migration `20261010143500_mark_project_items_purchased.sql` adds `public.mark_project_item_purchased(uuid)`, which creates and links inventory for an unlinked need or adds only the current shortfall to linked stock in one transaction. Row locks prevent concurrent/repeated purchase requests from double-incrementing inventory. Migration `20261010150000_revoke_anon_project_purchase.sql` removes Supabase's default anonymous function grant and permits execution only for authenticated callers.
 
 ## Entity relationships
 

@@ -157,7 +157,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Add service-layer item creation/update/deletion and calculate `owned`, `partial`, or `missing` plus shortage quantities.
   - Add a migration that enforces linked supplies belong to the project owner (or the caller is an admin); preserve project-item RLS and foreign-key behavior.
   - Treat differing or unspecified units as incomparable rather than claiming an item is owned; surface the full need as missing until a compatible supply is linked.
-  - **Progress:** project-item read/write service methods and service-layer quantity calculations are implemented; migration `20261010142000` tightens project-item linkage policies and prevents duplicate links to the same owned supply within a project. Local calculation/validation assertions and the production build pass; live RLS enforcement awaits applying and checking the new migration.
+  - **Progress:** project-item read/write service methods and service-layer quantity calculations are implemented; migration `20261010142000` tightens project-item linkage policies and prevents duplicate links to the same owned supply within a project. Local calculation/validation assertions, the production build, and linked policy/index inspection pass.
   - **Done when:** service outputs report correct ownership quantities and unauthorized links are rejected server-side.
 - **Stage 2 — Project detail and supply-item entry** ✅
   - Add a protected `pages/project-detail.html`, its Vite entry, and a link from each project card.
@@ -168,18 +168,18 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Stage 3 — Item maintenance and shopping list** ✅
   - Allow editing needed quantity/details and removing an item with confirmation.
   - Show missing/short quantities and a focused shopping list, with counts and accessible progress.
-  - **Progress:** editable items, confirmed removal, partial/missing shortfall details, and shopping-list filtering are implemented. Local production build, editor diagnostics, and whitespace checks pass; live item CRUD awaits the new project-item security migration.
+  - **Progress:** editable items, confirmed removal, partial/missing shortfall details, and shopping-list filtering are implemented. Local production build, editor diagnostics, and whitespace checks pass.
   - **Done when:** edits/removals refresh progress and only incomplete items appear on the shopping list.
 - **Stage 4 — Mark as purchased** ✅
   - Add a transactional, RLS-safe database function to create/link a supply for a missing need or increase a linked partial supply by only its shortfall.
   - Make repeat calls safe: a fully covered need must not inflate inventory again.
   - **Progress:** `mark_project_item_purchased` runs atomically, checks project-owner/admin authorization and compatible units, creates and links missing inventory, and increments partial inventory by only the locked current shortfall.
-  - **Verification:** UI build, editor diagnostics, whitespace checks, and local exact-shortfall assertions pass. Database behavior is pending migration application and authenticated integration tests.
+  - **Verification:** migrations `20261010142000`, `20261010143500`, and `20261010150000` are applied to the linked project. The RPC is security definer and executable by authenticated users only. UI build, editor diagnostics, whitespace checks, and local exact-shortfall assertions pass. Authenticated database behavior and cross-user isolation still need integration testing.
   - **Done when:** purchased needs become owned and the shopping list/progress update without split database writes.
 - **Stage 5 — Integration checks and documentation** 🟡
   - Test missing, fully owned, partial, unit mismatch, add/edit/delete, purchase, repeated purchase, and cross-user access.
   - Run the production build and update README, architecture/database documentation, and manual test guidance.
-  - **Progress:** implementation has not started; project supply tracking has no dedicated live integration checks yet.
+  - **Progress:** implementation and documentation are complete. Authenticated project-item CRUD, purchase RPC, repeated-purchase idempotence, unit mismatch handling, and cross-user policy tests remain to be run.
 - **Acceptance checks:** missing needs show the full quantity to buy, partial needs show only the shortfall, fully owned needs show zero to buy, and a purchase updates the linked inventory and project progress atomically.
 - **Commit:** `feat(projects): track needed vs owned supplies`
 
