@@ -255,7 +255,7 @@ function renderProjectFile(kind, url, label, type) {
     link.textContent = `Open ${label}`;
     link.hidden = false;
   } else {
-    link.hidden = true;
+    if (link) link.hidden = true;
     image.src = url;
     image.alt = `${kind === 'cover' ? 'Project cover' : 'Pattern'}: ${label}`;
     image.hidden = false;
