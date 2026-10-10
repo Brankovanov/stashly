@@ -210,10 +210,22 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 11. Build the admin panel
 
-- Add an admin-guarded page for category management, user and role management, and overall statistics.
-- Rely on RLS for enforcement; client-side hiding is only for UX.
-- **Verify:** test admin actions and confirm normal users cannot perform them through the API.
-- **Commit:** `feat(admin): admin panel for categories and users`
+- **Stage 1 — Secure admin data operations** ⬜
+  - Add an admin service for aggregate statistics, user listings, and category CRUD.
+  - Add a privileged, authenticated-only RPC to list users with account email and safely change roles, including protection against removing the last administrator.
+  - **Commit:** `feat(admin): add secure admin data operations`
+- **Stage 2 — Admin overview and category management** ⬜
+  - Register a protected admin page with loading, empty, and error states.
+  - Show account, supply, and project totals; add category create/edit/delete with visible outcomes.
+  - **Commit:** `feat(admin): manage categories and view platform totals`
+- **Stage 3 — User roles and content moderation** ⬜
+  - List users and allow safe role changes with confirmation and explicit failure handling.
+  - Provide admin access to all supplies and projects with edit links and confirmed delete/cleanup feedback.
+  - **Commit:** `feat(admin): manage users and moderate content`
+- **Stage 4 — Navigation, verification, and documentation** ⬜
+  - Ensure admin navigation and guards behave consistently, and document setup/manual checks and migration behavior.
+  - Verify admin operations, role boundaries, and normal-user denial via UI and server-side policies/RPC checks.
+  - **Commit:** `docs(admin): document panel and access verification`
 
 ### 12. Polish, document, and deploy
 
