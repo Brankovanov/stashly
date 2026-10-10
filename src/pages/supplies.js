@@ -133,6 +133,14 @@ function createSupplyCard(supply) {
   }
 
   body.append(heading);
+  if (supply.photo_url) {
+    const photo = document.createElement('img');
+    photo.className = 'supply-photo mb-3';
+    photo.src = supply.photo_url;
+    photo.alt = `${supply.name} photo`;
+    photo.loading = 'lazy';
+    body.prepend(photo);
+  }
   if (supply.brand) body.append(createDetail(supply.brand, 'text-muted'));
   if (supply.color_code) body.append(createDetail(`Color: ${supply.color_code}`));
 
@@ -190,13 +198,9 @@ function showActionNotice() {
     deleted: 'Supply removed from your inventory.',
   };
   const action = Object.keys(messages).find((key) => params.has(key));
-  if (!action) return;
+  if (!action && !params.has('photoCleanup')) return;
 
-  const notice = document.createElement('div');
-  notice.className = 'alert alert-success';
-  notice.setAttribute('role', 'status');
-  notice.textContent = messages[action];
-  document.querySelector('main').prepend(notice);
+  showInventoryNotice(messages[action], 'success');
   window.history.replaceState({}, '', window.location.pathname);
 }
 
@@ -214,17 +218,28 @@ async function handleSupplyAction(event) {
   button.textContent = 'Deleting…';
   errorState.hidden = true;
   try {
-    await deleteSupply(supply.id);
+    const result = await deleteSupply(supply.id);
     allSupplies = allSupplies.filter((item) => item.id !== supply.id);
     renderSupplies();
-    const notice = new URLSearchParams(window.location.search);
-    notice.set('deleted', '1');
-    window.history.replaceState({}, '', `${window.location.pathname}?${notice}`);
-    showActionNotice();
+    showInventoryNotice('Supply removed from your inventory.', 'success');
+    if (result.photoCleanupError) {
+      showInventoryNotice(
+        `The supply was deleted, but its photo could not be removed. Stored path: ${result.photoPath}. ${result.photoCleanupError}`,
+        'warning',
+      );
+    }
   } catch (error) {
     errorState.textContent = error.message;
     errorState.hidden = false;
     button.disabled = false;
     button.textContent = 'Delete';
   }
+}
+
+function showInventoryNotice(text, kind) {
+  const notice = document.createElement('div');
+  notice.className = `alert alert-${kind}`;
+  notice.setAttribute('role', kind === 'warning' ? 'alert' : 'status');
+  notice.textContent = text;
+  document.querySelector('main').prepend(notice);
 }

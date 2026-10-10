@@ -1,7 +1,8 @@
 import { getSupabaseClient } from '../lib/supabaseClient.js';
+import { deleteSupplyPhoto, getSupplyPhotoUrls } from './storageService.js';
 
 const SUPPLY_FIELDS =
-  'id, name, brand, color_code, color_hex, quantity, unit, notes, created_at, category_id, categories(name, icon)';
+  'id, user_id, name, brand, color_code, color_hex, quantity, unit, notes, created_at, category_id, photo_path, categories(name, icon)';
 
 /**
  * Loads the signed-in user's supplies and the available supply categories.
@@ -23,9 +24,15 @@ export async function getSupplyBrowseData() {
   if (categoriesResult.error) {
     throw new Error(`Unable to load categories: ${categoriesResult.error.message}`);
   }
+  const photoUrls = await getSupplyPhotoUrls(
+    suppliesResult.data.map((supply) => supply.photo_path),
+  );
 
   return {
-    supplies: suppliesResult.data,
+    supplies: suppliesResult.data.map((supply) => ({
+      ...supply,
+      photo_url: photoUrls.get(supply.photo_path) ?? null,
+    })),
     categories: categoriesResult.data,
   };
 }
@@ -82,6 +89,7 @@ export async function updateSupply(supplyId, supply) {
 }
 
 export async function deleteSupply(supplyId) {
+  const supply = await getSupplyById(supplyId);
   const { data, error } = await getSupabaseClient()
     .from('supplies')
     .delete()
@@ -91,4 +99,15 @@ export async function deleteSupply(supplyId) {
 
   if (error) throw new Error(`Unable to delete supply: ${error.message}`);
   if (!data) throw new Error('Supply not found or you do not have permission to delete it.');
+
+  if (!supply.photo_path) return { photoCleanupError: null, photoPath: null };
+  try {
+    await deleteSupplyPhoto(supply.photo_path);
+    return { photoCleanupError: null, photoPath: null };
+  } catch (cleanupError) {
+    return {
+      photoCleanupError: cleanupError.message,
+      photoPath: supply.photo_path,
+    };
+  }
 }

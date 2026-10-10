@@ -9,6 +9,12 @@ import {
   getSupplyCategories,
   updateSupply,
 } from '../services/suppliesService.js';
+import {
+  deleteSupplyPhoto,
+  getSupplyPhotoUrls,
+  uploadSupplyPhoto,
+  validateSupplyPhoto,
+} from '../services/storageService.js';
 import { requireAuth } from '../utils/guards.js';
 import { validateSupplyInput } from '../utils/supplyValidation.js';
 
@@ -20,8 +26,15 @@ const error = document.querySelector('#form-error');
 const message = document.querySelector('#form-message');
 const submitButton = form.querySelector('button[type="submit"]');
 const categorySelect = form.elements.category_id;
+const photoInput = form.elements.photo;
+const photoPreview = document.querySelector('#photo-preview');
+const removePhotoOption = document.querySelector('#remove-photo-option');
 const supplyId = new URLSearchParams(window.location.search).get('id');
 const isEditing = Boolean(supplyId);
+let existingPhotoPath = null;
+let existingPhotoUrl = null;
+let supplyOwnerId = null;
+let previewObjectUrl = null;
 
 try {
   const user = await requireAuth();
@@ -30,8 +43,21 @@ try {
       getSupplyCategories(),
       isEditing ? getSupplyById(supplyId) : Promise.resolve(null),
     ]);
+    existingPhotoPath = supply?.photo_path ?? null;
+    supplyOwnerId = supply?.user_id ?? null;
     populateCategories(categories);
-    if (supply) populateForm(supply);
+    if (supply) {
+      const photoUrls = await getSupplyPhotoUrls([existingPhotoPath]);
+      existingPhotoUrl = photoUrls.get(existingPhotoPath) ?? null;
+      populateForm(supply, existingPhotoUrl);
+    }
+
+    function showPhotoPreviewAfterInvalidSelection(errorMessage) {
+      if (form.elements.remove_photo.checked) photoPreview.hidden = true;
+      else if (existingPhotoUrl) showPhotoPreview(existingPhotoUrl, 'Current photo');
+      else photoPreview.hidden = true;
+      showMessage(errorMessage, 'danger');
+    }
     loading.hidden = true;
     form.hidden = false;
     if (isEditing) {
@@ -59,21 +85,106 @@ form.addEventListener('submit', async (event) => {
   const { errors, value } = validateSupplyInput(readFormValues());
   showValidationErrors(errors);
   if (Object.keys(errors).length > 0) return;
+  try {
+    validateSupplyPhoto(photoInput.files[0]);
+  } catch (photoError) {
+    showMessage(photoError.message, 'danger');
+    return;
+  }
 
   submitButton.disabled = true;
   submitButton.textContent = 'Saving…';
+  let uploadedPhotoPath = null;
+  let saved = false;
   try {
-    if (isEditing) await updateSupply(supplyId, value);
-    else await createSupply(value);
-    const result = isEditing ? 'updated' : 'created';
-    window.location.assign(`/pages/supplies.html?${result}=1`);
+    const selectedPhoto = photoInput.files[0];
+    if (selectedPhoto) {
+      uploadedPhotoPath = await uploadSupplyPhoto(selectedPhoto, supplyOwnerId);
+    }
+    const photoPath =
+      uploadedPhotoPath ??
+      (form.elements.remove_photo.checked ? null : existingPhotoPath);
+    const supply = { ...value, photo_path: photoPath };
+
+    if (isEditing) await updateSupply(supplyId, supply);
+    else await createSupply(supply);
+    saved = true;
   } catch (saveError) {
-    message.className = 'alert alert-danger mt-3';
-    message.textContent = saveError.message;
-    submitButton.disabled = false;
-    submitButton.textContent = isEditing ? 'Save changes' : 'Save supply';
+    if (uploadedPhotoPath) {
+      try {
+        await deleteSupplyPhoto(uploadedPhotoPath);
+      } catch (cleanupError) {
+        showMessage(
+          `${saveError.message} The uploaded photo could not be cleaned up (${cleanupError.message}); stored path: ${uploadedPhotoPath}`,
+          'danger',
+        );
+      }
+    }
+    if (!message.textContent) showMessage(saveError.message, 'danger');
+  }
+
+  if (saved) {
+    let cleanupWarning = false;
+    const photoChanged = existingPhotoPath && existingPhotoPath !==
+      (uploadedPhotoPath ?? (form.elements.remove_photo.checked ? null : existingPhotoPath));
+    if (photoChanged) {
+      try {
+        await deleteSupplyPhoto(existingPhotoPath);
+      } catch {
+        cleanupWarning = true;
+      }
+    }
+    const result = isEditing ? 'updated' : 'created';
+    const cleanupParam = cleanupWarning ? '&photoCleanup=1' : '';
+    window.location.assign(
+      `/pages/supplies.html?${result}=1${cleanupParam}`,
+    );
+    return;
+  }
+
+  submitButton.disabled = false;
+  submitButton.textContent = isEditing ? 'Save changes' : 'Save supply';
+});
+
+photoInput.addEventListener('change', () => {
+  message.textContent = '';
+  const file = photoInput.files[0];
+  if (!file) {
+    if (previewObjectUrl) URL.revokeObjectURL(previewObjectUrl);
+    previewObjectUrl = null;
+    photoPreview.hidden = true;
+    return;
+  }
+
+  try {
+    validateSupplyPhoto(file);
+    if (previewObjectUrl) URL.revokeObjectURL(previewObjectUrl);
+    previewObjectUrl = URL.createObjectURL(file);
+    form.elements.remove_photo.checked = false;
+    showPhotoPreview(previewObjectUrl, file.name);
+  } catch (photoError) {
+    photoInput.value = '';
+    showPhotoPreviewAfterInvalidSelection(photoError.message);
   }
 });
+
+form.elements.remove_photo.addEventListener('change', () => {
+  if (photoInput.files[0]) return;
+  if (form.elements.remove_photo.checked) {
+    photoPreview.hidden = true;
+  } else if (existingPhotoUrl) {
+    showPhotoPreview(existingPhotoUrl, 'Current photo');
+  }
+});
+
+window.addEventListener('pagehide', () => {
+  if (previewObjectUrl) URL.revokeObjectURL(previewObjectUrl);
+});
+
+function showMessage(text, kind) {
+  message.className = `alert alert-${kind} mt-3`;
+  message.textContent = text;
+}
 
 function populateCategories(items) {
   for (const category of items) {
@@ -97,7 +208,7 @@ function readFormValues() {
   };
 }
 
-function populateForm(supply) {
+function populateForm(supply, photoUrl) {
   form.elements.category_id.value = supply.category_id ?? '';
   form.elements.name.value = supply.name;
   form.elements.brand.value = supply.brand ?? '';
@@ -106,6 +217,18 @@ function populateForm(supply) {
   form.elements.quantity.value = supply.quantity;
   form.elements.unit.value = supply.unit ?? '';
   form.elements.notes.value = supply.notes ?? '';
+  if (supply.photo_path) {
+    removePhotoOption.hidden = false;
+    if (photoUrl) showPhotoPreview(photoUrl, 'Current photo');
+  }
+}
+
+function showPhotoPreview(url, caption) {
+  const image = photoPreview.querySelector('img');
+  image.src = url;
+  image.alt = caption === 'Current photo' ? 'Current supply photo' : 'Selected supply photo preview';
+  photoPreview.querySelector('[data-preview-caption]').textContent = caption;
+  photoPreview.hidden = false;
 }
 
 function clearValidationErrors() {

@@ -54,12 +54,14 @@ The app reads Supabase credentials from `.env`. Configure the project URL and br
 5. While signed out, visit `/pages/supplies.html`; verify it redirects to login and returns to the requested page after sign-in.
 6. As a signed-in user, verify categories and only that user's supplies appear. Repeat with a second account to confirm data isolation.
 7. Add a supply, edit it, cancel a delete confirmation, then confirm deletion. Verify quantity/color validation and visible errors.
+8. Upload JPG/PNG/WebP photos up to 5 MB on create and edit; verify preview and inventory display, replace or remove a photo, and delete the supply.
+9. Verify unsupported/oversized files are rejected and a second user cannot access another user's photo object.
 
-The default-category seed is a migration under `supabase/migrations/`; apply pending migrations to the intended Supabase project before expecting seeded categories to appear. Never share or commit `.env` values.
+Apply pending migrations to the intended Supabase project before relying on categories or photo storage. The storage bucket is private; photo paths are stored in the database and displayed through expiring signed URLs. Never share or commit `.env` values.
 
 ## Next implementation milestone
 
-Add private supply-photo uploads with storage policies, file type/size validation, and cleanup when images are replaced or supplies are deleted. See [the implementation plan](docs/implementation-plan.md).
+Build project CRUD, including project covers/pattern files, after completing the live Supabase storage and ownership checks. See [the implementation plan](docs/implementation-plan.md).
 
 ## Roles
 

@@ -19,6 +19,10 @@ The application stores user data, inventory records, project information, and ad
 - `categories` are readable by authenticated users and writable only by admins.
 - `user_roles` is admin-controlled; normal users can access only their own row.
 
+## Supply photo storage
+
+The private `supply-photos` bucket stores JPG, PNG, and WebP images up to 5 MB. Object names follow `{user_id}/{uuid}.{ext}` and the `supplies.photo_path` column stores the object path, not a URL. Authenticated users can access objects in their own folder; admins can access objects for authorized moderation. The client creates expiring signed URLs when rendering private photos. Bucket configuration and object policies are managed by `supabase/migrations/20261010101407_add_supply_photos_storage.sql`.
+
 ## Entity relationships
 
 ```mermaid
