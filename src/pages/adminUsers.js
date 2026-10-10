@@ -88,6 +88,7 @@ async function handleAction(event, adminId) {
     }
   } catch (error) {
     button.disabled = false;
+    select.value = user.role;
     showMessage(error.message, 'danger');
   }
 }
