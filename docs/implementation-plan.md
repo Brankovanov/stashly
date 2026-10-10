@@ -20,6 +20,13 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 10 | Add profile and dashboard | ✅ Implemented; profile-row and cross-user avatar access checks pass; avatar replacement/error edge cases remain |
 | 11 | Build the admin panel | 🟡 Cross-user edits/deletes, cleanup warnings, and role-selector labels verified; role-change and broader accessibility checks remain |
 | 12 | Polish, document, and deploy | 🟡 Production build and responsive no-overflow checks verified; broader accessibility/state review and deployment remain |
+| 13 | Add color catalogues | ⬜ Not started |
+| 14 | Add per-user catalogue selection | ⬜ Not started |
+| 15 | Use catalogues in supply forms | ⬜ Not started |
+| 16 | Suggest close color matches | ⬜ Not started |
+| 17 | Add supply color picker | ⬜ Optional / decision pending |
+| 18 | Add a friendly loading animation | ⬜ Not started |
+| 19 | Add avatar profile submenu | ⬜ Not started |
 
 ## Phase 1 — Foundation and security
 
@@ -240,6 +247,67 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Progress (2026-10-10):** the production build passes. Browser checks at 375, 768, and 1280 px found no horizontal overflow on the home, supplies, projects, supply/project forms, profile, project detail, and admin pages. An accessibility scan found no unlabeled form controls on those screens after adding and rechecking accessible names for both dynamically generated admin role selectors. This is a targeted scan, not a full accessibility audit. Broader keyboard/assistive-technology, loading/empty/error-state coverage, deployment smoke testing, and deployment/demo-credential setup remain.
 - **Commits:** `docs: add README, architecture and database docs`; `chore: deployment config`
 
+## Phase 4 — Color catalogues and interface polish
+
+### 13. Add color catalogues
+
+- Add versioned JSON catalogue files for the supported embroidery color systems.
+- Define one consistent entry shape containing the catalogue identifier, manufacturer/code, display name, and normalized color value (hex/RGB).
+- Add a catalogue loader/validation utility so malformed or missing entries fail visibly instead of silently producing invalid supply data.
+- Document catalogue provenance, update procedure, and licensing/attribution requirements before importing any external dataset.
+- **Verify:** every catalogue parses, entries have unique codes, color values are valid, and the production build includes the catalogue assets.
+- **Commit:** `feat(colors): add embroidery color catalogues`
+
+### 14. Add per-user catalogue selection
+
+- Add a user-level catalogue preference with `DNS` as the default for existing and newly registered users.
+- Store the preference in the profile data or a dedicated preferences table through a committed migration, with an allowlist of supported catalogue identifiers.
+- Add profile/settings controls for selecting the active catalogue and make the choice persist across sessions and pages.
+- Keep the preference server-validated and fall back to `DNS` only when no valid preference exists.
+- **Verify:** two users can select different catalogues, each sees their own selection after signing in again, and invalid catalogue identifiers are rejected by the database/service layer.
+- **Commit:** `feat(profile): select a personal color catalogue`
+
+### 15. Use catalogues when creating and editing supplies
+
+- Extend the supply form to load the active user's catalogue and offer catalogue-code/name lookup while preserving manual entry for colors not present in a catalogue.
+- Store the selected catalogue identifier and color code alongside the normalized color value without breaking existing supplies.
+- Update supply cards, details, and edit forms to display the correct catalogue label and code.
+- Keep catalogue reads in a service/module rather than embedding data-access logic in page scripts.
+- **Verify:** create and edit supplies using catalogue entries, switch catalogues and repeat, retain manually entered colors, and confirm existing supplies still render correctly.
+- **Commit:** `feat(supplies): use color catalogues in supply forms`
+
+### 16. Suggest close color matches
+
+- When an exact code/color match is unavailable, compare the entered or selected color against the active catalogue using a documented color-distance algorithm.
+- Show a small ranked list of close matches with code, name, swatch, and distance/approximation context; never replace the user's value automatically.
+- Avoid misleading suggestions when the input is invalid or the nearest result is outside the configured similarity threshold.
+- **Verify:** exact matches are preferred, close colors are ranked consistently, no suggestions appear for invalid input, and the feature remains usable on mobile.
+- **Commit:** `feat(colors): suggest nearby catalogue matches`
+
+### 17. Add a supply color picker (optional)
+
+- Decide whether a native color input plus catalogue suggestions provides enough usability before adding a custom picker.
+- If implemented, add an accessible picker to create/edit supply forms that synchronizes with the hex value and catalogue lookup without creating conflicting sources of truth.
+- Support keyboard interaction, labels, contrast-safe swatches, and a manual hex fallback.
+- **Verify:** picker, text input, catalogue selection, validation, and edit-prefill behavior remain synchronized; otherwise document the decision to defer it.
+- **Commit:** `feat(supplies): add accessible color picker`
+
+### 18. Add a friendly loading animation
+
+- Create a reusable loading component with a lightweight knitting/cat animation (or similarly craft-themed animation) and a text alternative for assistive technology.
+- Use it consistently for page-level and relevant service-loading states without blocking error or empty-state rendering.
+- Respect `prefers-reduced-motion` and avoid adding a large asset or dependency solely for the animation.
+- **Verify:** loaders appear during real network delays, disappear on success/error, remain responsive at mobile widths, and become static/reduced under reduced-motion preferences.
+- **Commit:** `feat(ui): add craft-themed loading states`
+
+### 19. Add an avatar profile submenu
+
+- Change the signed-in navbar so the avatar opens a separate profile submenu instead of placing all profile actions directly in the main navigation.
+- Include the profile link and sign-out action in the submenu, preserve the admin link and active navigation behavior, and provide an accessible button label/state.
+- Ensure the menu works with mouse, keyboard, touch, and signed-out navigation transitions.
+- **Verify:** the submenu opens and closes reliably, closes after navigation where appropriate, has no horizontal overflow, and remains usable at 375 px and desktop widths.
+- **Commit:** `feat(nav): add avatar profile submenu`
+
 ## Completion criteria
 
 - At least five responsive screens; the planned app includes nine.
@@ -247,5 +315,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - RLS protects every public table, with cross-user access tested.
 - Services own data access; page scripts handle DOM and events.
 - Each screen includes loading, empty, and error states.
+- Color catalogues are versioned, validated, attributed, and selectable per user; catalogue-backed supply entry and close-match suggestions are tested.
+- The optional color picker has an explicit implemented/deferred decision, loading states respect reduced motion, and profile actions are available through an accessible avatar submenu.
 - The app builds locally and is deployed with setup instructions and demo accounts.
 - Commit each working step; the guide recommends spreading commits across at least three different days.

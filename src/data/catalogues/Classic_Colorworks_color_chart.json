@@ -1,0 +1,4488 @@
+{
+  "brand": "Classic Colorworks",
+  "source_file": "Classic_Colorworks_color_chart.csv",
+  "code_field": "Classic Colorworks Code",
+  "count": 280,
+  "colors": [
+    {
+      "code": "12-Grain",
+      "name": "12-Grain",
+      "hex": "#B1A18E",
+      "rgb": {
+        "r": 177,
+        "g": 161,
+        "b": 142
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 9.0,
+        "y": 19.8,
+        "k": 30.6
+      }
+    },
+    {
+      "code": "Almost Auburn",
+      "name": "Almost Auburn",
+      "hex": "#8A453D",
+      "rgb": {
+        "r": 138,
+        "g": 69,
+        "b": 61
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 50.0,
+        "y": 55.8,
+        "k": 45.9
+      }
+    },
+    {
+      "code": "Amber Waves",
+      "name": "Amber Waves",
+      "hex": "#968442",
+      "rgb": {
+        "r": 150,
+        "g": 132,
+        "b": 66
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 12.0,
+        "y": 56.0,
+        "k": 41.2
+      }
+    },
+    {
+      "code": "Amethyst",
+      "name": "Amethyst",
+      "hex": "#BFA9D2",
+      "rgb": {
+        "r": 191,
+        "g": 169,
+        "b": 210
+      },
+      "cmyk": {
+        "c": 9.0,
+        "m": 19.5,
+        "y": 0.0,
+        "k": 17.6
+      }
+    },
+    {
+      "code": "Antique Lace",
+      "name": "Antique Lace",
+      "hex": "#AAA199",
+      "rgb": {
+        "r": 170,
+        "g": 161,
+        "b": 153
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 5.3,
+        "y": 10.0,
+        "k": 33.3
+      }
+    },
+    {
+      "code": "Apple Cider",
+      "name": "Apple Cider",
+      "hex": "#AA794D",
+      "rgb": {
+        "r": 170,
+        "g": 121,
+        "b": 77
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 28.8,
+        "y": 54.7,
+        "k": 33.3
+      }
+    },
+    {
+      "code": "Apple Fritter",
+      "name": "Apple Fritter",
+      "hex": "#AD3638",
+      "rgb": {
+        "r": 173,
+        "g": 54,
+        "b": 56
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 68.8,
+        "y": 67.6,
+        "k": 32.2
+      }
+    },
+    {
+      "code": "Argyle Socks",
+      "name": "Argyle Socks",
+      "hex": "#887599",
+      "rgb": {
+        "r": 136,
+        "g": 117,
+        "b": 153
+      },
+      "cmyk": {
+        "c": 11.1,
+        "m": 23.5,
+        "y": 0.0,
+        "k": 40.0
+      }
+    },
+    {
+      "code": "Aunt Marie's Violet",
+      "name": "Aunt Marie's Violet",
+      "hex": "#B076A0",
+      "rgb": {
+        "r": 176,
+        "g": 118,
+        "b": 160
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 33.0,
+        "y": 9.1,
+        "k": 31.0
+      }
+    },
+    {
+      "code": "Auntie Dee",
+      "name": "Auntie Dee",
+      "hex": "#211A23",
+      "rgb": {
+        "r": 33,
+        "g": 26,
+        "b": 35
+      },
+      "cmyk": {
+        "c": 5.7,
+        "m": 25.7,
+        "y": 0.0,
+        "k": 86.3
+      }
+    },
+    {
+      "code": "Autumn Spice",
+      "name": "Autumn Spice",
+      "hex": "#9A401C",
+      "rgb": {
+        "r": 154,
+        "g": 64,
+        "b": 28
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 58.4,
+        "y": 81.8,
+        "k": 39.6
+      }
+    },
+    {
+      "code": "Avocado",
+      "name": "Avocado",
+      "hex": "#8A6F3E",
+      "rgb": {
+        "r": 138,
+        "g": 111,
+        "b": 62
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 19.6,
+        "y": 55.1,
+        "k": 45.9
+      }
+    },
+    {
+      "code": "Baby Blanket",
+      "name": "Baby Blanket",
+      "hex": "#BAA093",
+      "rgb": {
+        "r": 186,
+        "g": 160,
+        "b": 147
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 14.0,
+        "y": 21.0,
+        "k": 27.1
+      }
+    },
+    {
+      "code": "Baby Chick",
+      "name": "Baby Chick",
+      "hex": "#B7AE9C",
+      "rgb": {
+        "r": 183,
+        "g": 174,
+        "b": 156
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 4.9,
+        "y": 14.8,
+        "k": 28.2
+      }
+    },
+    {
+      "code": "Baking Tin",
+      "name": "Baking Tin",
+      "hex": "#7B7B7B",
+      "rgb": {
+        "r": 123,
+        "g": 123,
+        "b": 123
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 0.0,
+        "y": 0.0,
+        "k": 51.8
+      }
+    },
+    {
+      "code": "Balsam Fir",
+      "name": "Balsam Fir",
+      "hex": "#3B3327",
+      "rgb": {
+        "r": 59,
+        "g": 51,
+        "b": 39
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 13.6,
+        "y": 33.9,
+        "k": 76.9
+      }
+    },
+    {
+      "code": "Bambino",
+      "name": "Bambino",
+      "hex": "#B57877",
+      "rgb": {
+        "r": 181,
+        "g": 120,
+        "b": 119
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 33.7,
+        "y": 34.3,
+        "k": 29.0
+      }
+    },
+    {
+      "code": "Bamboo",
+      "name": "Bamboo",
+      "hex": "#C9C2C6",
+      "rgb": {
+        "r": 201,
+        "g": 194,
+        "b": 198
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 3.5,
+        "y": 1.5,
+        "k": 21.2
+      }
+    },
+    {
+      "code": "Bandana",
+      "name": "Bandana",
+      "hex": "#570D21",
+      "rgb": {
+        "r": 87,
+        "g": 13,
+        "b": 33
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 85.1,
+        "y": 62.1,
+        "k": 65.9
+      }
+    },
+    {
+      "code": "Barn Door",
+      "name": "Barn Door",
+      "hex": "#96423B",
+      "rgb": {
+        "r": 150,
+        "g": 66,
+        "b": 59
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 56.0,
+        "y": 60.7,
+        "k": 41.2
+      }
+    },
+    {
+      "code": "Barrel Cactus",
+      "name": "Barrel Cactus",
+      "hex": "#A6A7A2",
+      "rgb": {
+        "r": 166,
+        "g": 167,
+        "b": 162
+      },
+      "cmyk": {
+        "c": 0.6,
+        "m": 0.0,
+        "y": 3.0,
+        "k": 34.5
+      }
+    },
+    {
+      "code": "Bean Sprout",
+      "name": "Bean Sprout",
+      "hex": "#5F5D30",
+      "rgb": {
+        "r": 95,
+        "g": 93,
+        "b": 48
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 2.1,
+        "y": 49.5,
+        "k": 62.7
+      }
+    },
+    {
+      "code": "Bejeweled",
+      "name": "Bejeweled",
+      "hex": "#1D454A",
+      "rgb": {
+        "r": 29,
+        "g": 69,
+        "b": 74
+      },
+      "cmyk": {
+        "c": 60.8,
+        "m": 6.8,
+        "y": 0.0,
+        "k": 71.0
+      }
+    },
+    {
+      "code": "Bella Rosa",
+      "name": "Bella Rosa",
+      "hex": "#B19F9B",
+      "rgb": {
+        "r": 177,
+        "g": 159,
+        "b": 155
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 10.2,
+        "y": 12.4,
+        "k": 30.6
+      }
+    },
+    {
+      "code": "Betty Bluebell",
+      "name": "Betty Bluebell",
+      "hex": "#84A4CE",
+      "rgb": {
+        "r": 132,
+        "g": 164,
+        "b": 206
+      },
+      "cmyk": {
+        "c": 35.9,
+        "m": 20.4,
+        "y": 0.0,
+        "k": 19.2
+      }
+    },
+    {
+      "code": "Bing Cherry",
+      "name": "Bing Cherry",
+      "hex": "#3C1A1F",
+      "rgb": {
+        "r": 60,
+        "g": 26,
+        "b": 31
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 56.7,
+        "y": 48.3,
+        "k": 76.5
+      }
+    },
+    {
+      "code": "Black Coffee",
+      "name": "Black Coffee",
+      "hex": "#1B1517",
+      "rgb": {
+        "r": 27,
+        "g": 21,
+        "b": 23
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 22.2,
+        "y": 14.8,
+        "k": 89.4
+      }
+    },
+    {
+      "code": "Blackbird",
+      "name": "Blackbird",
+      "hex": "#1C130F",
+      "rgb": {
+        "r": 28,
+        "g": 19,
+        "b": 15
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 32.1,
+        "y": 46.4,
+        "k": 89.0
+      }
+    },
+    {
+      "code": "Blacksmith Blue",
+      "name": "Blacksmith Blue",
+      "hex": "#22232C",
+      "rgb": {
+        "r": 34,
+        "g": 35,
+        "b": 44
+      },
+      "cmyk": {
+        "c": 22.7,
+        "m": 20.5,
+        "y": 0.0,
+        "k": 82.7
+      }
+    },
+    {
+      "code": "Blue Beadboard",
+      "name": "Blue Beadboard",
+      "hex": "#AFBFC6",
+      "rgb": {
+        "r": 175,
+        "g": 191,
+        "b": 198
+      },
+      "cmyk": {
+        "c": 11.6,
+        "m": 3.5,
+        "y": 0.0,
+        "k": 22.4
+      }
+    },
+    {
+      "code": "Blue Beatrice",
+      "name": "Blue Beatrice",
+      "hex": "#7F879E",
+      "rgb": {
+        "r": 127,
+        "g": 135,
+        "b": 158
+      },
+      "cmyk": {
+        "c": 19.6,
+        "m": 14.6,
+        "y": 0.0,
+        "k": 38.0
+      }
+    },
+    {
+      "code": "Blue Corn",
+      "name": "Blue Corn",
+      "hex": "#14242A",
+      "rgb": {
+        "r": 20,
+        "g": 36,
+        "b": 42
+      },
+      "cmyk": {
+        "c": 52.4,
+        "m": 14.3,
+        "y": 0.0,
+        "k": 83.5
+      }
+    },
+    {
+      "code": "Blue Moon",
+      "name": "Blue Moon",
+      "hex": "#8490A0",
+      "rgb": {
+        "r": 132,
+        "g": 144,
+        "b": 160
+      },
+      "cmyk": {
+        "c": 17.5,
+        "m": 10.0,
+        "y": 0.0,
+        "k": 37.3
+      }
+    },
+    {
+      "code": "Blueberry Tart",
+      "name": "Blueberry Tart",
+      "hex": "#7A98B4",
+      "rgb": {
+        "r": 122,
+        "g": 152,
+        "b": 180
+      },
+      "cmyk": {
+        "c": 32.2,
+        "m": 15.6,
+        "y": 0.0,
+        "k": 29.4
+      }
+    },
+    {
+      "code": "Blushing Beauty",
+      "name": "Blushing Beauty",
+      "hex": "#D48882",
+      "rgb": {
+        "r": 212,
+        "g": 136,
+        "b": 130
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 35.8,
+        "y": 38.7,
+        "k": 16.9
+      }
+    },
+    {
+      "code": "Boysenberry Jam",
+      "name": "Boysenberry Jam",
+      "hex": "#733553",
+      "rgb": {
+        "r": 115,
+        "g": 53,
+        "b": 83
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 53.9,
+        "y": 27.8,
+        "k": 54.9
+      }
+    },
+    {
+      "code": "Bramble Bush",
+      "name": "Bramble Bush",
+      "hex": "#5D361E",
+      "rgb": {
+        "r": 93,
+        "g": 54,
+        "b": 30
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 41.9,
+        "y": 67.7,
+        "k": 63.5
+      }
+    },
+    {
+      "code": "Brandied Pears",
+      "name": "Brandied Pears",
+      "hex": "#71492F",
+      "rgb": {
+        "r": 113,
+        "g": 73,
+        "b": 47
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 35.4,
+        "y": 58.4,
+        "k": 55.7
+      }
+    },
+    {
+      "code": "Brown Hen",
+      "name": "Brown Hen",
+      "hex": "#AB8673",
+      "rgb": {
+        "r": 171,
+        "g": 134,
+        "b": 115
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 21.6,
+        "y": 32.7,
+        "k": 32.9
+      }
+    },
+    {
+      "code": "Brown Sugar",
+      "name": "Brown Sugar",
+      "hex": "#985D3E",
+      "rgb": {
+        "r": 152,
+        "g": 93,
+        "b": 62
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 38.8,
+        "y": 59.2,
+        "k": 40.4
+      }
+    },
+    {
+      "code": "Bunny Honey",
+      "name": "Bunny Honey",
+      "hex": "#D6C4BE",
+      "rgb": {
+        "r": 214,
+        "g": 196,
+        "b": 190
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 8.4,
+        "y": 11.2,
+        "k": 16.1
+      }
+    },
+    {
+      "code": "Calico Kitty",
+      "name": "Calico Kitty",
+      "hex": "#864B42",
+      "rgb": {
+        "r": 134,
+        "g": 75,
+        "b": 66
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 44.0,
+        "y": 50.7,
+        "k": 47.5
+      }
+    },
+    {
+      "code": "Camouflage",
+      "name": "Camouflage",
+      "hex": "#545248",
+      "rgb": {
+        "r": 84,
+        "g": 82,
+        "b": 72
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 2.4,
+        "y": 14.3,
+        "k": 67.1
+      }
+    },
+    {
+      "code": "Campfire",
+      "name": "Campfire",
+      "hex": "#5F1918",
+      "rgb": {
+        "r": 95,
+        "g": 25,
+        "b": 24
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 73.7,
+        "y": 74.7,
+        "k": 62.7
+      }
+    },
+    {
+      "code": "Candied Yams",
+      "name": "Candied Yams",
+      "hex": "#AE5A3B",
+      "rgb": {
+        "r": 174,
+        "g": 90,
+        "b": 59
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 48.3,
+        "y": 66.1,
+        "k": 31.8
+      }
+    },
+    {
+      "code": "Candy Corn",
+      "name": "Candy Corn",
+      "hex": "#AE683C",
+      "rgb": {
+        "r": 174,
+        "g": 104,
+        "b": 60
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 40.2,
+        "y": 65.5,
+        "k": 31.8
+      }
+    },
+    {
+      "code": "Cappuccino",
+      "name": "Cappuccino",
+      "hex": "#986A69",
+      "rgb": {
+        "r": 152,
+        "g": 106,
+        "b": 105
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 30.3,
+        "y": 30.9,
+        "k": 40.4
+      }
+    },
+    {
+      "code": "Caramel",
+      "name": "Caramel",
+      "hex": "#A47758",
+      "rgb": {
+        "r": 164,
+        "g": 119,
+        "b": 88
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 27.4,
+        "y": 46.3,
+        "k": 35.7
+      }
+    },
+    {
+      "code": "Caribbean Waters",
+      "name": "Caribbean Waters",
+      "hex": "#5A847D",
+      "rgb": {
+        "r": 90,
+        "g": 132,
+        "b": 125
+      },
+      "cmyk": {
+        "c": 31.8,
+        "m": 0.0,
+        "y": 5.3,
+        "k": 48.2
+      }
+    },
+    {
+      "code": "Carrie Berry",
+      "name": "Carrie Berry",
+      "hex": "#DC6689",
+      "rgb": {
+        "r": 220,
+        "g": 102,
+        "b": 137
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 53.6,
+        "y": 37.7,
+        "k": 13.7
+      }
+    },
+    {
+      "code": "Cashmere",
+      "name": "Cashmere",
+      "hex": "#81719E",
+      "rgb": {
+        "r": 129,
+        "g": 113,
+        "b": 158
+      },
+      "cmyk": {
+        "c": 18.4,
+        "m": 28.5,
+        "y": 0.0,
+        "k": 38.0
+      }
+    },
+    {
+      "code": "Caterpillar",
+      "name": "Caterpillar",
+      "hex": "#271615",
+      "rgb": {
+        "r": 39,
+        "g": 22,
+        "b": 21
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 43.6,
+        "y": 46.2,
+        "k": 84.7
+      }
+    },
+    {
+      "code": "Cauldron",
+      "name": "Cauldron",
+      "hex": "#373F49",
+      "rgb": {
+        "r": 55,
+        "g": 63,
+        "b": 73
+      },
+      "cmyk": {
+        "c": 24.7,
+        "m": 13.7,
+        "y": 0.0,
+        "k": 71.4
+      }
+    },
+    {
+      "code": "Cayenne",
+      "name": "Cayenne",
+      "hex": "#5B1C1E",
+      "rgb": {
+        "r": 91,
+        "g": 28,
+        "b": 30
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 69.2,
+        "y": 67.0,
+        "k": 64.3
+      }
+    },
+    {
+      "code": "Cerise",
+      "name": "Cerise",
+      "hex": "#BE5F7C",
+      "rgb": {
+        "r": 190,
+        "g": 95,
+        "b": 124
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 50.0,
+        "y": 34.7,
+        "k": 25.5
+      }
+    },
+    {
+      "code": "Chai",
+      "name": "Chai",
+      "hex": "#947B67",
+      "rgb": {
+        "r": 148,
+        "g": 123,
+        "b": 103
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 16.9,
+        "y": 30.4,
+        "k": 42.0
+      }
+    },
+    {
+      "code": "Cherry Cobbler",
+      "name": "Cherry Cobbler",
+      "hex": "#56151E",
+      "rgb": {
+        "r": 86,
+        "g": 21,
+        "b": 30
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 75.6,
+        "y": 65.1,
+        "k": 66.3
+      }
+    },
+    {
+      "code": "Chesapeake Bay",
+      "name": "Chesapeake Bay",
+      "hex": "#515F68",
+      "rgb": {
+        "r": 81,
+        "g": 95,
+        "b": 104
+      },
+      "cmyk": {
+        "c": 22.1,
+        "m": 8.7,
+        "y": 0.0,
+        "k": 59.2
+      }
+    },
+    {
+      "code": "Chili Pepper",
+      "name": "Chili Pepper",
+      "hex": "#7B2119",
+      "rgb": {
+        "r": 123,
+        "g": 33,
+        "b": 25
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 73.2,
+        "y": 79.7,
+        "k": 51.8
+      }
+    },
+    {
+      "code": "Chocolate Cream Pie",
+      "name": "Chocolate Cream Pie",
+      "hex": "#7C6963",
+      "rgb": {
+        "r": 124,
+        "g": 105,
+        "b": 99
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 15.3,
+        "y": 20.2,
+        "k": 51.4
+      }
+    },
+    {
+      "code": "Chocolate Mousse",
+      "name": "Chocolate Mousse",
+      "hex": "#936F66",
+      "rgb": {
+        "r": 147,
+        "g": 111,
+        "b": 102
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 24.5,
+        "y": 30.6,
+        "k": 42.4
+      }
+    },
+    {
+      "code": "Chopped Chives",
+      "name": "Chopped Chives",
+      "hex": "#707F63",
+      "rgb": {
+        "r": 112,
+        "g": 127,
+        "b": 99
+      },
+      "cmyk": {
+        "c": 11.8,
+        "m": 0.0,
+        "y": 22.0,
+        "k": 50.2
+      }
+    },
+    {
+      "code": "Cinnamon Toast",
+      "name": "Cinnamon Toast",
+      "hex": "#B17D71",
+      "rgb": {
+        "r": 177,
+        "g": 125,
+        "b": 113
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 29.4,
+        "y": 36.2,
+        "k": 30.6
+      }
+    },
+    {
+      "code": "Clay Pot",
+      "name": "Clay Pot",
+      "hex": "#A86359",
+      "rgb": {
+        "r": 168,
+        "g": 99,
+        "b": 89
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 41.1,
+        "y": 47.0,
+        "k": 34.1
+      }
+    },
+    {
+      "code": "Cloud",
+      "name": "Cloud",
+      "hex": "#A3B0BA",
+      "rgb": {
+        "r": 163,
+        "g": 176,
+        "b": 186
+      },
+      "cmyk": {
+        "c": 12.4,
+        "m": 5.4,
+        "y": 0.0,
+        "k": 27.1
+      }
+    },
+    {
+      "code": "Cobbled Peach",
+      "name": "Cobbled Peach",
+      "hex": "#CA907D",
+      "rgb": {
+        "r": 202,
+        "g": 144,
+        "b": 125
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 28.7,
+        "y": 38.1,
+        "k": 20.8
+      }
+    },
+    {
+      "code": "Cocoa Bean",
+      "name": "Cocoa Bean",
+      "hex": "#5D4039",
+      "rgb": {
+        "r": 93,
+        "g": 64,
+        "b": 57
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 31.2,
+        "y": 38.7,
+        "k": 63.5
+      }
+    },
+    {
+      "code": "Colonial Copper",
+      "name": "Colonial Copper",
+      "hex": "#B5592E",
+      "rgb": {
+        "r": 181,
+        "g": 89,
+        "b": 46
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 50.8,
+        "y": 74.6,
+        "k": 29.0
+      }
+    },
+    {
+      "code": "Colonial Rose",
+      "name": "Colonial Rose",
+      "hex": "#8B4D48",
+      "rgb": {
+        "r": 139,
+        "g": 77,
+        "b": 72
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 44.6,
+        "y": 48.2,
+        "k": 45.5
+      }
+    },
+    {
+      "code": "Cool Azul",
+      "name": "Cool Azul",
+      "hex": "#738287",
+      "rgb": {
+        "r": 115,
+        "g": 130,
+        "b": 135
+      },
+      "cmyk": {
+        "c": 14.8,
+        "m": 3.7,
+        "y": 0.0,
+        "k": 47.1
+      }
+    },
+    {
+      "code": "Copper Penny",
+      "name": "Copper Penny",
+      "hex": "#C07863",
+      "rgb": {
+        "r": 192,
+        "g": 120,
+        "b": 99
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 37.5,
+        "y": 48.4,
+        "k": 24.7
+      }
+    },
+    {
+      "code": "Cottage Daisies",
+      "name": "Cottage Daisies",
+      "hex": "#E5C593",
+      "rgb": {
+        "r": 229,
+        "g": 197,
+        "b": 147
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 14.0,
+        "y": 35.8,
+        "k": 10.2
+      }
+    },
+    {
+      "code": "Cottage Garden",
+      "name": "Cottage Garden",
+      "hex": "#BFA39F",
+      "rgb": {
+        "r": 191,
+        "g": 163,
+        "b": 159
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 14.7,
+        "y": 16.8,
+        "k": 25.1
+      }
+    },
+    {
+      "code": "Country Lane",
+      "name": "Country Lane",
+      "hex": "#AC8973",
+      "rgb": {
+        "r": 172,
+        "g": 137,
+        "b": 115
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 20.3,
+        "y": 33.1,
+        "k": 32.5
+      }
+    },
+    {
+      "code": "Crab Cakes",
+      "name": "Crab Cakes",
+      "hex": "#AB4F49",
+      "rgb": {
+        "r": 171,
+        "g": 79,
+        "b": 73
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 53.8,
+        "y": 57.3,
+        "k": 32.9
+      }
+    },
+    {
+      "code": "Creamy Peach",
+      "name": "Creamy Peach",
+      "hex": "#DFBCB2",
+      "rgb": {
+        "r": 223,
+        "g": 188,
+        "b": 178
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 15.7,
+        "y": 20.2,
+        "k": 12.5
+      }
+    },
+    {
+      "code": "Creeping Jenny",
+      "name": "Creeping Jenny",
+      "hex": "#B6A786",
+      "rgb": {
+        "r": 182,
+        "g": 167,
+        "b": 134
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 8.2,
+        "y": 26.4,
+        "k": 28.6
+      }
+    },
+    {
+      "code": "Crushed Pineapple",
+      "name": "Crushed Pineapple",
+      "hex": "#D7BB78",
+      "rgb": {
+        "r": 215,
+        "g": 187,
+        "b": 120
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 13.0,
+        "y": 44.2,
+        "k": 15.7
+      }
+    },
+    {
+      "code": "Cupid",
+      "name": "Cupid",
+      "hex": "#560914",
+      "rgb": {
+        "r": 86,
+        "g": 9,
+        "b": 20
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 89.5,
+        "y": 76.7,
+        "k": 66.3
+      }
+    },
+    {
+      "code": "Dandelion Stem",
+      "name": "Dandelion Stem",
+      "hex": "#B6AB8F",
+      "rgb": {
+        "r": 182,
+        "g": 171,
+        "b": 143
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 6.0,
+        "y": 21.4,
+        "k": 28.6
+      }
+    },
+    {
+      "code": "Deep Blue Sea",
+      "name": "Deep Blue Sea",
+      "hex": "#537686",
+      "rgb": {
+        "r": 83,
+        "g": 118,
+        "b": 134
+      },
+      "cmyk": {
+        "c": 38.1,
+        "m": 11.9,
+        "y": 0.0,
+        "k": 47.5
+      }
+    },
+    {
+      "code": "Deep Fennel",
+      "name": "Deep Fennel",
+      "hex": "#375957",
+      "rgb": {
+        "r": 55,
+        "g": 89,
+        "b": 87
+      },
+      "cmyk": {
+        "c": 38.2,
+        "m": 0.0,
+        "y": 2.2,
+        "k": 65.1
+      }
+    },
+    {
+      "code": "Desert Mesquite",
+      "name": "Desert Mesquite",
+      "hex": "#313A32",
+      "rgb": {
+        "r": 49,
+        "g": 58,
+        "b": 50
+      },
+      "cmyk": {
+        "c": 15.5,
+        "m": 0.0,
+        "y": 13.8,
+        "k": 77.3
+      }
+    },
+    {
+      "code": "Dublin Bay",
+      "name": "Dublin Bay",
+      "hex": "#5D6C6D",
+      "rgb": {
+        "r": 93,
+        "g": 108,
+        "b": 109
+      },
+      "cmyk": {
+        "c": 14.7,
+        "m": 0.9,
+        "y": 0.0,
+        "k": 57.3
+      }
+    },
+    {
+      "code": "Dulce De Leche",
+      "name": "Dulce De Leche",
+      "hex": "#B19085",
+      "rgb": {
+        "r": 177,
+        "g": 144,
+        "b": 133
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 18.6,
+        "y": 24.9,
+        "k": 30.6
+      }
+    },
+    {
+      "code": "Eggshell",
+      "name": "Eggshell",
+      "hex": "#BDAA92",
+      "rgb": {
+        "r": 189,
+        "g": 170,
+        "b": 146
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 10.1,
+        "y": 22.8,
+        "k": 25.9
+      }
+    },
+    {
+      "code": "Embers",
+      "name": "Embers",
+      "hex": "#A63604",
+      "rgb": {
+        "r": 166,
+        "g": 54,
+        "b": 4
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 67.5,
+        "y": 97.6,
+        "k": 34.9
+      }
+    },
+    {
+      "code": "English Ivy",
+      "name": "English Ivy",
+      "hex": "#2B291B",
+      "rgb": {
+        "r": 43,
+        "g": 41,
+        "b": 27
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 4.7,
+        "y": 37.2,
+        "k": 83.1
+      }
+    },
+    {
+      "code": "Erin Go Emerald",
+      "name": "Erin Go Emerald",
+      "hex": "#1C2320",
+      "rgb": {
+        "r": 28,
+        "g": 35,
+        "b": 32
+      },
+      "cmyk": {
+        "c": 20.0,
+        "m": 0.0,
+        "y": 8.6,
+        "k": 86.3
+      }
+    },
+    {
+      "code": "Eve's Leaves",
+      "name": "Eve's Leaves",
+      "hex": "#75764B",
+      "rgb": {
+        "r": 117,
+        "g": 118,
+        "b": 75
+      },
+      "cmyk": {
+        "c": 0.8,
+        "m": 0.0,
+        "y": 36.4,
+        "k": 53.7
+      }
+    },
+    {
+      "code": "Fallen Leaves",
+      "name": "Fallen Leaves",
+      "hex": "#8C3417",
+      "rgb": {
+        "r": 140,
+        "g": 52,
+        "b": 23
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 62.9,
+        "y": 83.6,
+        "k": 45.1
+      }
+    },
+    {
+      "code": "Fancy Green Nancy",
+      "name": "Fancy Green Nancy",
+      "hex": "#5B815B",
+      "rgb": {
+        "r": 91,
+        "g": 129,
+        "b": 91
+      },
+      "cmyk": {
+        "c": 29.5,
+        "m": 0.0,
+        "y": 29.5,
+        "k": 49.4
+      }
+    },
+    {
+      "code": "Fields of Green",
+      "name": "Fields of Green",
+      "hex": "#6DB37B",
+      "rgb": {
+        "r": 109,
+        "g": 179,
+        "b": 123
+      },
+      "cmyk": {
+        "c": 39.1,
+        "m": 0.0,
+        "y": 31.3,
+        "k": 29.8
+      }
+    },
+    {
+      "code": "Finley Gold",
+      "name": "Finley Gold",
+      "hex": "#E2C46C",
+      "rgb": {
+        "r": 226,
+        "g": 196,
+        "b": 108
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 13.3,
+        "y": 52.2,
+        "k": 11.4
+      }
+    },
+    {
+      "code": "Fleur De Lilac",
+      "name": "Fleur De Lilac",
+      "hex": "#B79199",
+      "rgb": {
+        "r": 183,
+        "g": 145,
+        "b": 153
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 20.8,
+        "y": 16.4,
+        "k": 28.2
+      }
+    },
+    {
+      "code": "Fool's Gold",
+      "name": "Fool's Gold",
+      "hex": "#A5794F",
+      "rgb": {
+        "r": 165,
+        "g": 121,
+        "b": 79
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 26.7,
+        "y": 52.1,
+        "k": 35.3
+      }
+    },
+    {
+      "code": "Four Leaf Clover",
+      "name": "Four Leaf Clover",
+      "hex": "#667950",
+      "rgb": {
+        "r": 102,
+        "g": 121,
+        "b": 80
+      },
+      "cmyk": {
+        "c": 15.7,
+        "m": 0.0,
+        "y": 33.9,
+        "k": 52.5
+      }
+    },
+    {
+      "code": "Fresh Brew",
+      "name": "Fresh Brew",
+      "hex": "#471C13",
+      "rgb": {
+        "r": 71,
+        "g": 28,
+        "b": 19
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 60.6,
+        "y": 73.2,
+        "k": 72.2
+      }
+    },
+    {
+      "code": "Frog Legs",
+      "name": "Frog Legs",
+      "hex": "#978D30",
+      "rgb": {
+        "r": 151,
+        "g": 141,
+        "b": 48
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 6.6,
+        "y": 68.2,
+        "k": 40.8
+      }
+    },
+    {
+      "code": "Frosted Sage",
+      "name": "Frosted Sage",
+      "hex": "#8FA5A2",
+      "rgb": {
+        "r": 143,
+        "g": 165,
+        "b": 162
+      },
+      "cmyk": {
+        "c": 13.3,
+        "m": 0.0,
+        "y": 1.8,
+        "k": 35.3
+      }
+    },
+    {
+      "code": "Frosty",
+      "name": "Frosty",
+      "hex": "#C8C3B1",
+      "rgb": {
+        "r": 200,
+        "g": 195,
+        "b": 177
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 2.5,
+        "y": 11.5,
+        "k": 21.6
+      }
+    },
+    {
+      "code": "Frozen Margarita",
+      "name": "Frozen Margarita",
+      "hex": "#789C6F",
+      "rgb": {
+        "r": 120,
+        "g": 156,
+        "b": 111
+      },
+      "cmyk": {
+        "c": 23.1,
+        "m": 0.0,
+        "y": 28.8,
+        "k": 38.8
+      }
+    },
+    {
+      "code": "Garden Trellis",
+      "name": "Garden Trellis",
+      "hex": "#A6AEAC",
+      "rgb": {
+        "r": 166,
+        "g": 174,
+        "b": 172
+      },
+      "cmyk": {
+        "c": 4.6,
+        "m": 0.0,
+        "y": 1.1,
+        "k": 31.8
+      }
+    },
+    {
+      "code": "German Chocolate",
+      "name": "German Chocolate",
+      "hex": "#2F120F",
+      "rgb": {
+        "r": 47,
+        "g": 18,
+        "b": 15
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 61.7,
+        "y": 68.1,
+        "k": 81.6
+      }
+    },
+    {
+      "code": "Ginger Snap",
+      "name": "Ginger Snap",
+      "hex": "#AB936B",
+      "rgb": {
+        "r": 171,
+        "g": 147,
+        "b": 107
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 14.0,
+        "y": 37.4,
+        "k": 32.9
+      }
+    },
+    {
+      "code": "Gingerbread",
+      "name": "Gingerbread",
+      "hex": "#654B2F",
+      "rgb": {
+        "r": 101,
+        "g": 75,
+        "b": 47
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 25.7,
+        "y": 53.5,
+        "k": 60.4
+      }
+    },
+    {
+      "code": "Glazed Carrots",
+      "name": "Glazed Carrots",
+      "hex": "#C07B5D",
+      "rgb": {
+        "r": 192,
+        "g": 123,
+        "b": 93
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 35.9,
+        "y": 51.6,
+        "k": 24.7
+      }
+    },
+    {
+      "code": "Gold Rush",
+      "name": "Gold Rush",
+      "hex": "#A3691A",
+      "rgb": {
+        "r": 163,
+        "g": 105,
+        "b": 26
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 35.6,
+        "y": 84.0,
+        "k": 36.1
+      }
+    },
+    {
+      "code": "Granny Annie",
+      "name": "Granny Annie",
+      "hex": "#0C1B25",
+      "rgb": {
+        "r": 12,
+        "g": 27,
+        "b": 37
+      },
+      "cmyk": {
+        "c": 67.6,
+        "m": 27.0,
+        "y": 0.0,
+        "k": 85.5
+      }
+    },
+    {
+      "code": "Grape Pie",
+      "name": "Grape Pie",
+      "hex": "#7F496B",
+      "rgb": {
+        "r": 127,
+        "g": 73,
+        "b": 107
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 42.5,
+        "y": 15.7,
+        "k": 50.2
+      }
+    },
+    {
+      "code": "Grasshopper",
+      "name": "Grasshopper",
+      "hex": "#2B4127",
+      "rgb": {
+        "r": 43,
+        "g": 65,
+        "b": 39
+      },
+      "cmyk": {
+        "c": 33.8,
+        "m": 0.0,
+        "y": 40.0,
+        "k": 74.5
+      }
+    },
+    {
+      "code": "Green Onion",
+      "name": "Green Onion",
+      "hex": "#AEB4A5",
+      "rgb": {
+        "r": 174,
+        "g": 180,
+        "b": 165
+      },
+      "cmyk": {
+        "c": 3.3,
+        "m": 0.0,
+        "y": 8.3,
+        "k": 29.4
+      }
+    },
+    {
+      "code": "Green Tea",
+      "name": "Green Tea",
+      "hex": "#69664B",
+      "rgb": {
+        "r": 105,
+        "g": 102,
+        "b": 75
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 2.9,
+        "y": 28.6,
+        "k": 58.8
+      }
+    },
+    {
+      "code": "Hayride",
+      "name": "Hayride",
+      "hex": "#7E6B44",
+      "rgb": {
+        "r": 126,
+        "g": 107,
+        "b": 68
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 15.1,
+        "y": 46.0,
+        "k": 50.6
+      }
+    },
+    {
+      "code": "Hazelnut",
+      "name": "Hazelnut",
+      "hex": "#A97F4E",
+      "rgb": {
+        "r": 169,
+        "g": 127,
+        "b": 78
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 24.9,
+        "y": 53.8,
+        "k": 33.7
+      }
+    },
+    {
+      "code": "Heatherleigh",
+      "name": "Heatherleigh",
+      "hex": "#8D5B78",
+      "rgb": {
+        "r": 141,
+        "g": 91,
+        "b": 120
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 35.5,
+        "y": 14.9,
+        "k": 44.7
+      }
+    },
+    {
+      "code": "Hickory Sticks",
+      "name": "Hickory Sticks",
+      "hex": "#3E3126",
+      "rgb": {
+        "r": 62,
+        "g": 49,
+        "b": 38
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 21.0,
+        "y": 38.7,
+        "k": 75.7
+      }
+    },
+    {
+      "code": "Holly Berry",
+      "name": "Holly Berry",
+      "hex": "#751726",
+      "rgb": {
+        "r": 117,
+        "g": 23,
+        "b": 38
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 80.3,
+        "y": 67.5,
+        "k": 54.1
+      }
+    },
+    {
+      "code": "Honey Comb",
+      "name": "Honey Comb",
+      "hex": "#C7964E",
+      "rgb": {
+        "r": 199,
+        "g": 150,
+        "b": 78
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 24.6,
+        "y": 60.8,
+        "k": 22.0
+      }
+    },
+    {
+      "code": "House Wine",
+      "name": "House Wine",
+      "hex": "#BF6784",
+      "rgb": {
+        "r": 191,
+        "g": 103,
+        "b": 132
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 46.1,
+        "y": 30.9,
+        "k": 25.1
+      }
+    },
+    {
+      "code": "Hydrangea",
+      "name": "Hydrangea",
+      "hex": "#787488",
+      "rgb": {
+        "r": 120,
+        "g": 116,
+        "b": 136
+      },
+      "cmyk": {
+        "c": 11.8,
+        "m": 14.7,
+        "y": 0.0,
+        "k": 46.7
+      }
+    },
+    {
+      "code": "Jakey Brown",
+      "name": "Jakey Brown",
+      "hex": "#A76A63",
+      "rgb": {
+        "r": 167,
+        "g": 106,
+        "b": 99
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 36.5,
+        "y": 40.7,
+        "k": 34.5
+      }
+    },
+    {
+      "code": "Jelly Roll",
+      "name": "Jelly Roll",
+      "hex": "#6F0D41",
+      "rgb": {
+        "r": 111,
+        "g": 13,
+        "b": 65
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 88.3,
+        "y": 41.4,
+        "k": 56.5
+      }
+    },
+    {
+      "code": "Jolly Holly",
+      "name": "Jolly Holly",
+      "hex": "#697B59",
+      "rgb": {
+        "r": 105,
+        "g": 123,
+        "b": 89
+      },
+      "cmyk": {
+        "c": 14.6,
+        "m": 0.0,
+        "y": 27.6,
+        "k": 51.8
+      }
+    },
+    {
+      "code": "Joshua Tree",
+      "name": "Joshua Tree",
+      "hex": "#818067",
+      "rgb": {
+        "r": 129,
+        "g": 128,
+        "b": 103
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 0.8,
+        "y": 20.2,
+        "k": 49.4
+      }
+    },
+    {
+      "code": "Just Rust",
+      "name": "Just Rust",
+      "hex": "#7D291F",
+      "rgb": {
+        "r": 125,
+        "g": 41,
+        "b": 31
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 67.2,
+        "y": 75.2,
+        "k": 51.0
+      }
+    },
+    {
+      "code": "Key Largo",
+      "name": "Key Largo",
+      "hex": "#6A967C",
+      "rgb": {
+        "r": 106,
+        "g": 150,
+        "b": 124
+      },
+      "cmyk": {
+        "c": 29.3,
+        "m": 0.0,
+        "y": 17.3,
+        "k": 41.2
+      }
+    },
+    {
+      "code": "Khaki Mocha",
+      "name": "Khaki Mocha",
+      "hex": "#E5D5C5",
+      "rgb": {
+        "r": 229,
+        "g": 213,
+        "b": 197
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 7.0,
+        "y": 14.0,
+        "k": 10.2
+      }
+    },
+    {
+      "code": "La Tierra",
+      "name": "La Tierra",
+      "hex": "#55372E",
+      "rgb": {
+        "r": 85,
+        "g": 55,
+        "b": 46
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 35.3,
+        "y": 45.9,
+        "k": 66.7
+      }
+    },
+    {
+      "code": "Ladybug",
+      "name": "Ladybug",
+      "hex": "#992D3C",
+      "rgb": {
+        "r": 153,
+        "g": 45,
+        "b": 60
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 70.6,
+        "y": 60.8,
+        "k": 40.0
+      }
+    },
+    {
+      "code": "Lakeside",
+      "name": "Lakeside",
+      "hex": "#193937",
+      "rgb": {
+        "r": 25,
+        "g": 57,
+        "b": 55
+      },
+      "cmyk": {
+        "c": 56.1,
+        "m": 0.0,
+        "y": 3.5,
+        "k": 77.6
+      }
+    },
+    {
+      "code": "Lavender Louise",
+      "name": "Lavender Louise",
+      "hex": "#B78FAD",
+      "rgb": {
+        "r": 183,
+        "g": 143,
+        "b": 173
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 21.9,
+        "y": 5.5,
+        "k": 28.2
+      }
+    },
+    {
+      "code": "Lemon Grass",
+      "name": "Lemon Grass",
+      "hex": "#656D4E",
+      "rgb": {
+        "r": 101,
+        "g": 109,
+        "b": 78
+      },
+      "cmyk": {
+        "c": 7.3,
+        "m": 0.0,
+        "y": 28.4,
+        "k": 57.3
+      }
+    },
+    {
+      "code": "Lemon Lime",
+      "name": "Lemon Lime",
+      "hex": "#C4C87D",
+      "rgb": {
+        "r": 196,
+        "g": 200,
+        "b": 125
+      },
+      "cmyk": {
+        "c": 2.0,
+        "m": 0.0,
+        "y": 37.5,
+        "k": 21.6
+      }
+    },
+    {
+      "code": "Lettuce Leaf",
+      "name": "Lettuce Leaf",
+      "hex": "#649489",
+      "rgb": {
+        "r": 100,
+        "g": 148,
+        "b": 137
+      },
+      "cmyk": {
+        "c": 32.4,
+        "m": 0.0,
+        "y": 7.4,
+        "k": 42.0
+      }
+    },
+    {
+      "code": "Licorice Red",
+      "name": "Licorice Red",
+      "hex": "#6D1A26",
+      "rgb": {
+        "r": 109,
+        "g": 26,
+        "b": 38
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 76.1,
+        "y": 65.1,
+        "k": 57.3
+      }
+    },
+    {
+      "code": "Lighthouse",
+      "name": "Lighthouse",
+      "hex": "#CABFBB",
+      "rgb": {
+        "r": 202,
+        "g": 191,
+        "b": 187
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 5.4,
+        "y": 7.4,
+        "k": 20.8
+      }
+    },
+    {
+      "code": "Little House Brown",
+      "name": "Little House Brown",
+      "hex": "#8A6D61",
+      "rgb": {
+        "r": 138,
+        "g": 109,
+        "b": 97
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 21.0,
+        "y": 29.7,
+        "k": 45.9
+      }
+    },
+    {
+      "code": "Little Pink Peony",
+      "name": "Little Pink Peony",
+      "hex": "#CDACAD",
+      "rgb": {
+        "r": 205,
+        "g": 172,
+        "b": 173
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 16.1,
+        "y": 15.6,
+        "k": 19.6
+      }
+    },
+    {
+      "code": "Little Sprout",
+      "name": "Little Sprout",
+      "hex": "#7F8A66",
+      "rgb": {
+        "r": 127,
+        "g": 138,
+        "b": 102
+      },
+      "cmyk": {
+        "c": 8.0,
+        "m": 0.0,
+        "y": 26.1,
+        "k": 45.9
+      }
+    },
+    {
+      "code": "Lobster Claw",
+      "name": "Lobster Claw",
+      "hex": "#B43310",
+      "rgb": {
+        "r": 180,
+        "g": 51,
+        "b": 16
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 71.7,
+        "y": 91.1,
+        "k": 29.4
+      }
+    },
+    {
+      "code": "London Fog",
+      "name": "London Fog",
+      "hex": "#4D4E52",
+      "rgb": {
+        "r": 77,
+        "g": 78,
+        "b": 82
+      },
+      "cmyk": {
+        "c": 6.1,
+        "m": 4.9,
+        "y": 0.0,
+        "k": 67.8
+      }
+    },
+    {
+      "code": "Lunar Eclipse",
+      "name": "Lunar Eclipse",
+      "hex": "#9F9DA5",
+      "rgb": {
+        "r": 159,
+        "g": 157,
+        "b": 165
+      },
+      "cmyk": {
+        "c": 3.6,
+        "m": 4.8,
+        "y": 0.0,
+        "k": 35.3
+      }
+    },
+    {
+      "code": "Mac and Cheese",
+      "name": "Mac and Cheese",
+      "hex": "#DEA799",
+      "rgb": {
+        "r": 222,
+        "g": 167,
+        "b": 153
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 24.8,
+        "y": 31.1,
+        "k": 12.9
+      }
+    },
+    {
+      "code": "Magnolia Blossom",
+      "name": "Magnolia Blossom",
+      "hex": "#C7BFB0",
+      "rgb": {
+        "r": 199,
+        "g": 191,
+        "b": 176
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 4.0,
+        "y": 11.6,
+        "k": 22.0
+      }
+    },
+    {
+      "code": "Manor Red",
+      "name": "Manor Red",
+      "hex": "#45191E",
+      "rgb": {
+        "r": 69,
+        "g": 25,
+        "b": 30
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 63.8,
+        "y": 56.5,
+        "k": 72.9
+      }
+    },
+    {
+      "code": "Mariner's Compass",
+      "name": "Mariner's Compass",
+      "hex": "#B8AA9A",
+      "rgb": {
+        "r": 184,
+        "g": 170,
+        "b": 154
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 7.6,
+        "y": 16.3,
+        "k": 27.8
+      }
+    },
+    {
+      "code": "Marmalade",
+      "name": "Marmalade",
+      "hex": "#D48655",
+      "rgb": {
+        "r": 212,
+        "g": 134,
+        "b": 85
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 36.8,
+        "y": 59.9,
+        "k": 16.9
+      }
+    },
+    {
+      "code": "Mauvelous",
+      "name": "Mauvelous",
+      "hex": "#BD9B9D",
+      "rgb": {
+        "r": 189,
+        "g": 155,
+        "b": 157
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 18.0,
+        "y": 16.9,
+        "k": 25.9
+      }
+    },
+    {
+      "code": "Meadow Green",
+      "name": "Meadow Green",
+      "hex": "#6A9F84",
+      "rgb": {
+        "r": 106,
+        "g": 159,
+        "b": 132
+      },
+      "cmyk": {
+        "c": 33.3,
+        "m": 0.0,
+        "y": 17.0,
+        "k": 37.6
+      }
+    },
+    {
+      "code": "Mermaid's Fin",
+      "name": "Mermaid's Fin",
+      "hex": "#182F47",
+      "rgb": {
+        "r": 24,
+        "g": 47,
+        "b": 71
+      },
+      "cmyk": {
+        "c": 66.2,
+        "m": 33.8,
+        "y": 0.0,
+        "k": 72.2
+      }
+    },
+    {
+      "code": "Milady's Teal",
+      "name": "Milady's Teal",
+      "hex": "#4E5A63",
+      "rgb": {
+        "r": 78,
+        "g": 90,
+        "b": 99
+      },
+      "cmyk": {
+        "c": 21.2,
+        "m": 9.1,
+        "y": 0.0,
+        "k": 61.2
+      }
+    },
+    {
+      "code": "Mint Julep",
+      "name": "Mint Julep",
+      "hex": "#447471",
+      "rgb": {
+        "r": 68,
+        "g": 116,
+        "b": 113
+      },
+      "cmyk": {
+        "c": 41.4,
+        "m": 0.0,
+        "y": 2.6,
+        "k": 54.5
+      }
+    },
+    {
+      "code": "Miss Madalynn",
+      "name": "Miss Madalynn",
+      "hex": "#C5ACBF",
+      "rgb": {
+        "r": 197,
+        "g": 172,
+        "b": 191
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 12.7,
+        "y": 3.0,
+        "k": 22.7
+      }
+    },
+    {
+      "code": "Mistletoe",
+      "name": "Mistletoe",
+      "hex": "#263721",
+      "rgb": {
+        "r": 38,
+        "g": 55,
+        "b": 33
+      },
+      "cmyk": {
+        "c": 30.9,
+        "m": 0.0,
+        "y": 40.0,
+        "k": 78.4
+      }
+    },
+    {
+      "code": "Misty Mauve",
+      "name": "Misty Mauve",
+      "hex": "#452427",
+      "rgb": {
+        "r": 69,
+        "g": 36,
+        "b": 39
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 47.8,
+        "y": 43.5,
+        "k": 72.9
+      }
+    },
+    {
+      "code": "Morning Glory",
+      "name": "Morning Glory",
+      "hex": "#55668E",
+      "rgb": {
+        "r": 85,
+        "g": 102,
+        "b": 142
+      },
+      "cmyk": {
+        "c": 40.1,
+        "m": 28.2,
+        "y": 0.0,
+        "k": 44.3
+      }
+    },
+    {
+      "code": "Mossy",
+      "name": "Mossy",
+      "hex": "#696B39",
+      "rgb": {
+        "r": 105,
+        "g": 107,
+        "b": 57
+      },
+      "cmyk": {
+        "c": 1.9,
+        "m": 0.0,
+        "y": 46.7,
+        "k": 58.0
+      }
+    },
+    {
+      "code": "Muddy Puddle",
+      "name": "Muddy Puddle",
+      "hex": "#524C41",
+      "rgb": {
+        "r": 82,
+        "g": 76,
+        "b": 65
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 7.3,
+        "y": 20.7,
+        "k": 67.8
+      }
+    },
+    {
+      "code": "Mulled Berries",
+      "name": "Mulled Berries",
+      "hex": "#774B6B",
+      "rgb": {
+        "r": 119,
+        "g": 75,
+        "b": 107
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 37.0,
+        "y": 10.1,
+        "k": 53.3
+      }
+    },
+    {
+      "code": "Nature Trail",
+      "name": "Nature Trail",
+      "hex": "#928F61",
+      "rgb": {
+        "r": 146,
+        "g": 143,
+        "b": 97
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 2.1,
+        "y": 33.6,
+        "k": 42.7
+      }
+    },
+    {
+      "code": "Nighty Nite",
+      "name": "Nighty Nite",
+      "hex": "#232D44",
+      "rgb": {
+        "r": 35,
+        "g": 45,
+        "b": 68
+      },
+      "cmyk": {
+        "c": 48.5,
+        "m": 33.8,
+        "y": 0.0,
+        "k": 73.3
+      }
+    },
+    {
+      "code": "Nutmeggie",
+      "name": "Nutmeggie",
+      "hex": "#935C5A",
+      "rgb": {
+        "r": 147,
+        "g": 92,
+        "b": 90
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 37.4,
+        "y": 38.8,
+        "k": 42.4
+      }
+    },
+    {
+      "code": "Old Blue Jeans",
+      "name": "Old Blue Jeans",
+      "hex": "#515B61",
+      "rgb": {
+        "r": 81,
+        "g": 91,
+        "b": 97
+      },
+      "cmyk": {
+        "c": 16.5,
+        "m": 6.2,
+        "y": 0.0,
+        "k": 62.0
+      }
+    },
+    {
+      "code": "Old Marigold",
+      "name": "Old Marigold",
+      "hex": "#CA8767",
+      "rgb": {
+        "r": 202,
+        "g": 135,
+        "b": 103
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 33.2,
+        "y": 49.0,
+        "k": 20.8
+      }
+    },
+    {
+      "code": "Old Money",
+      "name": "Old Money",
+      "hex": "#808174",
+      "rgb": {
+        "r": 128,
+        "g": 129,
+        "b": 116
+      },
+      "cmyk": {
+        "c": 0.8,
+        "m": 0.0,
+        "y": 10.1,
+        "k": 49.4
+      }
+    },
+    {
+      "code": "Old Oak Tree",
+      "name": "Old Oak Tree",
+      "hex": "#906029",
+      "rgb": {
+        "r": 144,
+        "g": 96,
+        "b": 41
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 33.3,
+        "y": 71.5,
+        "k": 43.5
+      }
+    },
+    {
+      "code": "Olive Branch",
+      "name": "Olive Branch",
+      "hex": "#959277",
+      "rgb": {
+        "r": 149,
+        "g": 146,
+        "b": 119
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 2.0,
+        "y": 20.1,
+        "k": 41.6
+      }
+    },
+    {
+      "code": "Onion Skin",
+      "name": "Onion Skin",
+      "hex": "#AC8E75",
+      "rgb": {
+        "r": 172,
+        "g": 142,
+        "b": 117
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 17.4,
+        "y": 32.0,
+        "k": 32.5
+      }
+    },
+    {
+      "code": "Ora's Iris",
+      "name": "Ora's Iris",
+      "hex": "#3B2B3F",
+      "rgb": {
+        "r": 59,
+        "g": 43,
+        "b": 63
+      },
+      "cmyk": {
+        "c": 6.3,
+        "m": 31.7,
+        "y": 0.0,
+        "k": 75.3
+      }
+    },
+    {
+      "code": "Orangena",
+      "name": "Orangena",
+      "hex": "#C16C70",
+      "rgb": {
+        "r": 193,
+        "g": 108,
+        "b": 112
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 44.0,
+        "y": 42.0,
+        "k": 24.3
+      }
+    },
+    {
+      "code": "Organza Pink",
+      "name": "Organza Pink",
+      "hex": "#C895AB",
+      "rgb": {
+        "r": 200,
+        "g": 149,
+        "b": 171
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 25.5,
+        "y": 14.5,
+        "k": 21.6
+      }
+    },
+    {
+      "code": "Pansy Purple",
+      "name": "Pansy Purple",
+      "hex": "#3E3369",
+      "rgb": {
+        "r": 62,
+        "g": 51,
+        "b": 105
+      },
+      "cmyk": {
+        "c": 41.0,
+        "m": 51.4,
+        "y": 0.0,
+        "k": 58.8
+      }
+    },
+    {
+      "code": "Pea Pod",
+      "name": "Pea Pod",
+      "hex": "#534824",
+      "rgb": {
+        "r": 83,
+        "g": 72,
+        "b": 36
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 13.3,
+        "y": 56.6,
+        "k": 67.5
+      }
+    },
+    {
+      "code": "Peach Sherbet",
+      "name": "Peach Sherbet",
+      "hex": "#D5C39C",
+      "rgb": {
+        "r": 213,
+        "g": 195,
+        "b": 156
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 8.5,
+        "y": 26.8,
+        "k": 16.5
+      }
+    },
+    {
+      "code": "Peanut Brittle",
+      "name": "Peanut Brittle",
+      "hex": "#B8815A",
+      "rgb": {
+        "r": 184,
+        "g": 129,
+        "b": 90
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 29.9,
+        "y": 51.1,
+        "k": 27.8
+      }
+    },
+    {
+      "code": "Pebble Beach",
+      "name": "Pebble Beach",
+      "hex": "#645341",
+      "rgb": {
+        "r": 100,
+        "g": 83,
+        "b": 65
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 17.0,
+        "y": 35.0,
+        "k": 60.8
+      }
+    },
+    {
+      "code": "Perfect Piecrust",
+      "name": "Perfect Piecrust",
+      "hex": "#BC9888",
+      "rgb": {
+        "r": 188,
+        "g": 152,
+        "b": 136
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 19.1,
+        "y": 27.7,
+        "k": 26.3
+      }
+    },
+    {
+      "code": "Persimmon",
+      "name": "Persimmon",
+      "hex": "#CA5A4F",
+      "rgb": {
+        "r": 202,
+        "g": 90,
+        "b": 79
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 55.4,
+        "y": 60.9,
+        "k": 20.8
+      }
+    },
+    {
+      "code": "Petite Maison",
+      "name": "Petite Maison",
+      "hex": "#A5B4B3",
+      "rgb": {
+        "r": 165,
+        "g": 180,
+        "b": 179
+      },
+      "cmyk": {
+        "c": 8.3,
+        "m": 0.0,
+        "y": 0.6,
+        "k": 29.4
+      }
+    },
+    {
+      "code": "Pickled Beets",
+      "name": "Pickled Beets",
+      "hex": "#5F3548",
+      "rgb": {
+        "r": 95,
+        "g": 53,
+        "b": 72
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 44.2,
+        "y": 24.2,
+        "k": 62.7
+      }
+    },
+    {
+      "code": "Pine Needles",
+      "name": "Pine Needles",
+      "hex": "#5F5230",
+      "rgb": {
+        "r": 95,
+        "g": 82,
+        "b": 48
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 13.7,
+        "y": 49.5,
+        "k": 62.7
+      }
+    },
+    {
+      "code": "Pink Champagne",
+      "name": "Pink Champagne",
+      "hex": "#EC6F9F",
+      "rgb": {
+        "r": 236,
+        "g": 111,
+        "b": 159
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 53.0,
+        "y": 32.6,
+        "k": 7.5
+      }
+    },
+    {
+      "code": "Pink Posey",
+      "name": "Pink Posey",
+      "hex": "#D3849F",
+      "rgb": {
+        "r": 211,
+        "g": 132,
+        "b": 159
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 37.4,
+        "y": 24.6,
+        "k": 17.3
+      }
+    },
+    {
+      "code": "Pixie Dust",
+      "name": "Pixie Dust",
+      "hex": "#B6A1BB",
+      "rgb": {
+        "r": 182,
+        "g": 161,
+        "b": 187
+      },
+      "cmyk": {
+        "c": 2.7,
+        "m": 13.9,
+        "y": 0.0,
+        "k": 26.7
+      }
+    },
+    {
+      "code": "Plum Paisley",
+      "name": "Plum Paisley",
+      "hex": "#6C4969",
+      "rgb": {
+        "r": 108,
+        "g": 73,
+        "b": 105
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 32.4,
+        "y": 2.8,
+        "k": 57.6
+      }
+    },
+    {
+      "code": "Plymouth Rock",
+      "name": "Plymouth Rock",
+      "hex": "#645E6B",
+      "rgb": {
+        "r": 100,
+        "g": 94,
+        "b": 107
+      },
+      "cmyk": {
+        "c": 6.5,
+        "m": 12.1,
+        "y": 0.0,
+        "k": 58.0
+      }
+    },
+    {
+      "code": "Poblano Pepper",
+      "name": "Poblano Pepper",
+      "hex": "#878974",
+      "rgb": {
+        "r": 135,
+        "g": 137,
+        "b": 116
+      },
+      "cmyk": {
+        "c": 1.5,
+        "m": 0.0,
+        "y": 15.3,
+        "k": 46.3
+      }
+    },
+    {
+      "code": "Polliwog",
+      "name": "Polliwog",
+      "hex": "#664B20",
+      "rgb": {
+        "r": 102,
+        "g": 75,
+        "b": 32
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 26.5,
+        "y": 68.6,
+        "k": 60.0
+      }
+    },
+    {
+      "code": "Ponderosa Pine",
+      "name": "Ponderosa Pine",
+      "hex": "#2F3121",
+      "rgb": {
+        "r": 47,
+        "g": 49,
+        "b": 33
+      },
+      "cmyk": {
+        "c": 4.1,
+        "m": 0.0,
+        "y": 32.7,
+        "k": 80.8
+      }
+    },
+    {
+      "code": "Prairie Grass",
+      "name": "Prairie Grass",
+      "hex": "#968F73",
+      "rgb": {
+        "r": 150,
+        "g": 143,
+        "b": 115
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 4.7,
+        "y": 23.3,
+        "k": 41.2
+      }
+    },
+    {
+      "code": "Prickly Pear",
+      "name": "Prickly Pear",
+      "hex": "#C55784",
+      "rgb": {
+        "r": 197,
+        "g": 87,
+        "b": 132
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 55.8,
+        "y": 33.0,
+        "k": 22.7
+      }
+    },
+    {
+      "code": "Priscilla's Peppermint",
+      "name": "Priscilla's Peppermint",
+      "hex": "#C46388",
+      "rgb": {
+        "r": 196,
+        "g": 99,
+        "b": 136
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 49.5,
+        "y": 30.6,
+        "k": 23.1
+      }
+    },
+    {
+      "code": "Pumpkin Harvest",
+      "name": "Pumpkin Harvest",
+      "hex": "#C07958",
+      "rgb": {
+        "r": 192,
+        "g": 121,
+        "b": 88
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 37.0,
+        "y": 54.2,
+        "k": 24.7
+      }
+    },
+    {
+      "code": "Purple Aster",
+      "name": "Purple Aster",
+      "hex": "#8A7297",
+      "rgb": {
+        "r": 138,
+        "g": 114,
+        "b": 151
+      },
+      "cmyk": {
+        "c": 8.6,
+        "m": 24.5,
+        "y": 0.0,
+        "k": 40.8
+      }
+    },
+    {
+      "code": "Purple Toile",
+      "name": "Purple Toile",
+      "hex": "#CEB4AD",
+      "rgb": {
+        "r": 206,
+        "g": 180,
+        "b": 173
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 12.6,
+        "y": 16.0,
+        "k": 19.2
+      }
+    },
+    {
+      "code": "Queen Bee",
+      "name": "Queen Bee",
+      "hex": "#DAA155",
+      "rgb": {
+        "r": 218,
+        "g": 161,
+        "b": 85
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 26.1,
+        "y": 61.0,
+        "k": 14.5
+      }
+    },
+    {
+      "code": "Rain Shower",
+      "name": "Rain Shower",
+      "hex": "#8A9E9D",
+      "rgb": {
+        "r": 138,
+        "g": 158,
+        "b": 157
+      },
+      "cmyk": {
+        "c": 12.7,
+        "m": 0.0,
+        "y": 0.6,
+        "k": 38.0
+      }
+    },
+    {
+      "code": "Rainy Day",
+      "name": "Rainy Day",
+      "hex": "#4B2641",
+      "rgb": {
+        "r": 75,
+        "g": 38,
+        "b": 65
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 49.3,
+        "y": 13.3,
+        "k": 70.6
+      }
+    },
+    {
+      "code": "Razzleberry",
+      "name": "Razzleberry",
+      "hex": "#551B2B",
+      "rgb": {
+        "r": 85,
+        "g": 27,
+        "b": 43
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 68.2,
+        "y": 49.4,
+        "k": 66.7
+      }
+    },
+    {
+      "code": "Really Teally",
+      "name": "Really Teally",
+      "hex": "#519FA0",
+      "rgb": {
+        "r": 81,
+        "g": 159,
+        "b": 160
+      },
+      "cmyk": {
+        "c": 49.4,
+        "m": 0.6,
+        "y": 0.0,
+        "k": 37.3
+      }
+    },
+    {
+      "code": "Red Currant",
+      "name": "Red Currant",
+      "hex": "#5D272C",
+      "rgb": {
+        "r": 93,
+        "g": 39,
+        "b": 44
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 58.1,
+        "y": 52.7,
+        "k": 63.5
+      }
+    },
+    {
+      "code": "Ribbon Red",
+      "name": "Ribbon Red",
+      "hex": "#77071A",
+      "rgb": {
+        "r": 119,
+        "g": 7,
+        "b": 26
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 94.1,
+        "y": 78.2,
+        "k": 53.3
+      }
+    },
+    {
+      "code": "Ripe Melon",
+      "name": "Ripe Melon",
+      "hex": "#C05C69",
+      "rgb": {
+        "r": 192,
+        "g": 92,
+        "b": 105
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 52.1,
+        "y": 45.3,
+        "k": 24.7
+      }
+    },
+    {
+      "code": "Ripple",
+      "name": "Ripple",
+      "hex": "#946D5A",
+      "rgb": {
+        "r": 148,
+        "g": 109,
+        "b": 90
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 26.4,
+        "y": 39.2,
+        "k": 42.0
+      }
+    },
+    {
+      "code": "River Rocks",
+      "name": "River Rocks",
+      "hex": "#5A5359",
+      "rgb": {
+        "r": 90,
+        "g": 83,
+        "b": 89
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 7.8,
+        "y": 1.1,
+        "k": 64.7
+      }
+    },
+    {
+      "code": "Roasted Chestnut",
+      "name": "Roasted Chestnut",
+      "hex": "#784124",
+      "rgb": {
+        "r": 120,
+        "g": 65,
+        "b": 36
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 45.8,
+        "y": 70.0,
+        "k": 52.9
+      }
+    },
+    {
+      "code": "Rod & Reel",
+      "name": "Rod & Reel",
+      "hex": "#513F46",
+      "rgb": {
+        "r": 81,
+        "g": 63,
+        "b": 70
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 22.2,
+        "y": 13.6,
+        "k": 68.2
+      }
+    },
+    {
+      "code": "Root Beer Float",
+      "name": "Root Beer Float",
+      "hex": "#AA7671",
+      "rgb": {
+        "r": 170,
+        "g": 118,
+        "b": 113
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 30.6,
+        "y": 33.5,
+        "k": 33.3
+      }
+    },
+    {
+      "code": "Rose Petal",
+      "name": "Rose Petal",
+      "hex": "#C88479",
+      "rgb": {
+        "r": 200,
+        "g": 132,
+        "b": 121
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 34.0,
+        "y": 39.5,
+        "k": 21.6
+      }
+    },
+    {
+      "code": "Rosy Glow",
+      "name": "Rosy Glow",
+      "hex": "#BA8D8A",
+      "rgb": {
+        "r": 186,
+        "g": 141,
+        "b": 138
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 24.2,
+        "y": 25.8,
+        "k": 27.1
+      }
+    },
+    {
+      "code": "Ruby Slippers",
+      "name": "Ruby Slippers",
+      "hex": "#5F1519",
+      "rgb": {
+        "r": 95,
+        "g": 21,
+        "b": 25
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 77.9,
+        "y": 73.7,
+        "k": 62.7
+      }
+    },
+    {
+      "code": "Sassy Brass",
+      "name": "Sassy Brass",
+      "hex": "#B06823",
+      "rgb": {
+        "r": 176,
+        "g": 104,
+        "b": 35
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 40.9,
+        "y": 80.1,
+        "k": 31.0
+      }
+    },
+    {
+      "code": "Sea Oats",
+      "name": "Sea Oats",
+      "hex": "#B7AF8F",
+      "rgb": {
+        "r": 183,
+        "g": 175,
+        "b": 143
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 4.4,
+        "y": 21.9,
+        "k": 28.2
+      }
+    },
+    {
+      "code": "Sea Shelley",
+      "name": "Sea Shelley",
+      "hex": "#E28B93",
+      "rgb": {
+        "r": 226,
+        "g": 139,
+        "b": 147
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 38.5,
+        "y": 35.0,
+        "k": 11.4
+      }
+    },
+    {
+      "code": "Secondhand Rose",
+      "name": "Secondhand Rose",
+      "hex": "#B76D8B",
+      "rgb": {
+        "r": 183,
+        "g": 109,
+        "b": 139
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 40.4,
+        "y": 24.0,
+        "k": 28.2
+      }
+    },
+    {
+      "code": "Secret Garden",
+      "name": "Secret Garden",
+      "hex": "#726F59",
+      "rgb": {
+        "r": 114,
+        "g": 111,
+        "b": 89
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 2.6,
+        "y": 21.9,
+        "k": 55.3
+      }
+    },
+    {
+      "code": "Sedona",
+      "name": "Sedona",
+      "hex": "#893F29",
+      "rgb": {
+        "r": 137,
+        "g": 63,
+        "b": 41
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 54.0,
+        "y": 70.1,
+        "k": 46.3
+      }
+    },
+    {
+      "code": "Shabby Sheep",
+      "name": "Shabby Sheep",
+      "hex": "#BEB8B2",
+      "rgb": {
+        "r": 190,
+        "g": 184,
+        "b": 178
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 3.2,
+        "y": 6.3,
+        "k": 25.5
+      }
+    },
+    {
+      "code": "Shamrock",
+      "name": "Shamrock",
+      "hex": "#689084",
+      "rgb": {
+        "r": 104,
+        "g": 144,
+        "b": 132
+      },
+      "cmyk": {
+        "c": 27.8,
+        "m": 0.0,
+        "y": 8.3,
+        "k": 43.5
+      }
+    },
+    {
+      "code": "Shrimp Cocktail",
+      "name": "Shrimp Cocktail",
+      "hex": "#CD615A",
+      "rgb": {
+        "r": 205,
+        "g": 97,
+        "b": 90
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 52.7,
+        "y": 56.1,
+        "k": 19.6
+      }
+    },
+    {
+      "code": "Smoke",
+      "name": "Smoke",
+      "hex": "#221E22",
+      "rgb": {
+        "r": 34,
+        "g": 30,
+        "b": 34
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 11.8,
+        "y": 0.0,
+        "k": 86.7
+      }
+    },
+    {
+      "code": "Snips And Snails",
+      "name": "Snips And Snails",
+      "hex": "#BBBBC9",
+      "rgb": {
+        "r": 187,
+        "g": 187,
+        "b": 201
+      },
+      "cmyk": {
+        "c": 7.0,
+        "m": 7.0,
+        "y": 0.0,
+        "k": 21.2
+      }
+    },
+    {
+      "code": "Snowball",
+      "name": "Snowball",
+      "hex": "#D1D2DC",
+      "rgb": {
+        "r": 209,
+        "g": 210,
+        "b": 220
+      },
+      "cmyk": {
+        "c": 5.0,
+        "m": 4.5,
+        "y": 0.0,
+        "k": 13.7
+      }
+    },
+    {
+      "code": "Sparkling Rose'",
+      "name": "Sparkling Rose'",
+      "hex": "#A1646C",
+      "rgb": {
+        "r": 161,
+        "g": 100,
+        "b": 108
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 37.9,
+        "y": 32.9,
+        "k": 36.9
+      }
+    },
+    {
+      "code": "Spinach",
+      "name": "Spinach",
+      "hex": "#4D6450",
+      "rgb": {
+        "r": 77,
+        "g": 100,
+        "b": 80
+      },
+      "cmyk": {
+        "c": 23.0,
+        "m": 0.0,
+        "y": 20.0,
+        "k": 60.8
+      }
+    },
+    {
+      "code": "Spun Sugar",
+      "name": "Spun Sugar",
+      "hex": "#D6B2BD",
+      "rgb": {
+        "r": 214,
+        "g": 178,
+        "b": 189
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 16.8,
+        "y": 11.7,
+        "k": 16.1
+      }
+    },
+    {
+      "code": "St. Bernard",
+      "name": "St. Bernard",
+      "hex": "#83857F",
+      "rgb": {
+        "r": 131,
+        "g": 133,
+        "b": 127
+      },
+      "cmyk": {
+        "c": 1.5,
+        "m": 0.0,
+        "y": 4.5,
+        "k": 47.8
+      }
+    },
+    {
+      "code": "Steamed Broccoli",
+      "name": "Steamed Broccoli",
+      "hex": "#455635",
+      "rgb": {
+        "r": 69,
+        "g": 86,
+        "b": 53
+      },
+      "cmyk": {
+        "c": 19.8,
+        "m": 0.0,
+        "y": 38.4,
+        "k": 66.3
+      }
+    },
+    {
+      "code": "Stepping Stones",
+      "name": "Stepping Stones",
+      "hex": "#696053",
+      "rgb": {
+        "r": 105,
+        "g": 96,
+        "b": 83
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 8.6,
+        "y": 21.0,
+        "k": 58.8
+      }
+    },
+    {
+      "code": "Sticks & Twigs",
+      "name": "Sticks & Twigs",
+      "hex": "#3D3229",
+      "rgb": {
+        "r": 61,
+        "g": 50,
+        "b": 41
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 18.0,
+        "y": 32.8,
+        "k": 76.1
+      }
+    },
+    {
+      "code": "Storm Lake Sunrise",
+      "name": "Storm Lake Sunrise",
+      "hex": "#BD6A67",
+      "rgb": {
+        "r": 189,
+        "g": 106,
+        "b": 103
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 43.9,
+        "y": 45.5,
+        "k": 25.9
+      }
+    },
+    {
+      "code": "Stormy Night",
+      "name": "Stormy Night",
+      "hex": "#707370",
+      "rgb": {
+        "r": 112,
+        "g": 115,
+        "b": 112
+      },
+      "cmyk": {
+        "c": 2.6,
+        "m": 0.0,
+        "y": 2.6,
+        "k": 54.9
+      }
+    },
+    {
+      "code": "Straw Hat",
+      "name": "Straw Hat",
+      "hex": "#937258",
+      "rgb": {
+        "r": 147,
+        "g": 114,
+        "b": 88
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 22.4,
+        "y": 40.1,
+        "k": 42.4
+      }
+    },
+    {
+      "code": "Strawberry Parfait",
+      "name": "Strawberry Parfait",
+      "hex": "#A44059",
+      "rgb": {
+        "r": 164,
+        "g": 64,
+        "b": 89
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 61.0,
+        "y": 45.7,
+        "k": 35.7
+      }
+    },
+    {
+      "code": "Sugar and Spice",
+      "name": "Sugar and Spice",
+      "hex": "#CE9F9B",
+      "rgb": {
+        "r": 206,
+        "g": 159,
+        "b": 155
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 22.8,
+        "y": 24.8,
+        "k": 19.2
+      }
+    },
+    {
+      "code": "Sugar Plum",
+      "name": "Sugar Plum",
+      "hex": "#A37985",
+      "rgb": {
+        "r": 163,
+        "g": 121,
+        "b": 133
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 25.8,
+        "y": 18.4,
+        "k": 36.1
+      }
+    },
+    {
+      "code": "Sugared Violets",
+      "name": "Sugared Violets",
+      "hex": "#998898",
+      "rgb": {
+        "r": 153,
+        "g": 136,
+        "b": 152
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 11.1,
+        "y": 0.7,
+        "k": 40.0
+      }
+    },
+    {
+      "code": "Summer Sky",
+      "name": "Summer Sky",
+      "hex": "#4D627A",
+      "rgb": {
+        "r": 77,
+        "g": 98,
+        "b": 122
+      },
+      "cmyk": {
+        "c": 36.9,
+        "m": 19.7,
+        "y": 0.0,
+        "k": 52.2
+      }
+    },
+    {
+      "code": "Sunflower",
+      "name": "Sunflower",
+      "hex": "#E2BE71",
+      "rgb": {
+        "r": 226,
+        "g": 190,
+        "b": 113
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 15.9,
+        "y": 50.0,
+        "k": 11.4
+      }
+    },
+    {
+      "code": "Sunkissed",
+      "name": "Sunkissed",
+      "hex": "#D2A783",
+      "rgb": {
+        "r": 210,
+        "g": 167,
+        "b": 131
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 20.5,
+        "y": 37.6,
+        "k": 17.6
+      }
+    },
+    {
+      "code": "Sunset",
+      "name": "Sunset",
+      "hex": "#D45249",
+      "rgb": {
+        "r": 212,
+        "g": 82,
+        "b": 73
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 61.3,
+        "y": 65.6,
+        "k": 16.9
+      }
+    },
+    {
+      "code": "Sunshine Girl",
+      "name": "Sunshine Girl",
+      "hex": "#D6BF21",
+      "rgb": {
+        "r": 214,
+        "g": 191,
+        "b": 33
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 10.7,
+        "y": 84.6,
+        "k": 16.1
+      }
+    },
+    {
+      "code": "Sweet Potato",
+      "name": "Sweet Potato",
+      "hex": "#E28963",
+      "rgb": {
+        "r": 226,
+        "g": 137,
+        "b": 99
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 39.4,
+        "y": 56.2,
+        "k": 11.4
+      }
+    },
+    {
+      "code": "Sweetest Heart",
+      "name": "Sweetest Heart",
+      "hex": "#8E4B59",
+      "rgb": {
+        "r": 142,
+        "g": 75,
+        "b": 89
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 47.2,
+        "y": 37.3,
+        "k": 44.3
+      }
+    },
+    {
+      "code": "Tabby",
+      "name": "Tabby",
+      "hex": "#B2B6B7",
+      "rgb": {
+        "r": 178,
+        "g": 182,
+        "b": 183
+      },
+      "cmyk": {
+        "c": 2.7,
+        "m": 0.5,
+        "y": 0.0,
+        "k": 28.2
+      }
+    },
+    {
+      "code": "Tahiti Orange",
+      "name": "Tahiti Orange",
+      "hex": "#E2B58C",
+      "rgb": {
+        "r": 226,
+        "g": 181,
+        "b": 140
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 19.9,
+        "y": 38.1,
+        "k": 11.4
+      }
+    },
+    {
+      "code": "Tangerine",
+      "name": "Tangerine",
+      "hex": "#F08E53",
+      "rgb": {
+        "r": 240,
+        "g": 142,
+        "b": 83
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 40.8,
+        "y": 65.4,
+        "k": 5.9
+      }
+    },
+    {
+      "code": "Tartan Plaid",
+      "name": "Tartan Plaid",
+      "hex": "#5B736D",
+      "rgb": {
+        "r": 91,
+        "g": 115,
+        "b": 109
+      },
+      "cmyk": {
+        "c": 20.9,
+        "m": 0.0,
+        "y": 5.2,
+        "k": 54.9
+      }
+    },
+    {
+      "code": "Tea and Biscuits",
+      "name": "Tea and Biscuits",
+      "hex": "#AE9478",
+      "rgb": {
+        "r": 174,
+        "g": 148,
+        "b": 120
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 14.9,
+        "y": 31.0,
+        "k": 31.8
+      }
+    },
+    {
+      "code": "Tennessee Red Clay",
+      "name": "Tennessee Red Clay",
+      "hex": "#8C433F",
+      "rgb": {
+        "r": 140,
+        "g": 67,
+        "b": 63
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 52.1,
+        "y": 55.0,
+        "k": 45.1
+      }
+    },
+    {
+      "code": "Thundercloud",
+      "name": "Thundercloud",
+      "hex": "#7D7C6B",
+      "rgb": {
+        "r": 125,
+        "g": 124,
+        "b": 107
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 0.8,
+        "y": 14.4,
+        "k": 51.0
+      }
+    },
+    {
+      "code": "Timber",
+      "name": "Timber",
+      "hex": "#4D3D33",
+      "rgb": {
+        "r": 77,
+        "g": 61,
+        "b": 51
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 20.8,
+        "y": 33.8,
+        "k": 69.8
+      }
+    },
+    {
+      "code": "Tiny Vine",
+      "name": "Tiny Vine",
+      "hex": "#7A8372",
+      "rgb": {
+        "r": 122,
+        "g": 131,
+        "b": 114
+      },
+      "cmyk": {
+        "c": 6.9,
+        "m": 0.0,
+        "y": 13.0,
+        "k": 48.6
+      }
+    },
+    {
+      "code": "Toasted Marshmallow",
+      "name": "Toasted Marshmallow",
+      "hex": "#B3A095",
+      "rgb": {
+        "r": 179,
+        "g": 160,
+        "b": 149
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 10.6,
+        "y": 16.8,
+        "k": 29.8
+      }
+    },
+    {
+      "code": "Tomatillo",
+      "name": "Tomatillo",
+      "hex": "#C0C2AE",
+      "rgb": {
+        "r": 192,
+        "g": 194,
+        "b": 174
+      },
+      "cmyk": {
+        "c": 1.0,
+        "m": 0.0,
+        "y": 10.3,
+        "k": 23.9
+      }
+    },
+    {
+      "code": "Tropical Paradise",
+      "name": "Tropical Paradise",
+      "hex": "#9EB6A9",
+      "rgb": {
+        "r": 158,
+        "g": 182,
+        "b": 169
+      },
+      "cmyk": {
+        "c": 13.2,
+        "m": 0.0,
+        "y": 7.1,
+        "k": 28.6
+      }
+    },
+    {
+      "code": "Tufted Yellow",
+      "name": "Tufted Yellow",
+      "hex": "#CAB894",
+      "rgb": {
+        "r": 202,
+        "g": 184,
+        "b": 148
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 8.9,
+        "y": 26.7,
+        "k": 20.8
+      }
+    },
+    {
+      "code": "Tyler Boy Blue",
+      "name": "Tyler Boy Blue",
+      "hex": "#8AA5B9",
+      "rgb": {
+        "r": 138,
+        "g": 165,
+        "b": 185
+      },
+      "cmyk": {
+        "c": 25.4,
+        "m": 10.8,
+        "y": 0.0,
+        "k": 27.5
+      }
+    },
+    {
+      "code": "Used Brick",
+      "name": "Used Brick",
+      "hex": "#783730",
+      "rgb": {
+        "r": 120,
+        "g": 55,
+        "b": 48
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 54.2,
+        "y": 60.0,
+        "k": 52.9
+      }
+    },
+    {
+      "code": "Vanilla Custard",
+      "name": "Vanilla Custard",
+      "hex": "#C3BDB8",
+      "rgb": {
+        "r": 195,
+        "g": 189,
+        "b": 184
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 3.1,
+        "y": 5.6,
+        "k": 23.5
+      }
+    },
+    {
+      "code": "Vintage Violet",
+      "name": "Vintage Violet",
+      "hex": "#A396BE",
+      "rgb": {
+        "r": 163,
+        "g": 150,
+        "b": 190
+      },
+      "cmyk": {
+        "c": 14.2,
+        "m": 21.1,
+        "y": 0.0,
+        "k": 25.5
+      }
+    },
+    {
+      "code": "Wagon Wheel",
+      "name": "Wagon Wheel",
+      "hex": "#7F634D",
+      "rgb": {
+        "r": 127,
+        "g": 99,
+        "b": 77
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 22.0,
+        "y": 39.4,
+        "k": 50.2
+      }
+    },
+    {
+      "code": "Wasabi",
+      "name": "Wasabi",
+      "hex": "#B1AF8D",
+      "rgb": {
+        "r": 177,
+        "g": 175,
+        "b": 141
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 1.1,
+        "y": 20.3,
+        "k": 30.6
+      }
+    },
+    {
+      "code": "Wavy Navy",
+      "name": "Wavy Navy",
+      "hex": "#262D3C",
+      "rgb": {
+        "r": 38,
+        "g": 45,
+        "b": 60
+      },
+      "cmyk": {
+        "c": 36.7,
+        "m": 25.0,
+        "y": 0.0,
+        "k": 76.5
+      }
+    },
+    {
+      "code": "Weathervane",
+      "name": "Weathervane",
+      "hex": "#908064",
+      "rgb": {
+        "r": 144,
+        "g": 128,
+        "b": 100
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 11.1,
+        "y": 30.6,
+        "k": 43.5
+      }
+    },
+    {
+      "code": "Weeping Willow",
+      "name": "Weeping Willow",
+      "hex": "#706948",
+      "rgb": {
+        "r": 112,
+        "g": 105,
+        "b": 72
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 6.3,
+        "y": 35.7,
+        "k": 56.1
+      }
+    },
+    {
+      "code": "Whatley Woodlands",
+      "name": "Whatley Woodlands",
+      "hex": "#8B6044",
+      "rgb": {
+        "r": 139,
+        "g": 96,
+        "b": 68
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 30.9,
+        "y": 51.1,
+        "k": 45.5
+      }
+    },
+    {
+      "code": "Wild Berries",
+      "name": "Wild Berries",
+      "hex": "#6C2B34",
+      "rgb": {
+        "r": 108,
+        "g": 43,
+        "b": 52
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 60.2,
+        "y": 51.9,
+        "k": 57.6
+      }
+    },
+    {
+      "code": "Wild Oats",
+      "name": "Wild Oats",
+      "hex": "#B0A09A",
+      "rgb": {
+        "r": 176,
+        "g": 160,
+        "b": 154
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 9.1,
+        "y": 12.5,
+        "k": 31.0
+      }
+    },
+    {
+      "code": "Wilderness",
+      "name": "Wilderness",
+      "hex": "#7E6E44",
+      "rgb": {
+        "r": 126,
+        "g": 110,
+        "b": 68
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 12.7,
+        "y": 46.0,
+        "k": 50.6
+      }
+    },
+    {
+      "code": "Wisconsin Woods",
+      "name": "Wisconsin Woods",
+      "hex": "#444149",
+      "rgb": {
+        "r": 68,
+        "g": 65,
+        "b": 73
+      },
+      "cmyk": {
+        "c": 6.8,
+        "m": 11.0,
+        "y": 0.0,
+        "k": 71.4
+      }
+    },
+    {
+      "code": "Ye Olde Gold",
+      "name": "Ye Olde Gold",
+      "hex": "#A58553",
+      "rgb": {
+        "r": 165,
+        "g": 133,
+        "b": 83
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 19.4,
+        "y": 49.7,
+        "k": 35.3
+      }
+    },
+    {
+      "code": "Zach Black",
+      "name": "Zach Black",
+      "hex": "#494E56",
+      "rgb": {
+        "r": 73,
+        "g": 78,
+        "b": 86
+      },
+      "cmyk": {
+        "c": 15.1,
+        "m": 9.3,
+        "y": 0.0,
+        "k": 66.3
+      }
+    },
+    {
+      "code": "Blooming Crocus",
+      "name": "Blooming Crocus",
+      "hex": "#6A4E69",
+      "rgb": {
+        "r": 106,
+        "g": 78,
+        "b": 105
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 26.4,
+        "y": 0.9,
+        "k": 58.4
+      }
+    },
+    {
+      "code": "Caroling",
+      "name": "Caroling",
+      "hex": "#610E19",
+      "rgb": {
+        "r": 97,
+        "g": 14,
+        "b": 25
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 85.6,
+        "y": 74.2,
+        "k": 62.0
+      }
+    },
+    {
+      "code": "Cherry Tomato",
+      "name": "Cherry Tomato",
+      "hex": "#AA343E",
+      "rgb": {
+        "r": 170,
+        "g": 52,
+        "b": 62
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 69.4,
+        "y": 63.5,
+        "k": 33.3
+      }
+    },
+    {
+      "code": "Golden Star",
+      "name": "Golden Star",
+      "hex": "#D0921D",
+      "rgb": {
+        "r": 208,
+        "g": 146,
+        "b": 29
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 29.8,
+        "y": 86.1,
+        "k": 18.4
+      }
+    },
+    {
+      "code": "Goldfish",
+      "name": "Goldfish",
+      "hex": "#E37158",
+      "rgb": {
+        "r": 227,
+        "g": 113,
+        "b": 88
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 50.2,
+        "y": 61.2,
+        "k": 11.0
+      }
+    },
+    {
+      "code": "Trail Dust",
+      "name": "Trail Dust",
+      "hex": "#5F493A",
+      "rgb": {
+        "r": 95,
+        "g": 73,
+        "b": 58
+      },
+      "cmyk": {
+        "c": 0.0,
+        "m": 23.2,
+        "y": 38.9,
+        "k": 62.7
+      }
+    }
+  ]
+}
