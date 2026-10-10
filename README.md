@@ -4,7 +4,7 @@ Embroidery Supplies Manager is a multi-page app for hobbyists to track their inv
 
 ## Project status
 
-The project foundation, database schema and RLS migrations, email/password authentication, supply browsing and CRUD, and project CRUD are implemented:
+The project foundation, database schema and RLS migrations, email/password authentication, supply browsing and CRUD, project CRUD, and project supply tracking are implemented:
 
 - Vite multi-page app scaffold complete
 - Bootstrap and shared styling configured
@@ -15,8 +15,9 @@ The project foundation, database schema and RLS migrations, email/password authe
 - Protected supplies browsing with category filtering, search, sorting, and loading/empty/error states
 - Supply create/edit forms and confirmed deletion from the inventory list
 - Protected project listing with status filtering, create/edit/delete, and private cover/pattern file handling
+- Project supply lists with owned/partial/missing states, progress, and shopping lists
 
-Live integration checks still need to cover supply workflows, cross-user ownership, project admin moderation, and storage-cleanup failure handling. The next feature milestone is project supply tracking.
+Live integration checks still need to cover supply workflows, cross-user ownership, project admin moderation, and storage-cleanup failure handling. Project-item flows need authenticated verification against the deployed migrations.
 
 ## Documentation
 
@@ -64,12 +65,16 @@ On 2026-10-10, authenticated project smoke tests passed in the local browser: cr
 10. Create projects in all three statuses and verify status filtering, edits, and delete confirmation behavior.
 11. Upload an image cover and an image or PDF pattern; verify previews, signed links, replacement/removal, and visible cleanup warnings. Reject unsupported and oversized files.
 12. With two users, verify projects and project files remain isolated; if testing as an admin, verify authorized moderation actions on another user's project.
+13. Open a project's supplies page, add an unlinked need and a compatible owned supply, and verify missing/owned states, progress, and shopping-list output.
+14. Lower/raise quantities and edit/remove items; verify partial shortfalls, unit mismatch handling, and progress update immediately.
+15. Mark an unlinked need as purchased and verify a new supply is created and linked. Mark a partially owned item as purchased and verify only the shortfall is added. Repeat the purchase request and verify inventory does not increase again.
+16. Verify an item with missing or incompatible units cannot be marked purchased until corrected, and verify a user cannot link another user's supply to their project through the API.
 
-Verify migration status against the intended Supabase project before relying on categories or file storage. The linked project checked on 2026-10-10 has both storage migrations applied. The `supply-photos` and `project-files` buckets are private; object paths are stored in the database and displayed through expiring signed URLs. Never share or commit `.env` values.
+Verify migration status against the intended Supabase project before relying on database and storage features. The linked project checked on 2026-10-10 has the project-item security, atomic-purchase, and anonymous-grant correction migrations applied. The purchase RPC is executable by authenticated users only. The `supply-photos` and `project-files` buckets are private; object paths are stored in the database and displayed through expiring signed URLs. Never share or commit `.env` values.
 
 ## Next implementation milestone
 
-Implement project supply tracking, including owned/partial/missing quantities and shopping lists. See [the implementation plan](docs/implementation-plan.md).
+Add the profile and dashboard screens. See [the implementation plan](docs/implementation-plan.md).
 
 ## Roles
 

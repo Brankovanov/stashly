@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Track the supplies needed for an embroidery project." />
+    <meta name="theme-color" content="#f8f5ef" />
+    <title>Project supplies — Stashly</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="site-header"></header>
+      <main class="container py-5">
+        <a class="btn btn-link px-0 mb-3" href="/pages/projects.html">
+          <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Back to projects
+        </a>
+        <p class="text-muted py-4 text-center" id="loading-state" role="status">
+          Loading project supplies…
+        </p>
+        <div class="alert alert-danger" id="error-state" role="alert" hidden></div>
+        <div id="project-content" hidden>
+          <section class="mb-4" aria-labelledby="project-title">
+            <p class="eyebrow mb-2">Project supplies</p>
+            <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+              <div>
+                <h1 class="display-6 fw-semibold" id="project-title"></h1>
+                <p class="text-muted project-description" id="project-description"></p>
+              </div>
+              <div id="project-file-links" class="d-flex flex-wrap gap-2 align-self-start"></div>
+            </div>
+          </section>
+
+          <section class="filter-panel p-3 p-md-4 mb-4" aria-labelledby="progress-heading">
+            <div class="d-flex justify-content-between align-items-center gap-3">
+              <h2 class="h5 mb-0" id="progress-heading">Supplies owned</h2>
+              <span id="progress-label" class="text-muted"></span>
+            </div>
+            <div
+              class="progress mt-3"
+              role="progressbar"
+              aria-label="Project supplies owned"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              id="progress-bar"
+            >
+              <div class="progress-bar bg-success" id="progress-value"></div>
+            </div>
+            <p class="small text-muted mb-0 mt-2" id="missing-summary"></p>
+          </section>
+
+          <section class="filter-panel p-3 p-md-4 mb-4" aria-labelledby="add-item-heading">
+            <h2 class="h4" id="add-item-heading">Add a needed supply</h2>
+            <form id="project-item-form" novalidate>
+              <div class="mb-3">
+                <label class="form-label" for="supply-choice">Inventory supply</label>
+                <select class="form-select" id="supply-choice" name="supply_id">
+                  <option value="">Describe a new supply need</option>
+                </select>
+                <div class="form-text">Link an item you own, or describe something to buy.</div>
+              </div>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="item-category">Category</label>
+                  <select class="form-select" id="item-category" name="category_id" required>
+                    <option value="">Choose a category</option>
+                  </select>
+                  <div class="invalid-feedback">Choose a category.</div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="item-name">Supply name</label>
+                  <input class="form-control" id="item-name" name="name" type="text" required />
+                  <div class="invalid-feedback">Enter a supply name.</div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label" for="item-brand">Brand</label>
+                  <input class="form-control" id="item-brand" name="brand" type="text" />
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label" for="item-color">Color code</label>
+                  <input class="form-control" id="item-color" name="color_code" type="text" />
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label" for="item-quantity">Quantity needed</label>
+                  <input
+                    class="form-control"
+                    id="item-quantity"
+                    name="quantity_needed"
+                    type="number"
+                    min="0.01"
+                    step="any"
+                    value="1"
+                    required
+                  />
+                  <div class="invalid-feedback">Enter a quantity greater than zero.</div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="item-unit">Unit</label>
+                  <input class="form-control" id="item-unit" name="unit" type="text" placeholder="skeins, meters, pieces" />
+                </div>
+              </div>
+              <div id="item-form-message" role="status" aria-live="polite"></div>
+              <div class="d-flex flex-wrap gap-2 mt-3">
+                <button class="btn btn-primary" type="submit">Add to project</button>
+                <button class="btn btn-outline-secondary" id="cancel-item-edit" type="button" hidden>
+                  Cancel edit
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section class="filter-panel p-3 p-md-4 mb-4" aria-labelledby="shopping-heading">
+            <div class="d-flex justify-content-between align-items-center gap-3 mb-2">
+              <h2 class="h4 mb-0" id="shopping-heading">Shopping list</h2>
+              <span class="badge text-bg-warning" id="shopping-count">0 items</span>
+            </div>
+            <ul class="list-group list-group-flush" id="shopping-items"></ul>
+            <p class="text-muted small mb-0" id="shopping-empty">Nothing to buy right now.</p>
+          </section>
+
+          <div id="project-item-groups" class="row g-3">
+            <section class="col-12 col-lg-4" aria-labelledby="owned-heading">
+              <div class="filter-panel p-3 h-100">
+                <h2 class="h5" id="owned-heading">Owned</h2>
+                <ul class="list-group list-group-flush" id="owned-items"></ul>
+              </div>
+            </section>
+            <section class="col-12 col-lg-4" aria-labelledby="partial-heading">
+              <div class="filter-panel p-3 h-100">
+                <h2 class="h5" id="partial-heading">Partially owned</h2>
+                <ul class="list-group list-group-flush" id="partial-items"></ul>
+              </div>
+            </section>
+            <section class="col-12 col-lg-4" aria-labelledby="missing-heading">
+              <div class="filter-panel p-3 h-100">
+                <h2 class="h5" id="missing-heading">Missing</h2>
+                <ul class="list-group list-group-flush" id="missing-items"></ul>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/projectDetail.js"></script>
+  </body>
+</html>

@@ -12,6 +12,7 @@ export default defineConfig({
         supplyForm: resolve(import.meta.dirname, 'pages/supply-form.html'),
         projects: resolve(import.meta.dirname, 'pages/projects.html'),
         projectForm: resolve(import.meta.dirname, 'pages/project-form.html'),
+        projectDetail: resolve(import.meta.dirname, 'pages/project-detail.html'),
       },
     },
   },

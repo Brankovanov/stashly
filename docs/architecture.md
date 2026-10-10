@@ -28,6 +28,7 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 - `src/services/authService.js` wraps auth operations and role lookup; `src/utils/guards.js` exposes authenticated-user and admin guards.
 - `src/services/suppliesService.js` loads the current RLS-visible inventory and categories for the supplies listing page.
 - `src/services/projectsService.js` provides RLS-backed project CRUD and resolves private cover/pattern paths to short-lived signed URLs.
+- `src/services/projectItemsService.js` loads project needs and owner inventory, calculates owned/partial/missing quantities, and calls the transactional purchase operation.
 - `src/services/storageService.js` validates supply images and project files, uploads them to private user-scoped buckets, and creates short-lived signed URLs for display.
 
 ## Request flow
@@ -43,4 +44,5 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 - Client-side guards and UI hiding are only UX conveniences.
 - Database RLS remains the source of truth for access control.
 - Storage object policies restrict supply photos and project files to the owning user's folder, with admin access following the server-side admin helper.
+- Project-item policies require linked inventory to belong to the project owner; `mark_project_item_purchased` performs the inventory update and item link atomically after checking authorization and unit compatibility.
 - Admin actions are restricted server-side via `public.is_admin()`.

@@ -99,6 +99,12 @@ function createProjectCard(project) {
   editLink.textContent = 'Edit project';
   editLink.setAttribute('aria-label', `Edit ${project.title}`);
   body.append(editLink);
+  const detailLink = document.createElement('a');
+  detailLink.className = 'btn btn-sm btn-outline-primary mt-2 align-self-start';
+  detailLink.href = `/pages/project-detail.html?id=${encodeURIComponent(project.id)}`;
+  detailLink.textContent = 'Project supplies';
+  detailLink.setAttribute('aria-label', `View supplies for ${project.title}`);
+  body.append(detailLink);
   const deleteButton = document.createElement('button');
   deleteButton.className = 'btn btn-sm btn-outline-danger mt-2 align-self-start';
   deleteButton.type = 'button';
