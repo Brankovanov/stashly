@@ -16,8 +16,8 @@ try {
   const user = await requireAuth();
   if (user) {
     const data = await getDashboardData();
-    document.querySelector('#dashboard-name').textContent = user.user_metadata?.display_name
-      ? `, ${user.user_metadata.display_name}`
+    document.querySelector('#dashboard-name').textContent = data.displayName
+      ? `, ${data.displayName}`
       : '';
     document.querySelector('#supply-count').textContent = String(data.supplyCount);
     document.querySelector('#project-count').textContent = String(data.projectCount);

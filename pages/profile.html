@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="View and update your Stashly profile." />
+    <meta name="theme-color" content="#f8f5ef" />
+    <title>My profile — Stashly</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="site-header"></header>
+      <main class="container py-5">
+        <section class="profile-panel p-4 p-md-5 mx-auto">
+          <p class="eyebrow mb-2">Your account</p>
+          <h1 class="display-6 fw-semibold mb-4">My profile</h1>
+
+          <p class="text-muted py-4 text-center" id="loading-state" role="status">
+            Loading your profile…
+          </p>
+          <div class="alert alert-danger" id="error-state" role="alert" hidden></div>
+
+          <form id="profile-form" novalidate hidden>
+            <div class="mb-3">
+              <label class="form-label" for="profile-email">Email address</label>
+              <input class="form-control" id="profile-email" type="email" readonly />
+              <div class="form-text">Your sign-in email cannot be changed here.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="display-name">Display name</label>
+              <input
+                class="form-control"
+                id="display-name"
+                name="display_name"
+                type="text"
+                maxlength="80"
+                autocomplete="name"
+                required
+              />
+              <div class="invalid-feedback">Enter a display name of up to 80 characters.</div>
+            </div>
+            <div id="profile-message" role="status" aria-live="polite"></div>
+            <button class="btn btn-primary" type="submit">Save profile</button>
+          </form>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/pages/profile.js"></script>
+  </body>
+</html>

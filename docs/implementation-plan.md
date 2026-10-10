@@ -17,7 +17,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
 | 9 | Implement project supply tracking | 🟡 Stages 1–4 complete; Stage 5 in progress |
-| 10 | Add profile and dashboard | 🟡 Stages 1–2 in progress |
+| 10 | Add profile and dashboard | 🟡 Stages 1–3 in progress |
 | 11 | Build the admin panel | ⬜ Not started |
 | 12 | Polish, document, and deploy | ⬜ Not started |
 
@@ -192,11 +192,12 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Replace the static home welcome with a protected, responsive dashboard with loading, empty, and error states plus links into supplies and projects.
   - **Progress:** implemented the authenticated dashboard service and responsive home view. Project needs reuse the shared unit-aware ownership calculation; local browser load shows the empty-inventory state. Production build and editor diagnostics pass.
   - **Commit:** `feat(dashboard): show personal inventory and project overview`
-- **Stage 2 — Profile details** 🟡
+- **Stage 2 — Profile details** ✅
   - Add an RLS-backed profile service for loading and updating the current user's display name.
   - Build a protected profile page with validation, save feedback, and account email.
+  - **Progress:** the page is registered as a Vite entry and uses the existing owner-only profile policies; browser checks confirmed account details load and a profile update succeeds. The dashboard greeting now reads the saved profile display name.
   - **Commit:** `feat(profile): view and update account details`
-- **Stage 3 — Profile avatar storage** ⬜
+- **Stage 3 — Profile avatar storage** 🟡
   - Add a migration for a private avatar bucket and user-folder storage policies.
   - Support validated JPG/PNG/WebP avatar upload, signed display URLs, and safe replacement/removal cleanup; store only the object path in `profiles.avatar_path`.
   - **Commit:** `feat(profile): add private avatar uploads`

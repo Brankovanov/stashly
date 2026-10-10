@@ -11,7 +11,7 @@ export async function getDashboardData() {
   if (!authData.user) throw new Error('You must be signed in to view your dashboard.');
 
   const userId = authData.user.id;
-  const [suppliesResult, projectsResult] = await Promise.all([
+  const [suppliesResult, projectsResult, profileResult] = await Promise.all([
     supabase
       .from('supplies')
       .select('id', { count: 'exact', head: true })
@@ -21,6 +21,11 @@ export async function getDashboardData() {
       .select('id, title, status, updated_at')
       .eq('user_id', userId)
       .order('updated_at', { ascending: false }),
+    supabase
+      .from('profiles')
+      .select('display_name')
+      .eq('id', userId)
+      .maybeSingle(),
   ]);
 
   if (suppliesResult.error) {
@@ -28,6 +33,9 @@ export async function getDashboardData() {
   }
   if (projectsResult.error) {
     throw new Error(`Unable to load your project summary: ${projectsResult.error.message}`);
+  }
+  if (profileResult.error) {
+    throw new Error(`Unable to load your profile: ${profileResult.error.message}`);
   }
 
   const projects = projectsResult.data;
@@ -46,6 +54,7 @@ export async function getDashboardData() {
   }
 
   return {
+    displayName: profileResult.data?.display_name ?? '',
     supplyCount: suppliesResult.count ?? 0,
     projectCount: projects.length,
     itemsToBuyCount,
