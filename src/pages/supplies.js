@@ -166,12 +166,17 @@ function createDetail(text, className = '') {
 
 function showActionNotice() {
   const params = new URLSearchParams(window.location.search);
-  if (!params.has('created')) return;
+  const messages = {
+    created: 'Supply added to your inventory.',
+    updated: 'Supply changes saved.',
+  };
+  const action = Object.keys(messages).find((key) => params.has(key));
+  if (!action) return;
 
   const notice = document.createElement('div');
   notice.className = 'alert alert-success';
   notice.setAttribute('role', 'status');
-  notice.textContent = 'Supply added to your inventory.';
+  notice.textContent = messages[action];
   document.querySelector('main').prepend(notice);
   window.history.replaceState({}, '', window.location.pathname);
 }

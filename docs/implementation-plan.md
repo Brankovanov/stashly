@@ -13,7 +13,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 3 | Add Row-Level Security | 🟡 Migration applied; access-control tests pending |
 | 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
-| 6 | Add supply CRUD | 🟡 Stages 1–2 implemented; live checks pending |
+| 6 | Add supply CRUD | 🟡 Stages 1–3 implemented; live checks pending |
 | 7 | Add supply photo storage | ⬜ Not started |
 | 8 | Build project CRUD | ⬜ Not started |
 | 9 | Implement project supply tracking | ⬜ Not started |
@@ -75,7 +75,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Load categories through the service and provide fields for category, name, brand, color code/hex, quantity, unit, and notes.
   - Include loading, error, success/navigation, and submit-disabled-while-saving behavior.
   - **Done when:** a signed-in user can create a supply and see it on the inventory page.
-- **Stage 3 — Edit supply**
+- **Stage 3 — Edit supply** ✅
   - Reuse the create form for editing, load the selected supply by ID, and prefill its values.
   - Handle missing/unauthorized rows without rendering a success state; updates must still be constrained by RLS.
   - **Done when:** editing persists the changes and the listing reflects them.

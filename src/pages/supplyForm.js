@@ -3,7 +3,12 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
 import { createNavbar } from '../components/navbar.js';
-import { createSupply, getSupplyCategories } from '../services/suppliesService.js';
+import {
+  createSupply,
+  getSupplyById,
+  getSupplyCategories,
+  updateSupply,
+} from '../services/suppliesService.js';
 import { requireAuth } from '../utils/guards.js';
 import { validateSupplyInput } from '../utils/supplyValidation.js';
 
@@ -15,15 +20,25 @@ const error = document.querySelector('#form-error');
 const message = document.querySelector('#form-message');
 const submitButton = form.querySelector('button[type="submit"]');
 const categorySelect = form.elements.category_id;
-let categories = [];
+const supplyId = new URLSearchParams(window.location.search).get('id');
+const isEditing = Boolean(supplyId);
 
 try {
   const user = await requireAuth();
   if (user) {
-    categories = await getSupplyCategories();
+    const [categories, supply] = await Promise.all([
+      getSupplyCategories(),
+      isEditing ? getSupplyById(supplyId) : Promise.resolve(null),
+    ]);
     populateCategories(categories);
+    if (supply) populateForm(supply);
     loading.hidden = true;
     form.hidden = false;
+    if (isEditing) {
+      document.title = 'Edit supply — Stashly';
+      document.querySelector('#form-title').textContent = 'Edit supply';
+      submitButton.textContent = 'Save changes';
+    }
     if (categories.length === 0) {
       error.textContent = 'No categories are available yet. Apply the category seed migration or ask an administrator to add categories.';
       error.hidden = false;
@@ -48,13 +63,15 @@ form.addEventListener('submit', async (event) => {
   submitButton.disabled = true;
   submitButton.textContent = 'Saving…';
   try {
-    await createSupply(value);
-    window.location.assign('/pages/supplies.html?created=1');
+    if (isEditing) await updateSupply(supplyId, value);
+    else await createSupply(value);
+    const result = isEditing ? 'updated' : 'created';
+    window.location.assign(`/pages/supplies.html?${result}=1`);
   } catch (saveError) {
     message.className = 'alert alert-danger mt-3';
     message.textContent = saveError.message;
     submitButton.disabled = false;
-    submitButton.textContent = 'Save supply';
+    submitButton.textContent = isEditing ? 'Save changes' : 'Save supply';
   }
 });
 
@@ -78,6 +95,17 @@ function readFormValues() {
     unit: form.elements.unit.value,
     notes: form.elements.notes.value,
   };
+}
+
+function populateForm(supply) {
+  form.elements.category_id.value = supply.category_id ?? '';
+  form.elements.name.value = supply.name;
+  form.elements.brand.value = supply.brand ?? '';
+  form.elements.color_code.value = supply.color_code ?? '';
+  form.elements.color_hex.value = supply.color_hex ?? '';
+  form.elements.quantity.value = supply.quantity;
+  form.elements.unit.value = supply.unit ?? '';
+  form.elements.notes.value = supply.notes ?? '';
 }
 
 function clearValidationErrors() {
