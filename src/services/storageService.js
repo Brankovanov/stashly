@@ -18,7 +18,7 @@ export function validateSupplyPhoto(file) {
   }
 }
 
-export async function uploadSupplyPhoto(file) {
+export async function uploadSupplyPhoto(file, ownerId) {
   validateSupplyPhoto(file);
   const supabase = getSupabaseClient();
   const { data: authData, error: authError } = await supabase.auth.getUser();
@@ -26,7 +26,8 @@ export async function uploadSupplyPhoto(file) {
   if (!authData.user) throw new Error('You must be signed in to upload a supply photo.');
 
   const extension = PHOTO_TYPES.get(file.type);
-  const path = `${authData.user.id}/${crypto.randomUUID()}.${extension}`;
+  const ownerFolder = ownerId ?? authData.user.id;
+  const path = `${ownerFolder}/${crypto.randomUUID()}.${extension}`;
   const { error } = await supabase.storage
     .from(SUPPLY_PHOTO_BUCKET)
     .upload(path, file, {
@@ -48,6 +49,9 @@ export async function getSupplyPhotoUrls(paths) {
     .createSignedUrls(uniquePaths, 3600);
 
   if (error) throw new Error(`Unable to load supply photos: ${error.message}`);
+  if (!data || data.length !== uniquePaths.length) {
+    throw new Error('Unable to create display links for all supply photos.');
+  }
 
   const urls = new Map();
   for (const item of data) {

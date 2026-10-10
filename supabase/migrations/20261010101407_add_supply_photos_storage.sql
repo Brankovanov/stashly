@@ -24,7 +24,10 @@ FOR SELECT
 TO authenticated
 USING (
   bucket_id = 'supply-photos'
-  AND (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+  AND (
+    (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+    OR public.is_admin()
+  )
 );
 
 CREATE POLICY "supply_photos_upload_own"
@@ -33,7 +36,10 @@ FOR INSERT
 TO authenticated
 WITH CHECK (
   bucket_id = 'supply-photos'
-  AND (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+  AND (
+    (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+    OR public.is_admin()
+  )
 );
 
 CREATE POLICY "supply_photos_update_own"
@@ -42,11 +48,17 @@ FOR UPDATE
 TO authenticated
 USING (
   bucket_id = 'supply-photos'
-  AND (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+  AND (
+    (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+    OR public.is_admin()
+  )
 )
 WITH CHECK (
   bucket_id = 'supply-photos'
-  AND (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+  AND (
+    (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+    OR public.is_admin()
+  )
 );
 
 CREATE POLICY "supply_photos_delete_own"
@@ -55,5 +67,8 @@ FOR DELETE
 TO authenticated
 USING (
   bucket_id = 'supply-photos'
-  AND (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+  AND (
+    (storage.foldername(name))[1] = (SELECT auth.uid()::text)
+    OR public.is_admin()
+  )
 );

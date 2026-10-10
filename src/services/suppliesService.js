@@ -2,7 +2,7 @@ import { getSupabaseClient } from '../lib/supabaseClient.js';
 import { deleteSupplyPhoto, getSupplyPhotoUrls } from './storageService.js';
 
 const SUPPLY_FIELDS =
-  'id, name, brand, color_code, color_hex, quantity, unit, notes, created_at, category_id, photo_path, categories(name, icon)';
+  'id, user_id, name, brand, color_code, color_hex, quantity, unit, notes, created_at, category_id, photo_path, categories(name, icon)';
 
 /**
  * Loads the signed-in user's supplies and the available supply categories.

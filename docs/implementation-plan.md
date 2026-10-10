@@ -14,7 +14,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 4 | Implement authentication | 🟡 Implemented; live Supabase flow tests pending |
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
-| 7 | Add supply photo storage | 🟡 Stages 1–4 complete; integration checks pending |
+| 7 | Add supply photo storage | 🟡 Implemented; live storage checks pending |
 | 8 | Build project CRUD | ⬜ Not started |
 | 9 | Implement project supply tracking | ⬜ Not started |
 | 10 | Add profile and dashboard | ⬜ Not started |
@@ -98,7 +98,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 - **Stage 1 — Private bucket and policies** ✅
   - Create the private `supply-photos` bucket with a 5 MB size limit and JPEG/PNG/WebP MIME allowlist.
-  - Add storage object policies restricting read/write/delete to the authenticated user's `{user_id}/` folder.
+  - Add storage object policies restricting read/write/delete to the authenticated user's `{user_id}/` folder; admins retain their database-authorized moderation access.
   - **Done when:** migration builds and policy paths match the storage service convention.
 - **Stage 2 — Storage service and display** ✅
   - Validate image MIME type and size before upload; use unique `{user_id}/{uuid}.{ext}` paths.
@@ -110,9 +110,10 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - On edit, upload the replacement, update the row's path, then clean the old file; compensate by removing the new file if the row update fails.
 - **Stage 4 — Delete cleanup** ✅
   - On supply deletion, remove the database row and its photo; report cleanup failures explicitly so orphaned storage objects can be cleaned up.
-- **Stage 5 — Integration checks and documentation**
+- **Stage 5 — Integration checks and documentation** 🟡
   - Test upload, display, replacement, delete cleanup, invalid type/size, and cross-user storage isolation.
   - Run the production build and update setup and manual test guidance.
+  - **Progress:** build and local file-validation assertions pass. The migration has not been applied to the remote project; live storage and two-user policy checks remain pending.
 - **Migration:** `supabase/migrations/20261010101407_add_supply_photos_storage.sql`
 - **Commit:** `feat(storage): supply photo upload and display`
 - **Commit:** `feat(storage): supply photo upload and display`

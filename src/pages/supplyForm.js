@@ -33,6 +33,7 @@ const supplyId = new URLSearchParams(window.location.search).get('id');
 const isEditing = Boolean(supplyId);
 let existingPhotoPath = null;
 let existingPhotoUrl = null;
+let supplyOwnerId = null;
 let previewObjectUrl = null;
 
 try {
@@ -43,6 +44,7 @@ try {
       isEditing ? getSupplyById(supplyId) : Promise.resolve(null),
     ]);
     existingPhotoPath = supply?.photo_path ?? null;
+    supplyOwnerId = supply?.user_id ?? null;
     populateCategories(categories);
     if (supply) {
       const photoUrls = await getSupplyPhotoUrls([existingPhotoPath]);
@@ -96,7 +98,9 @@ form.addEventListener('submit', async (event) => {
   let saved = false;
   try {
     const selectedPhoto = photoInput.files[0];
-    if (selectedPhoto) uploadedPhotoPath = await uploadSupplyPhoto(selectedPhoto);
+    if (selectedPhoto) {
+      uploadedPhotoPath = await uploadSupplyPhoto(selectedPhoto, supplyOwnerId);
+    }
     const photoPath =
       uploadedPhotoPath ??
       (form.elements.remove_photo.checked ? null : existingPhotoPath);
