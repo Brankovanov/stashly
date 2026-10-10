@@ -17,7 +17,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
 | 9 | Implement project supply tracking | 🟡 Stages 1–4 complete; Stage 5 in progress |
-| 10 | Add profile and dashboard | ⬜ Not started |
+| 10 | Add profile and dashboard | 🟡 Stage 1 in progress |
 | 11 | Build the admin panel | ⬜ Not started |
 | 12 | Polish, document, and deploy | ⬜ Not started |
 
@@ -187,9 +187,22 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 10. Add profile and dashboard
 
-- Build the profile page and dashboard counts for supplies, projects, and items to buy, plus recent projects.
-- Add avatar storage if in scope.
-- **Commit:** `feat: profile page and dashboard`
+- **Stage 1 — Dashboard data and overview** 🟡
+  - Load the signed-in user's supply count, project count, incomplete project-need count, and recently updated projects through a service.
+  - Replace the static home welcome with a protected, responsive dashboard with loading, empty, and error states plus links into supplies and projects.
+  - **Commit:** `feat(dashboard): show personal inventory and project overview`
+- **Stage 2 — Profile details** ⬜
+  - Add an RLS-backed profile service for loading and updating the current user's display name.
+  - Build a protected profile page with validation, save feedback, and account email.
+  - **Commit:** `feat(profile): view and update account details`
+- **Stage 3 — Profile avatar storage** ⬜
+  - Add a migration for a private avatar bucket and user-folder storage policies.
+  - Support validated JPG/PNG/WebP avatar upload, signed display URLs, and safe replacement/removal cleanup; store only the object path in `profiles.avatar_path`.
+  - **Commit:** `feat(profile): add private avatar uploads`
+- **Stage 4 — Navigation, verification, and documentation** ⬜
+  - Link the profile from signed-in navigation and ensure dashboard/profile links and signed-out routes behave consistently.
+  - Verify profile/dashboard states, responsive build, RLS/storage policy behavior, and document setup/manual checks.
+  - **Commit:** `docs(profile): document dashboard and profile workflows`
 
 ### 11. Build the admin panel
 
