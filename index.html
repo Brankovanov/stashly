@@ -14,14 +14,58 @@
     <div id="app">
       <header id="site-header"></header>
       <main class="container py-5">
-        <section class="welcome-panel p-4 p-md-5">
+        <section class="dashboard-heading mb-4">
           <p class="eyebrow mb-2">Your creative space</p>
-          <h1 class="display-5 fw-semibold mb-3">A little more room to stitch.</h1>
-          <p class="lead mb-0">
-            Stashly will help you keep track of your embroidery supplies and plan
-            projects with confidence.
-          </p>
+          <h1 class="display-5 fw-semibold mb-2">Welcome back<span id="dashboard-name"></span>.</h1>
+          <p class="lead text-muted mb-0">A quick look at your supplies and stitching plans.</p>
         </section>
+
+        <p class="text-muted py-4 text-center" id="loading-state" role="status">
+          Loading your dashboard…
+        </p>
+        <div class="alert alert-danger" id="error-state" role="alert" hidden></div>
+
+        <div id="dashboard-content" hidden>
+          <section class="row g-3 mb-5" aria-label="Your inventory and project summary">
+            <div class="col-12 col-md-4">
+              <article class="dashboard-stat p-4 h-100">
+                <i class="bi bi-box-seam fs-3 text-success" aria-hidden="true"></i>
+                <p class="text-muted mb-1 mt-3">Supplies in your stash</p>
+                <p class="display-6 fw-semibold mb-0" id="supply-count">0</p>
+                <a class="stretched-link" href="/pages/supplies.html" aria-label="Browse your supplies"></a>
+              </article>
+            </div>
+            <div class="col-12 col-md-4">
+              <article class="dashboard-stat p-4 h-100">
+                <i class="bi bi-journal-text fs-3 text-success" aria-hidden="true"></i>
+                <p class="text-muted mb-1 mt-3">Projects</p>
+                <p class="display-6 fw-semibold mb-0" id="project-count">0</p>
+                <a class="stretched-link" href="/pages/projects.html" aria-label="Browse your projects"></a>
+              </article>
+            </div>
+            <div class="col-12 col-md-4">
+              <article class="dashboard-stat p-4 h-100">
+                <i class="bi bi-basket2 fs-3 text-success" aria-hidden="true"></i>
+                <p class="text-muted mb-1 mt-3">Project items to buy</p>
+                <p class="display-6 fw-semibold mb-0" id="items-to-buy-count">0</p>
+                <a class="stretched-link" href="/pages/projects.html" aria-label="Review project items to buy"></a>
+              </article>
+            </div>
+          </section>
+
+          <section aria-labelledby="recent-projects-heading">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+              <h2 class="h3 mb-0" id="recent-projects-heading">Recently updated projects</h2>
+              <a href="/pages/projects.html">View all projects</a>
+            </div>
+            <div class="empty-state p-4 text-center" id="no-projects-state" hidden>
+              <h3 class="h5">Your next project starts here</h3>
+              <p class="text-muted">Create a project to keep its pattern and supply list together.</p>
+              <a class="btn btn-primary" href="/pages/project-form.html">Create a project</a>
+            </div>
+            <div class="row g-3" id="recent-projects" aria-live="polite"></div>
+          </section>
+        </div>
       </main>
     </div>
     <script type="module" src="/src/pages/index.js"></script>

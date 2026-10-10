@@ -17,7 +17,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
 | 9 | Implement project supply tracking | 🟡 Stages 1–4 complete; Stage 5 in progress |
-| 10 | Add profile and dashboard | 🟡 Stage 1 in progress |
+| 10 | Add profile and dashboard | 🟡 Stages 1–2 in progress |
 | 11 | Build the admin panel | ⬜ Not started |
 | 12 | Polish, document, and deploy | ⬜ Not started |
 
@@ -187,11 +187,12 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 10. Add profile and dashboard
 
-- **Stage 1 — Dashboard data and overview** 🟡
+- **Stage 1 — Dashboard data and overview** ✅
   - Load the signed-in user's supply count, project count, incomplete project-need count, and recently updated projects through a service.
   - Replace the static home welcome with a protected, responsive dashboard with loading, empty, and error states plus links into supplies and projects.
+  - **Progress:** implemented the authenticated dashboard service and responsive home view. Project needs reuse the shared unit-aware ownership calculation; local browser load shows the empty-inventory state. Production build and editor diagnostics pass.
   - **Commit:** `feat(dashboard): show personal inventory and project overview`
-- **Stage 2 — Profile details** ⬜
+- **Stage 2 — Profile details** 🟡
   - Add an RLS-backed profile service for loading and updating the current user's display name.
   - Build a protected profile page with validation, save feedback, and account email.
   - **Commit:** `feat(profile): view and update account details`
