@@ -16,7 +16,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
 | 8 | Build project CRUD | 🟡 Stages 1–5 implemented; integration checks pending |
-| 9 | Implement project supply tracking | 🟡 Stage 1 in progress |
+| 9 | Implement project supply tracking | 🟡 Stages 1–2 complete; Stage 3 in progress |
 | 10 | Add profile and dashboard | ⬜ Not started |
 | 11 | Build the admin panel | ⬜ Not started |
 | 12 | Polish, document, and deploy | ⬜ Not started |
@@ -159,12 +159,13 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
   - Treat differing or unspecified units as incomparable rather than claiming an item is owned; surface the full need as missing until a compatible supply is linked.
   - **Progress:** project-item read/write service methods and service-layer quantity calculations are implemented; migration `20261010142000` tightens project-item linkage policies and prevents duplicate links to the same owned supply within a project. Local calculation/validation assertions and the production build pass; live RLS enforcement awaits applying and checking the new migration.
   - **Done when:** service outputs report correct ownership quantities and unauthorized links are rejected server-side.
-- **Stage 2 — Project detail and supply-item entry**
+- **Stage 2 — Project detail and supply-item entry** ✅
   - Add a protected `pages/project-detail.html`, its Vite entry, and a link from each project card.
   - Render project information, progress, owned/partial/missing groups, and loading, empty, and error states.
   - Let users add an item by linking one of their supplies or describing a new need (category, name, brand/color, quantity, unit).
+  - **Progress:** protected detail screen, project summary, progress bar, ownership groups, and add-item form are implemented. The page calls the item and category services; source text is rendered with DOM text APIs.
   - **Done when:** an item can be added and shown under the correct ownership state without data access in the page layer.
-- **Stage 3 — Item maintenance and shopping list**
+- **Stage 3 — Item maintenance and shopping list** 🟡
   - Allow editing needed quantity/details and removing an item with confirmation.
   - Show missing/short quantities and a focused shopping list, with counts and accessible progress.
   - **Done when:** edits/removals refresh progress and only incomplete items appear on the shopping list.

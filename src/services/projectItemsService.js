@@ -6,14 +6,14 @@ const PROJECT_ITEM_FIELDS =
   'id, project_id, supply_id, category_id, name, brand, color_code, quantity_needed, unit, created_at, updated_at, supplies(id, quantity, unit)';
 
 export async function getProjectSupplyData(projectId) {
-  const [project, { data: items, error: itemsError }, supplies] = await Promise.all([
-    getProjectById(projectId),
+  const project = await getProjectById(projectId);
+  const [{ data: items, error: itemsError }, supplies] = await Promise.all([
     getSupabaseClient()
       .from('project_items')
       .select(PROJECT_ITEM_FIELDS)
       .eq('project_id', projectId)
       .order('created_at'),
-    getProjectSupplyOptions(),
+    getProjectSupplyOptions(project.user_id),
   ]);
 
   if (itemsError) throw new Error(`Unable to load project supplies: ${itemsError.message}`);
@@ -29,15 +29,15 @@ export async function getProjectSupplyData(projectId) {
       total,
       owned,
       percent: total ? Math.round((owned / total) * 100) : 0,
-      quantityMissing: projectItems.reduce((sum, item) => sum + item.quantity_missing, 0),
     },
   };
 }
 
-export async function getProjectSupplyOptions() {
+export async function getProjectSupplyOptions(ownerId) {
   const { data, error } = await getSupabaseClient()
     .from('supplies')
     .select('id, category_id, name, brand, color_code, quantity, unit, categories(name)')
+    .eq('user_id', ownerId)
     .order('name');
 
   if (error) throw new Error(`Unable to load your supplies: ${error.message}`);

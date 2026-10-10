@@ -6,7 +6,7 @@ export function validateProjectItemInput(values) {
   const quantityNeeded = Number(quantityText);
 
   if (!name) errors.name = 'Enter a supply name.';
-  if (!categoryId) errors.category_id = 'Choose a category.';
+  if (!categoryId && !values.supply_id) errors.category_id = 'Choose a category.';
   if (!quantityText || !Number.isFinite(quantityNeeded) || quantityNeeded <= 0) {
     errors.quantity_needed = 'Enter a quantity greater than zero.';
   }
