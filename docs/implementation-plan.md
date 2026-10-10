@@ -15,7 +15,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 5 | Build supply browsing | 🟡 Implemented; seed and live Supabase checks pending |
 | 6 | Add supply CRUD | 🟡 Implemented; live Supabase integration checks pending |
 | 7 | Add supply photo storage | 🟡 Deployed policy checks pass; signed-in storage tests pending |
-| 8 | Build project CRUD | 🟡 Stage 1 in progress |
+| 8 | Build project CRUD | 🟡 Stages 1–2 complete |
 | 9 | Implement project supply tracking | ⬜ Not started |
 | 10 | Add profile and dashboard | ⬜ Not started |
 | 11 | Build the admin panel | ⬜ Not started |
@@ -119,11 +119,11 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 8. Build project CRUD
 
-- **Stage 1 — Project data service** 🟡
+- **Stage 1 — Project data service** ✅
   - Add RLS-backed list, get-by-ID, create, update, and delete operations in `src/services/projectsService.js`.
   - Include owner identity on create; let project RLS enforce access on every operation.
   - **Done when:** service errors are explicit, missing/inaccessible records are not reported as success, and project queries return associated cover/pattern paths.
-- **Stage 2 — Project list**
+- **Stage 2 — Project list** ✅
   - Add `pages/projects.html` and its Vite entry with loading, error, empty, and populated states.
   - Show title, description excerpt, status badge, and optional cover; include navigation to create/edit.
   - Add filtering by planned/in-progress/completed status and an understandable empty state.

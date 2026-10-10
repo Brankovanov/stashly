@@ -91,6 +91,27 @@ body {
   padding: 1.25rem;
 }
 
+.project-status-filter {
+  max-width: 24rem;
+}
+
+.project-card {
+  border-color: #e9e2d7;
+  border-radius: 1rem;
+}
+
+.project-card .card-body {
+  padding: 1.25rem;
+}
+
+.project-description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  white-space: pre-line;
+}
+
 .supply-photo {
   display: block;
   width: 100%;
