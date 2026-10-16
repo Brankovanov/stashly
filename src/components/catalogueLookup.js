@@ -1,6 +1,7 @@
 import { loadCatalogue } from '../services/catalogueService.js';
 import { searchCatalogue } from '../utils/catalogueSearch.js';
 import { CATALOGUES, resolveCatalogueId } from '../utils/catalogues.js';
+import { describeDistance, findClosestColors } from '../utils/colorMatch.js';
 
 /**
  * Wires the "find a color in a catalogue" block of the supply form. Picking a
@@ -12,6 +13,9 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
   const queryInput = form.elements.lookup_query;
   const results = form.querySelector('#lookup-results');
   const status = form.querySelector('#lookup-status');
+  const suggestions = form.querySelector('#color-suggestions');
+  const suggestionsHeading = form.querySelector('#suggestions-heading');
+  const suggestionsList = form.querySelector('#suggestions-list');
   let catalogue = null;
   let loadToken = 0;
 
@@ -23,15 +27,37 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
   for (const name of ['color_code', 'color_hex']) {
     form.elements[name].addEventListener('input', () => {
       form.elements.color_catalogue.value = '';
+      renderSuggestions();
     });
   }
 
   void switchCatalogue();
 
+  function renderSuggestions() {
+    suggestions.hidden = true;
+    suggestionsList.replaceChildren();
+    if (!catalogue || form.elements.color_catalogue.value) return;
+
+    const matches = findClosestColors(catalogue.colors, form.elements.color_hex.value.trim());
+    if (matches.length === 0) return;
+
+    suggestionsHeading.textContent = `Closest ${catalogue.label} colors (approximate, nothing is changed until you choose one):`;
+    for (const { color, distance } of matches) {
+      const button = createResultButton(color);
+      const hint = document.createElement('span');
+      hint.className = 'ms-auto small text-muted';
+      hint.textContent = describeDistance(distance);
+      button.append(hint);
+      suggestionsList.append(button);
+    }
+    suggestions.hidden = false;
+  }
+
   async function switchCatalogue() {
     const token = ++loadToken;
     catalogue = null;
     results.replaceChildren();
+    renderSuggestions();
     status.textContent = 'Loading catalogue…';
     try {
       const loaded = await loadCatalogue(select.value);
@@ -39,6 +65,7 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
       catalogue = loaded;
       status.textContent = `${loaded.colors.length} colors available.`;
       renderResults();
+      renderSuggestions();
     } catch (error) {
       if (token === loadToken) status.textContent = error.message;
     }
@@ -94,5 +121,6 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
     queryInput.value = '';
     status.textContent = `Applied ${catalogue.brand} ${color.code} ${color.name}. You can adjust any field.`;
     form.elements.color_hex.classList.remove('is-invalid');
+    renderSuggestions();
   }
 }
