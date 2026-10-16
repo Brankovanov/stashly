@@ -4,7 +4,7 @@ Embroidery Supplies Manager is a multi-page app for hobbyists to track their inv
 
 ## Project status
 
-The project foundation, database schema and RLS migrations, email/password authentication, supply browsing and CRUD, project CRUD, project supply tracking, and the personal dashboard/profile experience are implemented:
+The core application is implemented: users can manage supplies and projects, track project materials, and manage their profile. Administrators can manage categories and roles and moderate supplies and projects. The app builds locally with Vite.
 
 - Vite multi-page app scaffold complete
 - Bootstrap and shared styling configured
@@ -20,7 +20,9 @@ The project foundation, database schema and RLS migrations, email/password authe
 - A protected profile page for display-name updates and private profile-photo management
 - An administrator-only panel for platform totals, categories, role management, and content moderation
 
-Remaining live checks include more upload/replacement edge cases, additional project-file types, and broader accessibility coverage. On 2026-10-10, two ordinary accounts verified row isolation for profiles, supplies/projects, and project items, including denied direct mutations and purchase attempts. They also verified private supply-photo, project-cover, PDF-pattern, and avatar access denial. A cross-owner supply-link attempt was rejected by RLS. Invalid and oversized selections were rejected with visible feedback for supply photos, project covers, project patterns, and avatars. Temporary-admin checks verified editing another user's supply and project, plus visible cleanup warnings when project-file and supply-photo deletion were deliberately blocked. The admin role selectors have accessible names; responsive checks at 375, 768, and 1280 px found no horizontal overflow on the admin page. Both test accounts are back to the `user` role, all temporary data/files were removed, and the linked project has no admins.
+Color-chart JSON data is present under `src/data/catalogues/`, but it is not yet connected to the supply form or profile preferences. The app is not documented as deployed; no live URL or demo credentials are configured here. Remaining work includes broader upload/replacement and accessibility checks, deployment and demo setup, and catalogue validation and integration.
+
+The manual Supabase/browser checks below were recorded on 2026-10-10. They verified two-account row isolation for profiles, supplies, projects, and project items; denied unauthorized mutations and purchase attempts; private supply-photo, project-cover, PDF-pattern, and avatar access; cross-owner supply-link rejection; and visible validation feedback for unsupported/oversized uploads. Temporary-admin checks covered category management, user listing, cross-account moderation, role guard behavior, and cleanup warnings when storage deletion was deliberately blocked. Temporary test data and roles were cleaned up afterward. These are documented prior checks, not a claim that the live Supabase project was re-tested for this update.
 
 ## Documentation
 
@@ -30,7 +32,7 @@ Remaining live checks include more upload/replacement edge cases, additional pro
 - [Architecture overview](docs/architecture.md)
 - [Database schema](docs/database.md)
 
-## Planned technology
+## Technology
 
 Vanilla JavaScript ES modules, HTML, CSS, Bootstrap 5, Vite, and Supabase (Postgres, Auth, and Storage).
 
@@ -83,7 +85,7 @@ Verify migration status against the intended Supabase project before relying on 
 
 ## Next implementation milestone
 
-Polish, document, and deploy. See [the implementation plan](docs/implementation-plan.md).
+Validate and integrate the existing color catalogues, complete remaining verification, then configure deployment and demo accounts. See [the implementation plan](docs/implementation-plan.md).
 
 ## Roles
 

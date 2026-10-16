@@ -12,7 +12,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 2 | Create the database schema | ✅ Done; migration applied |
 | 3 | Add Row-Level Security | 🟡 Two-user checks pass for profiles, supplies, projects, project items, and private files; broader table/policy coverage remains |
 | 4 | Implement authentication | 🟡 Signed-in access and guest guards checked; registration, confirmation-email, and full sign-out flows remain |
-| 5 | Build supply browsing | 🟡 Live inventory/categories and photo display checked; search/filter/sort and broader error-state checks remain |
+| 5 | Build supply browsing | ✅ Implemented: search, category filtering, sorting, and loading/empty/error states; broader manual state checks remain |
 | 6 | Add supply CRUD | 🟡 Create/delete and cross-user denial verified; own-record edit, scalar invalid-input, and service-error checks remain |
 | 7 | Add supply photo storage | 🟡 Owner upload/display/delete, cross-user access denial, and invalid/oversized feedback verified; replacement and bucket configuration remain |
 | 8 | Build project CRUD | 🟡 CRUD, cross-user row/file isolation, input validation, and cleanup-warning UI verified; additional file types and edge cases remain |
@@ -20,7 +20,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 10 | Add profile and dashboard | ✅ Implemented; profile-row and cross-user avatar access checks pass; avatar replacement/error edge cases remain |
 | 11 | Build the admin panel | 🟡 Cross-user edits/deletes, cleanup warnings, and role-selector labels verified; role-change and broader accessibility checks remain |
 | 12 | Polish, document, and deploy | 🟡 Production build and responsive no-overflow checks verified; broader accessibility/state review and deployment remain |
-| 13 | Add color catalogues | ⬜ Not started |
+| 13 | Validate existing color catalogue data | 🟡 23 catalogue JSON files are present; validation, provenance/licensing review, and app integration remain |
 | 14 | Add per-user catalogue selection | ⬜ Not started |
 | 15 | Use catalogues in supply forms | ⬜ Not started |
 | 16 | Suggest close color matches | ⬜ Not started |
@@ -63,11 +63,11 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ## Phase 2 — Core inventory and project workflows
 
-### 5. Build supply browsing 🟡
+### 5. Build supply browsing ✅
 
 - Seed default categories and add the supplies service and listing page.
 - Include category badges, color swatches, search, category filtering, sorting, and loading, empty, and error states.
-- **Progress:** the default-category migration, RLS-backed supply/category reads, and responsive protected listing page are implemented. Authenticated browser checks confirmed categories and a newly created supply appeared in the inventory with its photo. Search, filter, sort, and broader loading/error-state checks remain.
+- **Progress:** implemented in `src/pages/supplies.js` and `src/services/suppliesService.js`: the protected listing supports search, category filtering, sorting, category badges, color swatches, and loading/empty/error states. The default-category migration and RLS-backed reads are present. Authenticated browser checks confirmed categories and a newly created supply appeared in the inventory with its photo. Broader manual checks of search/filter/sort and state behavior remain.
 - **Commit:** `feat(supplies): browse supplies with search and filters`
 
 ### 6. Add supply CRUD
@@ -249,21 +249,21 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ## Phase 4 — Color catalogues and interface polish
 
-### 13. Add color catalogues
+### 13. Validate and integrate the existing color catalogues 🟡
 
-- Add versioned JSON catalogue files for the supported embroidery color systems.
-- Define one consistent entry shape containing the catalogue identifier, manufacturer/code, display name, and normalized color value (hex/RGB).
+- Catalogue JSON files already exist in `src/data/catalogues/` (23 files). They currently have no application consumer and are not yet validated as a set.
+- Review and document each catalogue's provenance, update procedure, and licensing/attribution requirements before relying on or distributing its data.
+- Define and validate a consistent entry shape containing the catalogue identifier, manufacturer/code, display name, and normalized color value (hex/RGB); preserve source-specific fields where needed.
 - Add a catalogue loader/validation utility so malformed or missing entries fail visibly instead of silently producing invalid supply data.
-- Document catalogue provenance, update procedure, and licensing/attribution requirements before importing any external dataset.
-- **Verify:** every catalogue parses, entries have unique codes, color values are valid, and the production build includes the catalogue assets.
-- **Commit:** `feat(colors): add embroidery color catalogues`
+- **Verify:** every catalogue parses, declared counts match, codes are unique within their catalogue, color values are valid, provenance/licensing is documented, and the production build includes the catalogue assets.
+- **Commit:** `feat(colors): validate and document existing catalogues`
 
 ### 14. Add per-user catalogue selection
 
-- Add a user-level catalogue preference with `DNS` as the default for existing and newly registered users.
+- Add a user-level catalogue preference and select a supported default for existing and newly registered users. The previously proposed `DNS` default does not correspond to an identifier in the current catalogue files; choose and document the intended default before adding the preference.
 - Store the preference in the profile data or a dedicated preferences table through a committed migration, with an allowlist of supported catalogue identifiers.
 - Add profile/settings controls for selecting the active catalogue and make the choice persist across sessions and pages.
-- Keep the preference server-validated and fall back to `DNS` only when no valid preference exists.
+- Keep the preference server-validated and fall back to the chosen supported default only when no valid preference exists.
 - **Verify:** two users can select different catalogues, each sees their own selection after signing in again, and invalid catalogue identifiers are rejected by the database/service layer.
 - **Commit:** `feat(profile): select a personal color catalogue`
 
