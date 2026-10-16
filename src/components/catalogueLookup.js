@@ -1,17 +1,15 @@
 import { loadCatalogue } from '../services/catalogueService.js';
-import { searchCatalogue } from '../utils/catalogueSearch.js';
 import { CATALOGUES, resolveCatalogueId } from '../utils/catalogues.js';
 import { describeDistance, findClosestColors } from '../utils/colorMatch.js';
 
 /**
- * Wires the "find a color in a catalogue" block of the supply form. Picking a
- * result fills brand, code, swatch and (if empty) name; every field stays
+ * Wires the "find a color in a catalogue" block of the supply form. Choosing a
+ * color fills brand, code, swatch and (if empty) name; every field stays
  * editable, and editing a color field by hand clears the stored catalogue.
  */
 export function setupCatalogueLookup(form, initialCatalogueId) {
-  const select = form.elements.lookup_catalogue;
-  const queryInput = form.elements.lookup_query;
-  const results = form.querySelector('#lookup-results');
+  const catalogueSelect = form.elements.lookup_catalogue;
+  const colorSelect = form.elements.lookup_color;
   const status = form.querySelector('#lookup-status');
   const suggestions = form.querySelector('#color-suggestions');
   const suggestionsHeading = form.querySelector('#suggestions-heading');
@@ -19,19 +17,58 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
   let catalogue = null;
   let loadToken = 0;
 
-  for (const item of CATALOGUES) select.append(new Option(item.label, item.id));
-  select.value = resolveCatalogueId(initialCatalogueId);
+  for (const item of CATALOGUES) catalogueSelect.append(new Option(item.label, item.id));
+  catalogueSelect.value = resolveCatalogueId(initialCatalogueId);
 
-  select.addEventListener('change', () => void switchCatalogue());
-  queryInput.addEventListener('input', renderResults);
+  catalogueSelect.addEventListener('change', () => void switchCatalogue());
+  colorSelect.addEventListener('change', () => {
+    const color = catalogue?.colors.find((item) => item.code === colorSelect.value);
+    if (color) applyColor(color);
+  });
   for (const name of ['color_code', 'color_hex']) {
     form.elements[name].addEventListener('input', () => {
       form.elements.color_catalogue.value = '';
+      colorSelect.value = '';
       renderSuggestions();
     });
   }
 
   void switchCatalogue();
+
+  async function switchCatalogue() {
+    const token = ++loadToken;
+    catalogue = null;
+    colorSelect.disabled = true;
+    colorSelect.replaceChildren(new Option('Loading…', ''));
+    renderSuggestions();
+    status.textContent = 'Loading catalogue…';
+    try {
+      const loaded = await loadCatalogue(catalogueSelect.value);
+      if (token !== loadToken) return;
+      catalogue = loaded;
+      populateColors();
+      status.textContent = `${loaded.colors.length} colors available.`;
+      renderSuggestions();
+    } catch (error) {
+      if (token !== loadToken) return;
+      colorSelect.replaceChildren(new Option('Catalogue unavailable', ''));
+      status.textContent = error.message;
+    }
+  }
+
+  function populateColors() {
+    colorSelect.replaceChildren(new Option('Choose a color…', ''));
+    for (const color of catalogue.colors) {
+      colorSelect.append(new Option(`${color.code} — ${color.name}`, color.code));
+    }
+    colorSelect.disabled = false;
+
+    // Re-select the saved color when editing a supply picked from this catalogue.
+    if (form.elements.color_catalogue.value === catalogue.id) {
+      const saved = form.elements.color_code.value;
+      if (catalogue.colors.some((color) => color.code === saved)) colorSelect.value = saved;
+    }
+  }
 
   function renderSuggestions() {
     suggestions.hidden = true;
@@ -43,7 +80,7 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
 
     suggestionsHeading.textContent = `Closest ${catalogue.label} colors (approximate, nothing is changed until you choose one):`;
     for (const { color, distance } of matches) {
-      const button = createResultButton(color);
+      const button = createSuggestionButton(color);
       const hint = document.createElement('span');
       hint.className = 'ms-auto small text-muted';
       hint.textContent = describeDistance(distance);
@@ -53,42 +90,7 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
     suggestions.hidden = false;
   }
 
-  async function switchCatalogue() {
-    const token = ++loadToken;
-    catalogue = null;
-    results.replaceChildren();
-    renderSuggestions();
-    status.textContent = 'Loading catalogue…';
-    try {
-      const loaded = await loadCatalogue(select.value);
-      if (token !== loadToken) return;
-      catalogue = loaded;
-      status.textContent = `${loaded.colors.length} colors available.`;
-      renderResults();
-      renderSuggestions();
-    } catch (error) {
-      if (token === loadToken) status.textContent = error.message;
-    }
-  }
-
-  function renderResults() {
-    results.replaceChildren();
-    if (!catalogue) return;
-
-    const query = queryInput.value.trim();
-    if (!query) {
-      status.textContent = `${catalogue.colors.length} colors available.`;
-      return;
-    }
-
-    const matches = searchCatalogue(catalogue.colors, query);
-    status.textContent = matches.length
-      ? `${matches.length} match${matches.length === 1 ? '' : 'es'} — choose one to fill the form.`
-      : 'No catalogue match. You can still enter the color manually.';
-    for (const color of matches) results.append(createResultButton(color));
-  }
-
-  function createResultButton(color) {
+  function createSuggestionButton(color) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'list-group-item list-group-item-action d-flex align-items-center gap-2';
@@ -117,8 +119,7 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
     if (!form.elements.name.value.trim()) {
       form.elements.name.value = `${catalogue.brand} ${color.code} ${color.name}`;
     }
-    results.replaceChildren();
-    queryInput.value = '';
+    colorSelect.value = color.code;
     status.textContent = `Applied ${catalogue.brand} ${color.code} ${color.name}. You can adjust any field.`;
     form.elements.color_hex.classList.remove('is-invalid');
     renderSuggestions();

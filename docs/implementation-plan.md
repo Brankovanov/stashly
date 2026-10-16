@@ -271,7 +271,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 15. Use catalogues when creating and editing supplies
 
-- Extend the supply form to load the active user's catalogue and offer catalogue-code/name lookup while preserving manual entry for colors not present in a catalogue.
+- Extend the supply form to load the active user's catalogue and offer a catalogue color dropdown (code and name) while preserving manual entry for colors not present in a catalogue.
 - Store the selected catalogue identifier and color code alongside the normalized color value without breaking existing supplies.
 - Update supply cards, details, and edit forms to display the correct catalogue label and code.
 - Keep catalogue reads in a service/module rather than embedding data-access logic in page scripts.

@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { test } from 'node:test';
-import { searchCatalogue } from '../src/utils/catalogueSearch.js';
 import { CATALOGUES, DEFAULT_CATALOGUE_ID, resolveCatalogueId } from '../src/utils/catalogues.js';
 import { describeDistance, findClosestColors, hexToLab } from '../src/utils/colorMatch.js';
 
@@ -25,12 +24,6 @@ test('migration allowlists contain exactly the registry ids', () => {
     const ids = [...sql.slice(sql.indexOf('in (')).matchAll(/'([a-z-]+)'/g)].map((m) => m[1]);
     assert.deepEqual([...ids].sort(), CATALOGUES.map((c) => c.id).sort(), name);
   }
-});
-
-test('searchCatalogue ranks exact code first and ignores blank queries', () => {
-  assert.equal(searchCatalogue(dmc, '310')[0].code, '310');
-  assert.deepEqual(searchCatalogue(dmc, '   '), []);
-  assert.deepEqual(searchCatalogue(dmc, 'zzzzzz'), []);
 });
 
 test('findClosestColors prefers exact matches and rejects invalid or distant input', () => {
