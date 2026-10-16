@@ -89,9 +89,20 @@ On 2026-10-10, authenticated project smoke tests passed in the local browser: cr
 
 Verify migration status against the intended Supabase project before relying on database and storage features. The linked project checked on 2026-10-10 has the project-item security, atomic-purchase, anonymous-grant correction, avatar storage, and admin-operation migrations applied. The purchase RPC is executable by authenticated users only. Admin RPC catalog checks confirm authenticated-only execution and no direct client role-write policies; the current project has no administrator account, so bootstrap one through the trusted SQL Editor before using admin functions. The `supply-photos`, `project-files`, and `avatars` buckets are private; object paths are stored in the database and displayed through expiring signed URLs. Never share or commit `.env` values.
 
+## Deployment (Netlify)
+
+The repo includes [netlify.toml](netlify.toml) (build `npm run build`, publish `dist`, Node 22, basic security headers, long-lived caching for `/assets`). There is no SPA redirect because every screen is a real HTML page.
+
+1. In Netlify choose **Add new site → Import an existing project**, pick this GitHub repo and the `main` branch. The build settings are read from `netlify.toml`.
+2. Under **Site configuration → Environment variables** add `VITE_SUPABASE_URL` (must end in `.supabase.co`) and `VITE_SUPABASE_ANON_KEY`. Use only the anon/publishable key, never the `service_role` key. Vite reads these at build time, so trigger a new deploy after changing them.
+3. In Supabase open **Authentication → URL Configuration**. Set **Site URL** to the Netlify URL and add `https://<your-site>/pages/reset-password.html` to **Redirect URLs** (keep the localhost entry for development).
+4. Register a normal demo user and a second account through the site, then promote the second one to admin in the SQL Editor (`update public.user_roles set role = 'admin' where user_id = (select id from auth.users where email = 'admin@example.com');`, using that account's email).
+5. Smoke-test the live site (sign in, add a supply, create a project, admin panel, password reset email), then record the live URL and demo credentials in this README.
+
+Live URL and demo credentials: _not configured yet_.
 ## Next implementation milestone
 
-Browser-check the catalogue lookup with real data (the two `20261016*` migrations are applied), confirm permission for the catalogue data, complete remaining verification, then configure deployment and demo accounts. Run `npm test` for the catalogue/color-matching tests. See [the implementation plan](docs/implementation-plan.md).
+Browser-check the catalogue lookup with real data (the two `20261016*` migrations are applied), confirm permission for the catalogue data, complete remaining verification, then deploy to Netlify and create demo accounts (see "Deployment (Netlify)"). Run `npm test` for the catalogue/color-matching tests. See [the implementation plan](docs/implementation-plan.md).
 
 ## Roles
 
