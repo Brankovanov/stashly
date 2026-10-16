@@ -2,12 +2,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
+import { mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import { deleteSupply, getSupplyBrowseData } from '../services/suppliesService.js';
 import { requireAuth } from '../utils/guards.js';
 import { getCatalogueInfo } from '../utils/catalogues.js';
 
 document.querySelector('#site-header').append(createNavbar());
+mountLoaders();
 
 const searchInput = document.querySelector('#supply-search');
 const categoryFilter = document.querySelector('#category-filter');

@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
+import { mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import {
   createProjectItem,
@@ -15,6 +16,7 @@ import { requireAuth } from '../utils/guards.js';
 import { validateProjectItemInput } from '../utils/projectItemValidation.js';
 
 document.querySelector('#site-header').append(createNavbar());
+mountLoaders();
 
 const loadingState = document.querySelector('#loading-state');
 const errorState = document.querySelector('#error-state');

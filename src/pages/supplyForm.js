@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
+import { mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import { setupCatalogueLookup } from '../components/catalogueLookup.js';
 import { getColorCatalogue } from '../services/profileService.js';
@@ -22,6 +23,7 @@ import { requireAuth } from '../utils/guards.js';
 import { validateSupplyInput } from '../utils/supplyValidation.js';
 
 document.querySelector('#site-header').append(createNavbar());
+mountLoaders();
 
 const form = document.querySelector('#supply-form');
 const loading = document.querySelector('#form-loading');

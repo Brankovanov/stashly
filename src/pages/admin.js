@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
+import { mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import { getAdminOverview, getAdminUsers } from '../services/adminService.js';
 import { requireAdmin } from '../utils/guards.js';
@@ -10,6 +11,7 @@ import { initializeAdminModeration } from './adminModeration.js';
 import { initializeAdminUsers } from './adminUsers.js';
 
 document.querySelector('#site-header').append(createNavbar());
+mountLoaders();
 
 const loadingState = document.querySelector('#loading-state');
 const errorState = document.querySelector('#error-state');

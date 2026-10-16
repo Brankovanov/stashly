@@ -2,11 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
+import { mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import { deleteProject, getProjects } from '../services/projectsService.js';
 import { requireAuth } from '../utils/guards.js';
 
 document.querySelector('#site-header').append(createNavbar());
+mountLoaders();
 
 const statusFilter = document.querySelector('#status-filter');
 const projectList = document.querySelector('#project-list');

@@ -319,3 +319,9 @@ body {
     animation: none;
   }
 }
+
+/* The pet loader replaces the yarn ball when it is chosen at random. */
+.craft-loader--pets::before {
+  display: none;
+}
+
