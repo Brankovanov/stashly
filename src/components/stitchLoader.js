@@ -323,6 +323,11 @@ class StitchLoader extends HTMLElement {
     this._timer = setInterval(() => this._tick(), STEP_MS);
   }
 
+  /** Length of one full stitch, hold and fade cycle in ms. */
+  get cycleMs() {
+    return (this._stitches.length + HOLD_TICKS + FADE_TICKS) * STEP_MS;
+  }
+
   _stopTimer() {
     clearInterval(this._timer);
     this._timer = null;
