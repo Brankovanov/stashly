@@ -48,12 +48,36 @@ export function createNavbar() {
           <li class="nav-item" data-guest-links>
             <a class="nav-link" href="/pages/register.html">Register</a>
           </li>
-          <li class="nav-item d-flex align-items-center gap-3" data-account-links hidden>
-            <a class="nav-link" href="/pages/profile.html">My profile</a>
-            <span class="small text-muted" data-account-email></span>
-            <button class="btn btn-sm btn-outline-secondary" type="button" data-sign-out>
-              Sign out
+          <li class="nav-item dropdown" data-account-links hidden>
+            <button
+              class="btn account-toggle d-flex align-items-center gap-2"
+              type="button"
+              data-bs-toggle="dropdown"
+              data-bs-auto-close="true"
+              aria-expanded="false"
+              aria-label="Account menu"
+              data-account-toggle
+            >
+              <span class="nav-avatar" aria-hidden="true">
+                <i class="bi bi-person-fill" data-avatar-fallback></i>
+                <img class="nav-avatar-img" alt="" hidden data-avatar-image />
+              </span>
+              <i class="bi bi-chevron-down small" aria-hidden="true"></i>
             </button>
+            <ul class="dropdown-menu dropdown-menu-end account-menu">
+              <li><span class="dropdown-item-text small text-muted text-break" data-account-email></span></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="/pages/profile.html">
+                  <i class="bi bi-person-circle me-2" aria-hidden="true"></i>My profile
+                </a>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button" data-sign-out>
+                  <i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Sign out
+                </button>
+              </li>
+            </ul>
           </li>
         </ul>
         <span
@@ -66,7 +90,7 @@ export function createNavbar() {
     </div>
   `;
 
-  for (const link of nav.querySelectorAll('.nav-link')) {
+  for (const link of nav.querySelectorAll('.nav-link, .dropdown-item[href]')) {
     const isCurrentPage =
       new URL(link.href, window.location.origin).pathname ===
       window.location.pathname;
