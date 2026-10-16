@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
-import { mountLoaders } from '../components/loaders.js';
+import { hideLoader, mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import {
   createProjectItem,
@@ -42,11 +42,11 @@ try {
     renderCategoryOptions(categories);
     renderSupplyOptions(data.supplies);
     renderProject(data);
-    loadingState.hidden = true;
+    await hideLoader(loadingState);
     content.hidden = false;
   }
 } catch (error) {
-  loadingState.hidden = true;
+  await hideLoader(loadingState);
   errorState.textContent = error.message;
   errorState.hidden = false;
 }

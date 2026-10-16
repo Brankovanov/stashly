@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
-import { mountLoaders } from '../components/loaders.js';
+import { hideLoader, mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import { deleteProject, getProjects } from '../services/projectsService.js';
 import { requireAuth } from '../utils/guards.js';
@@ -26,7 +26,7 @@ try {
   const user = await requireAuth();
   if (user) {
     projects = await getProjects();
-    loadingState.hidden = true;
+    await hideLoader(loadingState);
     statusFilter.addEventListener('change', renderProjects);
     document.querySelector('#clear-filter').addEventListener('click', () => {
       statusFilter.value = '';
@@ -35,7 +35,7 @@ try {
     renderProjects();
   }
 } catch (error) {
-  loadingState.hidden = true;
+  await hideLoader(loadingState);
   errorState.textContent = error.message;
   errorState.hidden = false;
 }

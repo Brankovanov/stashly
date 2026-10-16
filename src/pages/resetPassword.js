@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
-import { mountLoaders } from '../components/loaders.js';
+import { hideLoader, mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import { getSession, updatePassword } from '../services/authService.js';
 
@@ -22,7 +22,7 @@ try {
 } catch {
   hasSession = false;
 }
-loadingState.hidden = true;
+await hideLoader(loadingState);
 form.hidden = !hasSession;
 invalidState.hidden = hasSession;
 

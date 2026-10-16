@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
-import { mountLoaders } from '../components/loaders.js';
+import { hideLoader, mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import {
   createProject,
@@ -42,7 +42,7 @@ try {
     const project = isEditing ? await getProjectById(projectId) : null;
     projectOwnerId = project?.user_id ?? currentUser.id;
     if (project) await populateForm(project);
-    loading.hidden = true;
+    await hideLoader(loading);
     form.hidden = false;
     if (isEditing) {
       document.title = 'Edit project — Stashly';
@@ -51,7 +51,7 @@ try {
     }
   }
 } catch (loadError) {
-  loading.hidden = true;
+  await hideLoader(loading);
   error.textContent = loadError.message;
   error.hidden = false;
 }

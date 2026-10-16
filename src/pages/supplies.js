@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
-import { mountLoaders } from '../components/loaders.js';
+import { hideLoader, mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import { deleteSupply, getSupplyBrowseData } from '../services/suppliesService.js';
 import { requireAuth } from '../utils/guards.js';
@@ -31,7 +31,7 @@ try {
     const { supplies, categories } = await getSupplyBrowseData();
     allSupplies = supplies;
     populateCategories(categories);
-    loadingState.hidden = true;
+    await hideLoader(loadingState);
     searchInput.addEventListener('input', renderSupplies);
     categoryFilter.addEventListener('change', renderSupplies);
     sortSelect.addEventListener('change', renderSupplies);
@@ -41,7 +41,7 @@ try {
     renderSupplies();
   }
 } catch (error) {
-  loadingState.hidden = true;
+  await hideLoader(loadingState);
   errorState.textContent = error.message;
   errorState.hidden = false;
 }

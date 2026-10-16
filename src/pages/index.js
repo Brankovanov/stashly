@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
-import { mountLoaders } from '../components/loaders.js';
+import { hideLoader, mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import { getDashboardData } from '../services/dashboardService.js';
 import { requireAuth } from '../utils/guards.js';
@@ -27,11 +27,11 @@ try {
     const recentProjects = document.querySelector('#recent-projects');
     recentProjects.replaceChildren(...data.recentProjects.map(createRecentProject));
     document.querySelector('#no-projects-state').hidden = data.projectCount > 0;
-    loadingState.hidden = true;
+    await hideLoader(loadingState);
     dashboardContent.hidden = false;
   }
 } catch (error) {
-  loadingState.hidden = true;
+  await hideLoader(loadingState);
   errorState.textContent = error.message;
   errorState.hidden = false;
 }

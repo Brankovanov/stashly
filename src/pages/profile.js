@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
-import { mountLoaders } from '../components/loaders.js';
+import { hideLoader, mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import {
   getColorCatalogue,
@@ -50,7 +50,7 @@ try {
       catalogueSelect.append(new Option(catalogue.label, catalogue.id));
     }
     catalogueSelect.value = await getColorCatalogue();
-    loadingState.hidden = true;
+    await hideLoader(loadingState);
     form.hidden = false;
     avatarSection.hidden = false;
     removeAvatarButton.hidden = !currentProfile.avatar_path;
@@ -65,7 +65,7 @@ try {
     }
   }
 } catch (error) {
-  loadingState.hidden = true;
+  await hideLoader(loadingState);
   errorState.textContent = error.message;
   errorState.hidden = false;
 }
