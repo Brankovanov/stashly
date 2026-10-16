@@ -6,7 +6,16 @@
     <meta name="description" content="Manage Stashly categories, accounts, and content." />
     <meta name="theme-color" content="#f8f5ef" />
     <title>Admin panel — Stashly</title>
-  </head>
+    <style>
+      /* Hide the unstyled page until main.css and the navbar are ready (src/components/loaders.js sets .app-ready). The 5s fallback reveals the page if scripts fail. */
+      html { background: #f8f5ef; }
+      html:not(.app-ready) body { visibility: hidden; animation: boot-reveal 0s 5s forwards; }
+      html:not(.app-ready)::before { content: ""; position: fixed; top: 50%; left: 50%; width: 2.75rem; height: 2.75rem; margin: -1.4rem 0 0 -1.4rem; border-radius: 50%; background: #b96e68; animation: boot-spin 1s linear infinite, boot-hide 0s 5s forwards; }
+      @keyframes boot-spin { to { transform: rotate(360deg); } }
+      @keyframes boot-reveal { to { visibility: visible; } }
+      @keyframes boot-hide { to { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { html:not(.app-ready)::before { animation: boot-hide 0s 5s forwards; } }
+    </style>  </head>
   <body>
     <div id="app">
       <header id="site-header"></header>

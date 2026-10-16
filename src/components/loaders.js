@@ -8,6 +8,9 @@ const VARIANTS = ['yarn', 'pets-samoyed', 'pets-brown'];
  * stays as the accessible loading message; the pet animation is decorative.
  */
 export function mountLoaders(root = document) {
+  // Reveals the page that the inline head style keeps hidden until styles are loaded.
+  document.documentElement.classList.add('app-ready');
+
   for (const loader of root.querySelectorAll('.craft-loader')) {
     const variant = VARIANTS[Math.floor(Math.random() * VARIANTS.length)];
     if (variant === 'yarn') continue;
