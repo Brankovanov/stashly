@@ -8,6 +8,12 @@
   --craft-cream: #f8f5ef;
   --craft-green: #52685a;
   --craft-rose: #b96e68;
+
+  /* Bootstrap's default link blue fails 4.5:1 on the cream background. */
+  --bs-link-color: #3f5547;
+  --bs-link-color-rgb: 63, 85, 71;
+  --bs-link-hover-color: #2f4036;
+  --bs-link-hover-color-rgb: 47, 64, 54;
 }
 
 body {
