@@ -10,7 +10,7 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 
 - `index.html` and the pages under `pages/` are the user-facing screens.
 - `src/pages/` contains page entry scripts with events, validation, and rendering.
-- `src/components/` provides reusable UI pieces such as navigation, confirm modals, and toast messages.
+- `src/components/` provides reusable UI pieces such as navigation, confirm modals, and toast messages. Loading states use `loaders.js`, which randomly shows either a CSS yarn ball or the `<pet-loader>` web component (`petLoader.js`: a cat and a dog, in a Samoyed or brown variant, batting a ball of thread); all respect `prefers-reduced-motion`.
 - `src/utils/` keeps guards, formatting helpers, and shared validation logic.
 
 ### Data access
