@@ -49,6 +49,7 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 - Storage object policies restrict supply photos and project files to the owning user's folder, with admin access following the server-side admin helper.
 - Profile avatars use a private bucket and user-scoped object paths; uploads replace the profile's stored path before removing the old object.
 - Project-item policies require linked inventory to belong to the project owner; `mark_project_item_purchased` performs the inventory update and item link atomically after checking authorization and unit compatibility.
+- Signed-in users change their password from the profile page; `changePassword` re-verifies the current password with `signInWithPassword` before calling `updateUser`.
 - Profile updates are restricted to the signed-in user's `profiles` row by the existing owner-only policy.
 - Admin actions are restricted server-side via `public.is_admin()`.
 - The admin page is guarded in the frontend for navigation, while database RLS and the authenticated-only role RPCs enforce administrator access.

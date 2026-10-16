@@ -4,6 +4,7 @@ import 'bootstrap';
 import '../styles/main.css';
 import { hideLoader, mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
+import { initPasswordForm } from '../components/passwordForm.js';
 import {
   getColorCatalogue,
   getCurrentProfile,
@@ -30,6 +31,8 @@ const submitButton = form.querySelector('button[type="submit"]');
 const catalogueSelect = form.elements.color_catalogue;
 const message = document.querySelector('#profile-message');
 const avatarSection = document.querySelector('.profile-avatar-section');
+const passwordSection = document.querySelector('.password-section');
+initPasswordForm(document.querySelector('#password-form'));
 const avatarForm = document.querySelector('#avatar-form');
 const avatarFileInput = avatarForm.elements.avatar;
 const avatarPreview = document.querySelector('#avatar-preview');
@@ -53,6 +56,7 @@ try {
     await hideLoader(loadingState);
     form.hidden = false;
     avatarSection.hidden = false;
+    passwordSection.hidden = false;
     removeAvatarButton.hidden = !currentProfile.avatar_path;
     if (currentProfile.avatar_path) {
       try {

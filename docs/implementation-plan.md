@@ -27,7 +27,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 17 | Add supply color picker | ⬜ Optional / decision pending |
 | 18 | Add a friendly loading animation | 🟡 Implemented (each loading state randomly shows one of five pet animations (play dog/cat, cat-and-dog heads, stitched Samoyed/cat); reduced motion handled inside each component); browser-checked: full-screen overlay at 375 px, animation completes its first cycle before the page appears. Reduced-motion and real network delays not yet checked |
 | 19 | Add avatar profile submenu | 🟡 Implemented (Bootstrap dropdown with email, profile, sign-out; photo with icon fallback); browser-checked at 375 px with a mocked session (menu shows email, profile, sign-out, no horizontal overflow); desktop and photo avatar not yet checked |
-| 20 | Add password recovery | 🟡 Implemented (forgot/reset pages, service functions); live email flow and Supabase redirect URL still to verify (needs a real inbox, cannot be automated); optional profile "Change password" deferred |
+| 20 | Add password recovery | 🟡 Implemented (forgot/reset pages, service functions); live email flow and Supabase redirect URL still to verify (needs a real inbox, cannot be automated); profile "Change password" form added (re-checks the current password; browser-checked with mocked auth: mismatch, wrong password, success) |
 
 ## Phase 1 — Foundation and security
 
@@ -315,7 +315,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - Add a "Forgot password?" link on the login page to `pages/forgot-password.html`, which asks for an email and calls `resetPasswordForEmail` with a `redirectTo` pointing at the reset page, via new functions in `authService.js`.
 - Create `pages/reset-password.html` and `src/pages/resetPassword.js`, register the page in `vite.config.js`, and let a user in a recovery session set a new password with `updateUser`, with validation, confirmation field and toast feedback.
 - Add the local and deployed reset URLs to Supabase Authentication → URL Configuration → Redirect URLs; document this in the README. Show a neutral message so the form does not reveal which emails are registered.
-- Optionally add a "Change password" form on the profile page for signed-in users.
+- Done: a "Change password" form on the profile page (`src/components/passwordForm.js`, `changePassword` in `authService.js`) asks for the current password first.
 - **Verify:** the recovery email arrives, the link opens the reset page, an expired or invalid link shows an error state, the new password works for login, and the old one no longer does.
 - **Commit:** `feat(auth): add password recovery flow`
 

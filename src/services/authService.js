@@ -46,6 +46,23 @@ export async function updatePassword(password) {
   if (error) throw new Error(error.message);
 }
 
+/**
+ * Changes the password of the signed-in user after re-checking the current one,
+ * so a left-open browser session alone cannot take over the account.
+ */
+export async function changePassword({ currentPassword, newPassword }) {
+  const session = await getSession();
+  const email = session?.user?.email;
+  if (!email) throw new Error('Please sign in again before changing your password.');
+
+  const { error } = await getSupabaseClient().auth.signInWithPassword({
+    email,
+    password: currentPassword,
+  });
+  if (error) throw new Error('Your current password is incorrect.');
+  await updatePassword(newPassword);
+}
+
 export async function getSession() {
   const { data, error } = await getSupabaseClient().auth.getSession();
   if (error) throw new Error(error.message);
