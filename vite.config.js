@@ -8,6 +8,8 @@ export default defineConfig({
         home: resolve(import.meta.dirname, 'index.html'),
         login: resolve(import.meta.dirname, 'pages/login.html'),
         register: resolve(import.meta.dirname, 'pages/register.html'),
+        forgotPassword: resolve(import.meta.dirname, 'pages/forgot-password.html'),
+        resetPassword: resolve(import.meta.dirname, 'pages/reset-password.html'),
         supplies: resolve(import.meta.dirname, 'pages/supplies.html'),
         supplyForm: resolve(import.meta.dirname, 'pages/supply-form.html'),
         projects: resolve(import.meta.dirname, 'pages/projects.html'),
