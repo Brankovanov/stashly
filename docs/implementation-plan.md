@@ -26,7 +26,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 16 | Suggest close color matches | ⬜ Not started |
 | 17 | Add supply color picker | ⬜ Optional / decision pending |
 | 18 | Add a friendly loading animation | ⬜ Not started |
-| 19 | Add avatar profile submenu | ⬜ Not started |
+| 19 | Add avatar profile submenu | 🟡 Implemented (Bootstrap dropdown with email, profile, sign-out; photo with icon fallback); manual browser check at 375 px and desktop pending |
 | 20 | Add password recovery | 🟡 Implemented (forgot/reset pages, service functions); live email flow and Supabase redirect URL still to verify; optional profile "Change password" deferred |
 
 ## Phase 1 — Foundation and security

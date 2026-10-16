@@ -11,7 +11,7 @@ The core application is implemented: users can manage supplies and projects, tra
 - Initial schema created in `supabase/migrations/`
 - Row-level security policies added for profiles, user roles, categories, supplies, projects, and project items
 - Security helper `public.is_admin()` added for admin-only writes
-- Supabase auth client, login/register screens, session-aware navigation, sign-out, and route guards
+- Supabase auth client, login/register screens, session-aware navigation with an avatar dropdown (email, profile, sign-out), and route guards
 - Protected supplies browsing with category filtering, search, sorting, and loading/empty/error states
 - Supply create/edit forms and confirmed deletion from the inventory list
 - Protected project listing with status filtering, create/edit/delete, and private cover/pattern file handling
@@ -65,7 +65,7 @@ On 2026-10-10, authenticated project smoke tests passed in the local browser: cr
 
 1. Start the app with `npm run dev` after configuring `.env`.
 2. Open `/pages/register.html`, create an account, and follow the email confirmation link if confirmation is enabled in Supabase Auth.
-3. Log in at `/pages/login.html`; verify the navbar shows the signed-in email and a sign-out button.
+3. Log in at `/pages/login.html`; verify the navbar shows an avatar button (profile photo or person icon) whose dropdown lists your email, My profile and Sign out. Check it opens/closes by click, keyboard (Enter/Esc) and outside click, and fits at 375 px.
 4. Sign out and verify guest navigation returns.
 4a. From the login page, use "Forgot your password?", open the emailed link, set a new password, and verify login works with it only; an expired or reused link should show the invalid-link message.
 5. While signed out, visit `/pages/supplies.html`; verify it redirects to login and returns to the requested page after sign-in.
