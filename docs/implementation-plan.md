@@ -21,13 +21,13 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 11 | Build the admin panel | 🟡 Cross-user edits/deletes, cleanup warnings, and role-selector labels verified; role-change and broader accessibility checks remain |
 | 12 | Polish, document, and deploy | 🟡 Production build and responsive no-overflow checks verified; broader accessibility/state review and deployment remain |
 | 13 | Validate existing color catalogue data | 🟡 Repeatable structural validation passes for 23 files; source (Stitchmate) and `dmc` default recorded; no explicit redistribution licence, so permission/attribution check remains before public deployment |
-| 14 | Add per-user catalogue selection | 🟡 Implemented (migration `20261016160000`, profile selector, default `dmc`); migration must be applied and browser-checked |
-| 15 | Use catalogues in supply forms | 🟡 Implemented (migration `20261016170000`, lookup block, catalogue label on cards); migration must be applied and browser-checked |
-| 16 | Suggest close color matches | 🟡 Implemented (CIE76/CIELAB, covered by `npm test`); browser check pending |
+| 14 | Add per-user catalogue selection | 🟡 Implemented (migration `20261016160000`, profile selector, default `dmc`); migration applied (column verified on the live project 2026-10-16); profile selector browser-checked with a mocked session |
+| 15 | Use catalogues in supply forms | 🟡 Implemented (migration `20261016170000`, lookup block, catalogue label on cards); migration applied (column verified 2026-10-16); combobox browser-checked with a mocked session: filtering by code, swatches, keyboard pick fills brand/code/hex/catalogue/name. Still to check against real data (save and edit a supply) |
+| 16 | Suggest close color matches | 🟡 Implemented (CIE76/CIELAB, covered by `npm test`); browser-checked with a mocked session (a typed hex shows labelled close matches); real-data check pending |
 | 17 | Add supply color picker | ⬜ Optional / decision pending |
-| 18 | Add a friendly loading animation | 🟡 Implemented (each loading state randomly shows one of five pet animations (play dog/cat, cat-and-dog heads, stitched Samoyed/cat); reduced motion handled inside each component); manual browser check pending |
-| 19 | Add avatar profile submenu | 🟡 Implemented (Bootstrap dropdown with email, profile, sign-out; photo with icon fallback); manual browser check at 375 px and desktop pending |
-| 20 | Add password recovery | 🟡 Implemented (forgot/reset pages, service functions); live email flow and Supabase redirect URL still to verify; optional profile "Change password" deferred |
+| 18 | Add a friendly loading animation | 🟡 Implemented (each loading state randomly shows one of five pet animations (play dog/cat, cat-and-dog heads, stitched Samoyed/cat); reduced motion handled inside each component); browser-checked: full-screen overlay at 375 px, animation completes its first cycle before the page appears. Reduced-motion and real network delays not yet checked |
+| 19 | Add avatar profile submenu | 🟡 Implemented (Bootstrap dropdown with email, profile, sign-out; photo with icon fallback); browser-checked at 375 px with a mocked session (menu shows email, profile, sign-out, no horizontal overflow); desktop and photo avatar not yet checked |
+| 20 | Add password recovery | 🟡 Implemented (forgot/reset pages, service functions); live email flow and Supabase redirect URL still to verify (needs a real inbox, cannot be automated); optional profile "Change password" deferred |
 
 ## Phase 1 — Foundation and security
 
