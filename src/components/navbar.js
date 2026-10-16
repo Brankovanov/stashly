@@ -5,6 +5,8 @@ import {
   onAuthStateChange,
   signOut,
 } from '../services/authService.js';
+import { getCurrentProfile } from '../services/profileService.js';
+import { getProfileAvatarUrl } from '../services/storageService.js';
 
 export function createNavbar() {
   const nav = document.createElement('nav');
@@ -114,6 +116,22 @@ export function createNavbar() {
   return nav;
 }
 
+// The photo is decorative; any failure keeps the fallback icon instead of blocking the menu.
+async function loadNavAvatar(nav) {
+  const image = nav.querySelector('[data-avatar-image]');
+  const fallback = nav.querySelector('[data-avatar-fallback]');
+  try {
+    const profile = await getCurrentProfile();
+    if (!profile.avatar_path) return;
+    image.src = await getProfileAvatarUrl(profile.avatar_path);
+    image.hidden = false;
+    fallback.hidden = true;
+  } catch {
+    image.hidden = true;
+    fallback.hidden = false;
+  }
+}
+
 async function updateAccountNavigation(nav) {
   const status = nav.querySelector('[data-account-status]');
   const accountLinks = nav.querySelector('[data-account-links]');
@@ -146,6 +164,7 @@ async function updateAccountNavigation(nav) {
     projectsLink.hidden = false;
     email.textContent = session.user.email ?? '';
     adminLink.hidden = (await getUserRole(session.user.id)) !== 'admin';
+    void loadNavAvatar(nav);
 
     signOutButton.onclick = async () => {
       signOutButton.disabled = true;
