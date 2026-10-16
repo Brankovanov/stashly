@@ -1,13 +1,19 @@
 /**
  * <pet-loader>: a cat and a dog bat a little ball of thread back and forth.
- * Vanilla web component (Shadow DOM), no dependencies. Two dog variants:
- * dog="samoyed" (default) or dog="brown".
+ * Vanilla web component (custom element + Shadow DOM). No dependencies.
  *
+ * Usage:
+ *   <script type="module" src="./pet-loader.js"></script>
+ *
+ *   <pet-loader></pet-loader>
  *   <pet-loader label="Fetching your stash…" size="200"></pet-loader>
- *   <pet-loader hide-label dog="brown"></pet-loader>
+ *   <pet-loader hide-label></pet-loader>   <!-- label stays available to screen readers -->
  *
- * Theme with CSS variables: --pet-cat, --pet-cat-stripe, --pet-dog, --pet-dog-ear,
- * --pet-dog-shade, --pet-muzzle, --pet-ball, --pet-pink, --pet-ink, --pet-label
+ * Theme it from outside with CSS variables:
+ *   pet-loader { --pet-cat: #c9b2a0; --pet-ball: #7aa6ff; }
+ *
+ * Available variables: --pet-cat, --pet-cat-stripe, --pet-dog, --pet-dog-shade,
+ * --pet-muzzle, --pet-ball, --pet-pink, --pet-ink, --pet-label
  */
 
 const template = document.createElement('template');
@@ -70,10 +76,6 @@ template.innerHTML = `
       animation-name: lean-dog;
       filter: drop-shadow(0 0 1.2px var(--pet-dog-shade, #b9a98f));
     }
-    .dog-brown { filter: none; }
-    .dog-brown,
-    :host([dog="brown"]) .dog-samoyed { display: none; }
-    :host([dog="brown"]) .dog-brown { display: inline; }
     .pupil {
       animation-duration: 1.2s;
       animation-timing-function: ease-in-out;
@@ -175,26 +177,8 @@ template.innerHTML = `
       </g>
     </g>
 
-    <!-- Dog (brown) -->
-    <g class="dog dog-brown">
-      <ellipse cx="150" cy="80" rx="11" ry="22" transform="rotate(15 150 80)" fill="var(--pet-dog-ear, #a9703a)" />
-      <ellipse cx="214" cy="80" rx="11" ry="22" transform="rotate(-15 214 80)" fill="var(--pet-dog-ear, #a9703a)" />
-      <ellipse cx="182" cy="84" rx="30" ry="29" fill="var(--pet-dog-brown, #dba868)" />
-      <ellipse cx="182" cy="94" rx="15" ry="11" fill="var(--pet-muzzle-brown, #fbefd9)" />
-      <g class="blink">
-        <circle cx="170" cy="78" r="5.5" fill="#fff" />
-        <circle class="pupil pupil-dog" cx="170" cy="78" r="3" fill="var(--pet-ink, #3a2c28)" />
-      </g>
-      <g class="blink">
-        <circle cx="194" cy="78" r="5.5" fill="#fff" />
-        <circle class="pupil pupil-dog" cx="194" cy="78" r="3" fill="var(--pet-ink, #3a2c28)" />
-      </g>
-      <ellipse cx="182" cy="89" rx="6" ry="4.5" fill="var(--pet-ink, #3a2c28)" />
-      <ellipse class="tongue" cx="182" cy="102" rx="4" ry="5" fill="var(--pet-pink, #f4a3b4)" />
-      <path d="M182 93 v4 M182 97 q-5 4 -9 0 M182 97 q5 4 9 0" fill="none" stroke="var(--pet-ink, #3a2c28)" stroke-width="1.6" stroke-linecap="round" />
-    </g>
     <!-- Dog (Samoyed) -->
-    <g class="dog dog-samoyed">
+    <g class="dog">
       <polygon points="160,62 163,34 180,54" fill="var(--pet-dog, #fdfaf3)" stroke="var(--pet-dog, #fdfaf3)" stroke-width="4" stroke-linejoin="round" />
       <polygon points="204,62 201,34 184,54" fill="var(--pet-dog, #fdfaf3)" stroke="var(--pet-dog, #fdfaf3)" stroke-width="4" stroke-linejoin="round" />
       <polygon points="166,58 167,44 175,53" fill="var(--pet-pink, #f4a3b4)" opacity=".7" />
@@ -274,5 +258,3 @@ class PetLoader extends HTMLElement {
 if (!customElements.get('pet-loader')) {
   customElements.define('pet-loader', PetLoader);
 }
-
-export { PetLoader };
