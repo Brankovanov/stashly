@@ -11,6 +11,9 @@ const VARIANTS = [
   { tag: 'stitch-loader', attrs: { pet: 'cat' } },
 ];
 
+// Long animations (the stitch loader runs ~10 s) must not make fast pages feel slow.
+const MAX_WAIT_MS = 3500;
+
 const mounted = new WeakMap();
 
 /**
@@ -35,13 +38,13 @@ export function mountLoaders(root = document) {
 }
 
 /**
- * Hides a loading element, but lets its animation finish the first cycle so
- * fast loads don't cut it off mid-loop. Await it before showing the content.
+ * Hides a loading element, but lets its animation finish the first cycle (up to
+ * MAX_WAIT_MS) so fast loads don't cut it off mid-loop. Await it before showing the content.
  */
 export async function hideLoader(loader) {
   const info = mounted.get(loader);
   if (info && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const cycle = info.cycleMs ?? info.animation.cycleMs;
+    const cycle = Math.min(info.cycleMs ?? info.animation.cycleMs, MAX_WAIT_MS);
     const remaining = cycle - (performance.now() - info.start);
     if (remaining > 0) await new Promise((resolve) => setTimeout(resolve, remaining));
   }
