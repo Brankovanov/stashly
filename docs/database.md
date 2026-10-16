@@ -4,10 +4,10 @@ The application stores user data, inventory records, project information, and ad
 
 ## Core tables
 
-- `profiles`: one row per authenticated user
+- `profiles`: one row per authenticated user; `color_catalogue` stores the preferred catalogue id (default `dmc`, constrained to an allowlist)
 - `user_roles`: stores the default `user` or `admin` role
 - `categories`: admin-managed item categories
-- `supplies`: each user's owned inventory items
+- `supplies`: each user's owned inventory items; the nullable `color_catalogue` records which catalogue a color code was picked from (null for manual entry)
 - `projects`: project records keyed to a user
 - `project_items`: the materials listed for each project
 
@@ -61,6 +61,7 @@ erDiagram
     uuid id PK
     text display_name
     text avatar_path
+    text color_catalogue
     timestamptz created_at
     timestamptz updated_at
   }
@@ -90,6 +91,7 @@ erDiagram
     text unit
     text notes
     text photo_path
+    text color_catalogue
     timestamptz created_at
     timestamptz updated_at
   }

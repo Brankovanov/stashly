@@ -21,9 +21,9 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 11 | Build the admin panel | 🟡 Cross-user edits/deletes, cleanup warnings, and role-selector labels verified; role-change and broader accessibility checks remain |
 | 12 | Polish, document, and deploy | 🟡 Production build and responsive no-overflow checks verified; broader accessibility/state review and deployment remain |
 | 13 | Validate existing color catalogue data | 🟡 Repeatable structural validation passes for 23 files; source (Stitchmate) and `dmc` default recorded; no explicit redistribution licence, so permission/attribution check remains before public deployment |
-| 14 | Add per-user catalogue selection | ⬜ Not started |
-| 15 | Use catalogues in supply forms | ⬜ Not started |
-| 16 | Suggest close color matches | ⬜ Not started |
+| 14 | Add per-user catalogue selection | 🟡 Implemented (migration `20261016160000`, profile selector, default `dmc`); migration must be applied and browser-checked |
+| 15 | Use catalogues in supply forms | 🟡 Implemented (migration `20261016170000`, lookup block, catalogue label on cards); migration must be applied and browser-checked |
+| 16 | Suggest close color matches | 🟡 Implemented (CIE76/CIELAB, covered by `npm test`); browser check pending |
 | 17 | Add supply color picker | ⬜ Optional / decision pending |
 | 18 | Add a friendly loading animation | ⬜ Not started |
 | 19 | Add avatar profile submenu | 🟡 Implemented (Bootstrap dropdown with email, profile, sign-out; photo with icon fallback); manual browser check at 375 px and desktop pending |

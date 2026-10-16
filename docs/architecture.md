@@ -30,6 +30,7 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 - `src/services/projectsService.js` provides RLS-backed project CRUD and resolves private cover/pattern paths to short-lived signed URLs.
 - `src/services/projectItemsService.js` loads project needs and owner inventory, calculates owned/partial/missing quantities, and calls the transactional purchase operation.
 - `src/services/dashboardService.js` loads the signed-in user's inventory/project counts, incomplete project needs, and recent projects; `src/services/profileService.js` reads and updates the current user's profile under RLS.
+- `src/services/catalogueService.js` lazy-loads one color catalogue JSON at a time (each is its own build chunk); `src/utils/catalogues.js` is the registry of supported ids, `catalogueSearch.js` ranks code/name matches, and `colorMatch.js` finds close colors using CIE76 distance in CIELAB (threshold 15). `src/components/catalogueLookup.js` wires these into the supply form.
 - `src/services/adminService.js` reads administrator totals/users and manages categories through RLS-protected operations and narrowly granted role-management RPCs.
 - `src/services/storageService.js` validates supply images, project files, and profile avatars; it uploads to private user-scoped buckets and creates short-lived signed URLs for display.
 

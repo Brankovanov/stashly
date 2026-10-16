@@ -56,6 +56,12 @@ When adding or updating a chart:
 4. Review the dataset's redistribution terms separately; a passing structural
    check is not a licensing or accuracy review.
 
-Catalogue preference selection, supply-form lookup, and color-match
-suggestions are not implemented yet. The default catalogue is `dmc`
-(`DMC_color_chart.json`).
+Catalogue preference selection (`profiles.color_catalogue`, default `dmc`),
+supply-form lookup (`supplies.color_catalogue`) and close-match suggestions are
+implemented but need the two 20261016 migrations applied and a manual browser
+check. Matching uses CIE76 distance in CIELAB: suggestions within a distance of
+15 are shown, labelled Exact (<1), Very close (<5), Close (<10) or Similar, and
+nothing is suggested for invalid or distant colors. Suggestions never change the
+form until the user picks one. The registry (`src/utils/catalogues.js`) and the
+database allowlists must stay in sync; `npm test` checks this. Show the
+Stitchmate attribution wherever catalogue colors are offered.
