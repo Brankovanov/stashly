@@ -1,3 +1,4 @@
+import { createColorCombobox } from './colorCombobox.js';
 import { loadCatalogue } from '../services/catalogueService.js';
 import { CATALOGUES, resolveCatalogueId } from '../utils/catalogues.js';
 import { describeDistance, findClosestColors } from '../utils/colorMatch.js';
@@ -10,7 +11,7 @@ import { describeDistance, findClosestColors } from '../utils/colorMatch.js';
 export function setupCatalogueLookup(form, initialCatalogueId) {
   const catalogueSelect = form.elements.lookup_catalogue;
   const colorInput = form.elements.lookup_color;
-  const colorList = form.querySelector('#lookup-color-list');
+  const combobox = createColorCombobox(colorInput, form.querySelector('#lookup-color-list'), (color) => applyColor(color));
   const status = form.querySelector('#lookup-status');
   const suggestions = form.querySelector('#color-suggestions');
   const suggestionsHeading = form.querySelector('#suggestions-heading');
@@ -41,7 +42,8 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
     const token = ++loadToken;
     catalogue = null;
     colorInput.disabled = true;
-    colorList.replaceChildren();
+    colorInput.value = '';
+    combobox.setColors([]);
     renderSuggestions();
     status.textContent = 'Loading catalogue…';
     try {
@@ -53,12 +55,11 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
       renderSuggestions();
     } catch (error) {
       if (token !== loadToken) return;
-      colorList.replaceChildren();
       status.textContent = error.message;
     }
   }
 
-  // Accepts the datalist label ("310 — Black"), a bare code, or an exact name.
+  // Accepts the list label ("310 — Black"), a bare code, or an exact name.
   function findColor(text) {
     const query = text.trim().toLowerCase();
     if (!catalogue || !query) return null;
@@ -68,10 +69,7 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
   }
 
   function populateColors() {
-    colorList.replaceChildren();
-    for (const color of catalogue.colors) {
-      colorList.append(new Option(`${color.code} — ${color.name}`));
-    }
+    combobox.setColors(catalogue.colors);
     colorInput.disabled = false;
 
     // Re-select the saved color when editing a supply picked from this catalogue.

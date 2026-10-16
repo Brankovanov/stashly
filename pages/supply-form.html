@@ -32,8 +32,10 @@
                 </div>
                 <div class="col-12 col-sm-7">
                   <label class="form-label small" for="lookup-color">Code or name</label>
-                  <input type="text" class="form-control" id="lookup-color" name="lookup_color" list="lookup-color-list" placeholder="Type or pick, e.g. 310 or Black" autocomplete="off" disabled />
-                  <datalist id="lookup-color-list"></datalist>
+                  <div class="position-relative">
+                    <input type="text" class="form-control" id="lookup-color" name="lookup_color" placeholder="Type or pick, e.g. 310 or Black" autocomplete="off" role="combobox" aria-controls="lookup-color-list" aria-expanded="false" disabled />
+                    <ul class="list-group color-options shadow" id="lookup-color-list" role="listbox" hidden></ul>
+                  </div>
                 </div>
               </div>
               <div class="small text-muted mt-2" id="lookup-status" role="status" aria-live="polite"></div>
