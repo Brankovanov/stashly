@@ -27,6 +27,23 @@ reference until each dataset's origin and permitted use have been established
 and documented. The displayed RGB/hex values should be treated as approximate;
 thread and material colors vary by dye lot, substrate, lighting, and display.
 
+## Source, default and licensing status
+
+- **Source (reported by the project owner, 2026-10-16):** the catalogue data
+  comes from the public color charts on [Stitchmate](https://stitchmate.app/tools/anchor-color-chart)
+  (for example the Anchor chart, which Stitchmate describes as matching
+  Coats' published shade card). Per-file retrieval dates were not recorded.
+- **Default catalogue:** `dmc`, stored in `DMC_color_chart.json`. This replaces
+  the earlier `DNS` placeholder.
+- **Licensing:** public availability is not a licence. A review of Stitchmate's
+  terms on 2026-10-16 found no explicit grant to redistribute its chart data,
+  and its terms restrict automated scraping of the service. The underlying
+  values are manufacturer color information, which Stitchmate says are
+  approximate on screen. Before deploying publicly, either obtain written
+  permission or confirm the data's origin independently, and show an
+  attribution line ("Color data from Stitchmate; values are approximate") next
+  to any catalogue UI. If a rights holder objects, remove the affected files.
+
 ## Maintenance
 
 When adding or updating a chart:
@@ -40,6 +57,5 @@ When adding or updating a chart:
    check is not a licensing or accuracy review.
 
 Catalogue preference selection, supply-form lookup, and color-match
-suggestions are not implemented yet. The proposed `DNS` default is not a
-catalogue identifier in the current data and must be replaced with a supported
-choice before implementing user preferences.
+suggestions are not implemented yet. The default catalogue is `dmc`
+(`DMC_color_chart.json`).

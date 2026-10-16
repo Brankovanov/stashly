@@ -20,7 +20,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 10 | Add profile and dashboard | ✅ Implemented; profile-row and cross-user avatar access checks pass; avatar replacement/error edge cases remain |
 | 11 | Build the admin panel | 🟡 Cross-user edits/deletes, cleanup warnings, and role-selector labels verified; role-change and broader accessibility checks remain |
 | 12 | Polish, document, and deploy | 🟡 Production build and responsive no-overflow checks verified; broader accessibility/state review and deployment remain |
-| 13 | Validate existing color catalogue data | 🟡 Repeatable structural validation passes for 23 files; provenance/licensing review remains before app integration |
+| 13 | Validate existing color catalogue data | 🟡 Repeatable structural validation passes for 23 files; source (Stitchmate) and `dmc` default recorded; no explicit redistribution licence, so permission/attribution check remains before public deployment |
 | 14 | Add per-user catalogue selection | ⬜ Not started |
 | 15 | Use catalogues in supply forms | ⬜ Not started |
 | 16 | Suggest close color matches | ⬜ Not started |
@@ -261,8 +261,8 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 14. Add per-user catalogue selection
 
-- Blocked on resolving the provenance and redistribution terms described in [color catalogue documentation](color-catalogues.md).
-- Add a user-level catalogue preference and select a supported default for existing and newly registered users. The previously proposed `DNS` default does not correspond to an identifier in the current catalogue files; choose and document the intended default before adding the preference.
+- Blocked on resolving the provenance and redistribution terms described in [color catalogue documentation](color-catalogues.md). The source (Stitchmate) and default (`dmc`) are now recorded; the licensing caveat and attribution requirement remain.
+- Add a user-level catalogue preference with default `dmc` for existing and newly registered users.
 - Store the preference in the profile data or a dedicated preferences table through a committed migration, with an allowlist of supported catalogue identifiers.
 - Add profile/settings controls for selecting the active catalogue and make the choice persist across sessions and pages.
 - Keep the preference server-validated and fall back to the chosen supported default only when no valid preference exists.
