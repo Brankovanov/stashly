@@ -1,28 +1,31 @@
 import './petLoader.js';
+import './petPlayLoader.js';
+import './stitchLoader.js';
 
-const VARIANTS = ['yarn', 'pets-samoyed', 'pets-brown'];
+const VARIANTS = [
+  { tag: 'pet-play-loader', attrs: { pet: 'dog' } },
+  { tag: 'pet-play-loader', attrs: { pet: 'cat' } },
+  { tag: 'pet-loader', attrs: {} },
+  { tag: 'stitch-loader', attrs: { pet: 'samoyed' } },
+  { tag: 'stitch-loader', attrs: { pet: 'cat' } },
+];
 
 /**
- * Gives every `.craft-loader` element a random animation: the CSS yarn ball
- * or the cat-and-dog pet loader (one of two dogs). The element's own text
- * stays as the accessible loading message; the pet animation is decorative.
+ * Gives every `.craft-loader` element a random pet animation. The element's
+ * own text stays as the accessible loading message, so the animation is
+ * hidden from assistive technology.
  */
 export function mountLoaders(root = document) {
   // Reveals the page that the inline head style keeps hidden until styles are loaded.
   document.documentElement.classList.add('app-ready');
 
   for (const loader of root.querySelectorAll('.craft-loader')) {
-    const variant = VARIANTS[Math.floor(Math.random() * VARIANTS.length)];
-    if (variant === 'yarn') continue;
-
-    const pets = document.createElement('pet-loader');
-    pets.setAttribute('hide-label', '');
-    pets.setAttribute('size', '160');
-    pets.setAttribute('aria-hidden', 'true');
-    pets.setAttribute('role', 'presentation');
-    if (variant === 'pets-brown') pets.setAttribute('dog', 'brown');
-
-    loader.classList.add('craft-loader--pets');
-    loader.prepend(pets);
+    const { tag, attrs } = VARIANTS[Math.floor(Math.random() * VARIANTS.length)];
+    const animation = document.createElement(tag);
+    animation.setAttribute('hide-label', '');
+    animation.setAttribute('aria-hidden', 'true');
+    animation.setAttribute('role', 'presentation');
+    for (const [name, value] of Object.entries(attrs)) animation.setAttribute(name, value);
+    loader.prepend(animation);
   }
 }
