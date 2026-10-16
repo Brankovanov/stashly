@@ -10,7 +10,7 @@ The app uses a static multi-page frontend built with Vite and vanilla JavaScript
 
 - `index.html` and the pages under `pages/` are the user-facing screens.
 - `src/pages/` contains page entry scripts with events, validation, and rendering.
-- `src/components/` provides reusable UI pieces such as navigation, confirm modals, and toast messages. Loading states use `loaders.js`, which randomly shows one of five pet animations from three web components: `<pet-play-loader>` (Samoyed chasing a ball, cat with yarn; `petPlayLoader.js`), `<pet-loader>` (cat and Samoyed batting a thread ball; `petLoader.js`) and `<stitch-loader>` (Samoyed or cat cross-stitched onto fabric; `stitchLoader.js`). Pages call `await hideLoader(el)` instead of hiding the loading element directly, so a load that finishes early still lets the animation complete its first cycle (skipped under reduced motion); all respect `prefers-reduced-motion`.
+- `src/components/` provides reusable UI pieces such as navigation, confirm modals, and toast messages. Loading states use `loaders.js` and cover the whole page as a full-screen overlay; it randomly shows one of five pet animations from three web components: `<pet-play-loader>` (Samoyed chasing a ball, cat with yarn; `petPlayLoader.js`), `<pet-loader>` (cat and Samoyed batting a thread ball; `petLoader.js`) and `<stitch-loader>` (Samoyed or cat cross-stitched onto fabric; `stitchLoader.js`). Pages call `await hideLoader(el)` instead of hiding the loading element directly, so a load that finishes early still lets the animation complete its first cycle (skipped under reduced motion); all respect `prefers-reduced-motion`.
 - `src/utils/` keeps guards, formatting helpers, and shared validation logic.
 
 ### Data access

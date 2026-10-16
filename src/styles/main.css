@@ -283,14 +283,21 @@ body {
   background: rgb(255 255 255 / 65%);
 }
 
-/* Loading state: a random pet animation (src/components/loaders.js) above the
-   loading text, which stays in the DOM as the accessible label. */
+/* Loading state: a full-page overlay with a random pet animation
+   (src/components/loaders.js) above the loading text, which stays in the DOM as
+   the accessible label. The page underneath is revealed when it is hidden. */
 .craft-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 2rem 0;
+  padding: 1rem;
   color: #6c6560;
   text-align: center;
+  background: var(--craft-cream);
 }
