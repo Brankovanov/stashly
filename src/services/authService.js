@@ -28,6 +28,24 @@ export async function signOut() {
   if (error) throw new Error(error.message);
 }
 
+/**
+ * Emails a password recovery link. Succeeds for unknown addresses too, so the
+ * form cannot be used to discover which emails are registered.
+ */
+export async function requestPasswordReset(email) {
+  const { error } = await getSupabaseClient().auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/pages/reset-password.html`,
+  });
+
+  if (error) throw new Error(error.message);
+}
+
+/** Sets a new password for the user signed in via a recovery link or session. */
+export async function updatePassword(password) {
+  const { error } = await getSupabaseClient().auth.updateUser({ password });
+  if (error) throw new Error(error.message);
+}
+
 export async function getSession() {
   const { data, error } = await getSupabaseClient().auth.getSession();
   if (error) throw new Error(error.message);
