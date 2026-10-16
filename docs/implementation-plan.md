@@ -27,6 +27,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 17 | Add supply color picker | ⬜ Optional / decision pending |
 | 18 | Add a friendly loading animation | ⬜ Not started |
 | 19 | Add avatar profile submenu | ⬜ Not started |
+| 20 | Add password recovery | ⬜ Not started (no forgot/reset password flow exists; use the Supabase dashboard meanwhile) |
 
 ## Phase 1 — Foundation and security
 
@@ -309,6 +310,15 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - **Verify:** the submenu opens and closes reliably, closes after navigation where appropriate, has no horizontal overflow, and remains usable at 375 px and desktop widths.
 - **Commit:** `feat(nav): add avatar profile submenu`
 
+### 20. Add password recovery
+
+- Add a "Forgot password?" link on the login page that asks for an email and calls `resetPasswordForEmail` with a `redirectTo` pointing at the reset page, via new functions in `authService.js`.
+- Create `pages/reset-password.html` and `src/pages/resetPassword.js`, register the page in `vite.config.js`, and let a user in a recovery session set a new password with `updateUser`, with validation, confirmation field and toast feedback.
+- Add the local and deployed reset URLs to Supabase Authentication → URL Configuration → Redirect URLs; document this in the README. Show a neutral message so the form does not reveal which emails are registered.
+- Optionally add a "Change password" form on the profile page for signed-in users.
+- **Verify:** the recovery email arrives, the link opens the reset page, an expired or invalid link shows an error state, the new password works for login, and the old one no longer does.
+- **Commit:** `feat(auth): add password recovery flow`
+
 ## Completion criteria
 
 - At least five responsive screens; the planned app includes nine.
@@ -318,5 +328,6 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 - Each screen includes loading, empty, and error states.
 - Color catalogues are versioned, validated, attributed, and selectable per user; catalogue-backed supply entry and close-match suggestions are tested.
 - The optional color picker has an explicit implemented/deferred decision, loading states respect reduced motion, and profile actions are available through an accessible avatar submenu.
+- Users can recover a forgotten password through an emailed reset link.
 - The app builds locally and is deployed with setup instructions and demo accounts.
 - Commit each working step; the guide recommends spreading commits across at least three different days.
