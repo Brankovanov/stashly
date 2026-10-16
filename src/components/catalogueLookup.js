@@ -9,7 +9,8 @@ import { describeDistance, findClosestColors } from '../utils/colorMatch.js';
  */
 export function setupCatalogueLookup(form, initialCatalogueId) {
   const catalogueSelect = form.elements.lookup_catalogue;
-  const colorSelect = form.elements.lookup_color;
+  const colorInput = form.elements.lookup_color;
+  const colorList = form.querySelector('#lookup-color-list');
   const status = form.querySelector('#lookup-status');
   const suggestions = form.querySelector('#color-suggestions');
   const suggestionsHeading = form.querySelector('#suggestions-heading');
@@ -21,14 +22,15 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
   catalogueSelect.value = resolveCatalogueId(initialCatalogueId);
 
   catalogueSelect.addEventListener('change', () => void switchCatalogue());
-  colorSelect.addEventListener('change', () => {
-    const color = catalogue?.colors.find((item) => item.code === colorSelect.value);
+  // Commit on 'change' so typing "31" on the way to "310" isn't hijacked.
+  colorInput.addEventListener('change', () => {
+    const color = findColor(colorInput.value);
     if (color) applyColor(color);
   });
   for (const name of ['color_code', 'color_hex']) {
     form.elements[name].addEventListener('input', () => {
       form.elements.color_catalogue.value = '';
-      colorSelect.value = '';
+      colorInput.value = '';
       renderSuggestions();
     });
   }
@@ -38,8 +40,8 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
   async function switchCatalogue() {
     const token = ++loadToken;
     catalogue = null;
-    colorSelect.disabled = true;
-    colorSelect.replaceChildren(new Option('Loading…', ''));
+    colorInput.disabled = true;
+    colorList.replaceChildren();
     renderSuggestions();
     status.textContent = 'Loading catalogue…';
     try {
@@ -51,22 +53,31 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
       renderSuggestions();
     } catch (error) {
       if (token !== loadToken) return;
-      colorSelect.replaceChildren(new Option('Catalogue unavailable', ''));
+      colorList.replaceChildren();
       status.textContent = error.message;
     }
   }
 
+  // Accepts the datalist label ("310 — Black"), a bare code, or an exact name.
+  function findColor(text) {
+    const query = text.trim().toLowerCase();
+    if (!catalogue || !query) return null;
+    return catalogue.colors.find((c) => `${c.code} — ${c.name}`.toLowerCase() === query)
+      ?? catalogue.colors.find((c) => c.code.toLowerCase() === query)
+      ?? catalogue.colors.find((c) => c.name.toLowerCase() === query);
+  }
+
   function populateColors() {
-    colorSelect.replaceChildren(new Option('Choose a color…', ''));
+    colorList.replaceChildren();
     for (const color of catalogue.colors) {
-      colorSelect.append(new Option(`${color.code} — ${color.name}`, color.code));
+      colorList.append(new Option(`${color.code} — ${color.name}`));
     }
-    colorSelect.disabled = false;
+    colorInput.disabled = false;
 
     // Re-select the saved color when editing a supply picked from this catalogue.
     if (form.elements.color_catalogue.value === catalogue.id) {
       const saved = form.elements.color_code.value;
-      if (catalogue.colors.some((color) => color.code === saved)) colorSelect.value = saved;
+      if (catalogue.colors.some((color) => color.code === saved)) colorInput.value = `${saved} — ${catalogue.colors.find((color) => color.code === saved).name}`;
     }
   }
 
@@ -119,7 +130,7 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
     if (!form.elements.name.value.trim()) {
       form.elements.name.value = `${catalogue.brand} ${color.code} ${color.name}`;
     }
-    colorSelect.value = color.code;
+    colorInput.value = `${color.code} — ${color.name}`;
     status.textContent = `Applied ${catalogue.brand} ${color.code} ${color.name}. You can adjust any field.`;
     form.elements.color_hex.classList.remove('is-invalid');
     renderSuggestions();
