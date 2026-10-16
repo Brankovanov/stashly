@@ -282,3 +282,40 @@ body {
   border-radius: 1rem;
   background: rgb(255 255 255 / 65%);
 }
+
+/* Craft-themed loader: a rolling yarn ball above the loading text. The text
+   stays in the DOM as the accessible label; hiding the element hides both. */
+.craft-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 0;
+  color: #6c6560;
+  text-align: center;
+}
+
+.craft-loader::before {
+  content: "";
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background:
+    repeating-linear-gradient(35deg, transparent 0 5px, rgb(255 255 255 / 45%) 5px 7px),
+    repeating-linear-gradient(-35deg, transparent 0 5px, rgb(0 0 0 / 12%) 5px 7px),
+    var(--craft-rose);
+  box-shadow: 0 0.6rem 0 -0.35rem rgb(48 44 41 / 15%);
+  animation: yarn-roll 1.4s ease-in-out infinite;
+}
+
+@keyframes yarn-roll {
+  0% { transform: translateX(-1.5rem) rotate(-180deg); }
+  50% { transform: translateX(1.5rem) rotate(180deg); }
+  100% { transform: translateX(-1.5rem) rotate(-180deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .craft-loader::before {
+    animation: none;
+  }
+}
