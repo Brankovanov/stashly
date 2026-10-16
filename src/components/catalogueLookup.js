@@ -124,6 +124,7 @@ export function setupCatalogueLookup(form, initialCatalogueId) {
     form.elements.brand.value = catalogue.brand;
     form.elements.color_code.value = color.code;
     form.elements.color_hex.value = color.hex.toUpperCase();
+    form.elements.color_hex.dispatchEvent(new Event('change'));
     form.elements.color_catalogue.value = catalogue.id;
     if (!form.elements.name.value.trim()) {
       form.elements.name.value = `${catalogue.brand} ${color.code} ${color.name}`;

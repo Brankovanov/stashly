@@ -5,6 +5,7 @@ import '../styles/main.css';
 import { hideLoader, mountLoaders } from '../components/loaders.js';
 import { createNavbar } from '../components/navbar.js';
 import { setupCatalogueLookup } from '../components/catalogueLookup.js';
+import { setupColorPicker } from '../components/colorPicker.js';
 import { getColorCatalogue } from '../services/profileService.js';
 import { DEFAULT_CATALOGUE_ID } from '../utils/catalogues.js';
 import {
@@ -56,6 +57,7 @@ try {
       existingPhotoUrl = photoUrls.get(existingPhotoPath) ?? null;
       populateForm(supply, existingPhotoUrl);
     }
+    setupColorPicker(form);
     setupCatalogueLookup(form, supply?.color_catalogue ?? (await getPreferredCatalogue()));
 
     await hideLoader(loading);

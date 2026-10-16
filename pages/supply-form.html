@@ -73,17 +73,27 @@
               </div>
               <div class="col-12 col-sm-6">
                 <label class="form-label" for="color-hex">Color swatch (hex)</label>
-                <input
-                  class="form-control"
-                  id="color-hex"
-                  name="color_hex"
-                  type="text"
-                  inputmode="text"
-                  placeholder="#4A6B52"
-                  aria-describedby="color-hex-feedback"
-                />
-                <div class="invalid-feedback" id="color-hex-feedback">
+                <div class="input-group has-validation">
+                  <input
+                    class="form-control"
+                    id="color-hex"
+                    name="color_hex"
+                    type="text"
+                    inputmode="text"
+                    placeholder="#4A6B52"
+                    aria-describedby="color-hex-feedback"
+                  />
+                  <input
+                    class="form-control form-control-color"
+                    id="color-picker"
+                    type="color"
+                    value="#cccccc"
+                    title="Pick a color"
+                    aria-label="Pick a color"
+                  />
+                  <div class="invalid-feedback" id="color-hex-feedback">
                   Enter a six-digit hex color, for example #4A6B52.
+                  </div>
                 </div>
               </div>
             </div>
