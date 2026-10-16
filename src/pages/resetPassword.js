@@ -24,6 +24,18 @@ loadingState.hidden = true;
 form.hidden = !hasSession;
 invalidState.hidden = hasSession;
 
+if (!hasSession) {
+  // Supabase reports link problems (e.g. otp_expired) in the URL fragment or query.
+  const params = new URLSearchParams(window.location.hash.slice(1) || window.location.search);
+  const reason = params.get('error_description');
+  if (reason) {
+    const detail = document.createElement('p');
+    detail.className = 'mb-0 mt-2 small';
+    detail.textContent = `Reason: ${reason.replaceAll('+', ' ')}`;
+    invalidState.append(detail);
+  }
+}
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   message.textContent = '';
