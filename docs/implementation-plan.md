@@ -20,7 +20,7 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 | 10 | Add profile and dashboard | ✅ Implemented; profile-row and cross-user avatar access checks pass; avatar replacement/error edge cases remain |
 | 11 | Build the admin panel | 🟡 Cross-user edits/deletes, cleanup warnings, and role-selector labels verified; role-change and broader accessibility checks remain |
 | 12 | Polish, document, and deploy | 🟡 Production build and responsive no-overflow checks verified; broader accessibility/state review and deployment remain |
-| 13 | Validate existing color catalogue data | 🟡 23 catalogue JSON files are present; validation, provenance/licensing review, and app integration remain |
+| 13 | Validate existing color catalogue data | 🟡 Repeatable structural validation passes for 23 files; provenance/licensing review remains before app integration |
 | 14 | Add per-user catalogue selection | ⬜ Not started |
 | 15 | Use catalogues in supply forms | ⬜ Not started |
 | 16 | Suggest close color matches | ⬜ Not started |
@@ -251,15 +251,16 @@ Legend: ✅ done · 🟡 in progress / partly done · ⬜ not started
 
 ### 13. Validate and integrate the existing color catalogues 🟡
 
-- Catalogue JSON files already exist in `src/data/catalogues/` (23 files). They currently have no application consumer and are not yet validated as a set.
-- Review and document each catalogue's provenance, update procedure, and licensing/attribution requirements before relying on or distributing its data.
-- Define and validate a consistent entry shape containing the catalogue identifier, manufacturer/code, display name, and normalized color value (hex/RGB); preserve source-specific fields where needed.
-- Add a catalogue loader/validation utility so malformed or missing entries fail visibly instead of silently producing invalid supply data.
-- **Verify:** every catalogue parses, declared counts match, codes are unique within their catalogue, color values are valid, provenance/licensing is documented, and the production build includes the catalogue assets.
+- Catalogue JSON files already exist in `src/data/catalogues/` (23 files). They have no application consumer; the repeatable structural validator is now in place, but source permissions remain unverified.
+- A repeatable `npm run validate:catalogues` check now validates JSON, metadata, declared counts, unique codes, names, hex values, and RGB/hex consistency. Run it before accepting chart changes.
+- **Validation result (2026-10-16):** all 23 files passed; they contain 8,099 entries in total. The current metadata names CSV files but provides no source URLs, authors, retrieval dates, or license/permission terms.
+- Provenance and redistribution rights are therefore unresolved. Document source and licensing terms for every dataset before using it in the app or representing it as an endorsed reference. Add a runtime catalogue loader only when the data is cleared for application use.
+- **Verify before completion:** all catalogue entries pass validation, sources and licensing/attribution are documented, and only approved data is included in the production app.
 - **Commit:** `feat(colors): validate and document existing catalogues`
 
 ### 14. Add per-user catalogue selection
 
+- Blocked on resolving the provenance and redistribution terms described in [color catalogue documentation](color-catalogues.md).
 - Add a user-level catalogue preference and select a supported default for existing and newly registered users. The previously proposed `DNS` default does not correspond to an identifier in the current catalogue files; choose and document the intended default before adding the preference.
 - Store the preference in the profile data or a dedicated preferences table through a committed migration, with an allowlist of supported catalogue identifiers.
 - Add profile/settings controls for selecting the active catalogue and make the choice persist across sessions and pages.

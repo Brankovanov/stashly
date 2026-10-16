@@ -20,7 +20,7 @@ The core application is implemented: users can manage supplies and projects, tra
 - A protected profile page for display-name updates and private profile-photo management
 - An administrator-only panel for platform totals, categories, role management, and content moderation
 
-Color-chart JSON data is present under `src/data/catalogues/`, but it is not yet connected to the supply form or profile preferences. The app is not documented as deployed; no live URL or demo credentials are configured here. Remaining work includes broader upload/replacement and accessibility checks, deployment and demo setup, and catalogue validation and integration.
+Color-chart JSON data is present under `src/data/catalogues/`, but it is not yet connected to the supply form or profile preferences. All 23 files pass the structural validation command; their provenance and redistribution rights remain unresolved, so the data must not yet be integrated as a user-facing catalogue. The app is not documented as deployed; no live URL or demo credentials are configured here. Remaining work includes broader upload/replacement and accessibility checks, deployment and demo setup, catalogue provenance review, and later integration.
 
 The manual Supabase/browser checks below were recorded on 2026-10-10. They verified two-account row isolation for profiles, supplies, projects, and project items; denied unauthorized mutations and purchase attempts; private supply-photo, project-cover, PDF-pattern, and avatar access; cross-owner supply-link rejection; and visible validation feedback for unsupported/oversized uploads. Temporary-admin checks covered category management, user listing, cross-account moderation, role guard behavior, and cleanup warnings when storage deletion was deliberately blocked. Temporary test data and roles were cleaned up afterward. These are documented prior checks, not a claim that the live Supabase project was re-tested for this update.
 
@@ -31,6 +31,7 @@ The manual Supabase/browser checks below were recorded on 2026-10-10. They verif
 - [Project instructions](docs/copilot-instructions.md)
 - [Architecture overview](docs/architecture.md)
 - [Database schema](docs/database.md)
+- [Color catalogue data and validation](docs/color-catalogues.md)
 
 ## Technology
 
@@ -85,7 +86,7 @@ Verify migration status against the intended Supabase project before relying on 
 
 ## Next implementation milestone
 
-Validate and integrate the existing color catalogues, complete remaining verification, then configure deployment and demo accounts. See [the implementation plan](docs/implementation-plan.md).
+Resolve color catalogue provenance and permitted use before integrating the data, complete remaining verification, then configure deployment and demo accounts. See [the implementation plan](docs/implementation-plan.md).
 
 ## Roles
 
