@@ -3,6 +3,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
 import '../styles/main.css';
 import { createNavbar } from '../components/navbar.js';
+import { setupCatalogueLookup } from '../components/catalogueLookup.js';
+import { getColorCatalogue } from '../services/profileService.js';
+import { DEFAULT_CATALOGUE_ID } from '../utils/catalogues.js';
 import {
   createSupply,
   getSupplyById,
@@ -51,6 +54,7 @@ try {
       existingPhotoUrl = photoUrls.get(existingPhotoPath) ?? null;
       populateForm(supply, existingPhotoUrl);
     }
+    setupCatalogueLookup(form, supply?.color_catalogue ?? (await getPreferredCatalogue()));
 
     loading.hidden = true;
     form.hidden = false;
@@ -69,6 +73,15 @@ try {
   loading.hidden = true;
   error.textContent = loadError.message;
   error.hidden = false;
+}
+
+// The lookup is optional, so a failed preference read falls back to the default.
+async function getPreferredCatalogue() {
+  try {
+    return await getColorCatalogue();
+  } catch {
+    return DEFAULT_CATALOGUE_ID;
+  }
 }
 
 function showPhotoPreviewAfterInvalidSelection(errorMessage) {
@@ -203,6 +216,7 @@ function readFormValues() {
     brand: form.elements.brand.value,
     color_code: form.elements.color_code.value,
     color_hex: form.elements.color_hex.value,
+    color_catalogue: form.elements.color_catalogue.value,
     quantity: form.elements.quantity.value,
     unit: form.elements.unit.value,
     notes: form.elements.notes.value,
@@ -215,6 +229,7 @@ function populateForm(supply, photoUrl) {
   form.elements.brand.value = supply.brand ?? '';
   form.elements.color_code.value = supply.color_code ?? '';
   form.elements.color_hex.value = supply.color_hex ?? '';
+  form.elements.color_catalogue.value = supply.color_catalogue ?? '';
   form.elements.quantity.value = supply.quantity;
   form.elements.unit.value = supply.unit ?? '';
   form.elements.notes.value = supply.notes ?? '';

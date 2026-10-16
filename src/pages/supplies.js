@@ -5,6 +5,7 @@ import '../styles/main.css';
 import { createNavbar } from '../components/navbar.js';
 import { deleteSupply, getSupplyBrowseData } from '../services/suppliesService.js';
 import { requireAuth } from '../utils/guards.js';
+import { getCatalogueInfo } from '../utils/catalogues.js';
 
 document.querySelector('#site-header').append(createNavbar());
 
@@ -142,7 +143,16 @@ function createSupplyCard(supply) {
     body.prepend(photo);
   }
   if (supply.brand) body.append(createDetail(supply.brand, 'text-muted'));
-  if (supply.color_code) body.append(createDetail(`Color: ${supply.color_code}`));
+  if (supply.color_code) {
+    const catalogueLabel = getCatalogueInfo(supply.color_catalogue)?.label;
+    body.append(
+      createDetail(
+        catalogueLabel
+          ? `Color: ${supply.color_code} (${catalogueLabel})`
+          : `Color: ${supply.color_code}`,
+      ),
+    );
+  }
 
   const category = document.createElement('span');
   category.className = 'badge rounded-pill text-bg-light border mt-2';

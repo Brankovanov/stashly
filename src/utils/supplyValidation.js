@@ -1,3 +1,5 @@
+import { isSupportedCatalogue } from './catalogues.js';
+
 export function validateSupplyInput(values) {
   const errors = {};
   const name = values.name.trim();
@@ -23,6 +25,9 @@ export function validateSupplyInput(values) {
       brand: toNullableText(values.brand),
       color_code: toNullableText(values.color_code),
       color_hex: colorHex || null,
+      color_catalogue: isSupportedCatalogue(values.color_catalogue)
+        ? values.color_catalogue
+        : null,
       quantity,
       unit: toNullableText(values.unit),
       notes: toNullableText(values.notes),

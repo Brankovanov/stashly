@@ -17,6 +17,35 @@
           <p id="form-loading" class="text-muted" role="status">Loading categories…</p>
           <div id="form-error" class="alert alert-danger" role="alert" hidden></div>
           <form id="supply-form" hidden novalidate>
+            <fieldset class="catalogue-lookup mb-4">
+              <legend class="h6 mb-1">Find a color in a catalogue</legend>
+              <p class="form-text mt-0">
+                Optional: pick a thread or bead color to fill in brand, code and swatch.
+                You can still type everything manually. Color data is from
+                <a href="https://stitchmate.app/" target="_blank" rel="noopener">Stitchmate</a>;
+                on-screen colors are approximate.
+              </p>
+              <div class="row g-2">
+                <div class="col-12 col-sm-5">
+                  <label class="form-label small" for="lookup-catalogue">Catalogue</label>
+                  <select class="form-select" id="lookup-catalogue" name="lookup_catalogue"></select>
+                </div>
+                <div class="col-12 col-sm-7">
+                  <label class="form-label small" for="lookup-query">Code or name</label>
+                  <input
+                    class="form-control"
+                    id="lookup-query"
+                    name="lookup_query"
+                    type="search"
+                    autocomplete="off"
+                    placeholder="310 or Black"
+                  />
+                </div>
+              </div>
+              <div class="small text-muted mt-2" id="lookup-status" role="status" aria-live="polite"></div>
+              <div class="list-group mt-2" id="lookup-results"></div>
+            </fieldset>
+            <input type="hidden" name="color_catalogue" />
             <div class="mb-3">
               <label class="form-label" for="category-id">Category</label>
               <select class="form-select" id="category-id" name="category_id" required>
