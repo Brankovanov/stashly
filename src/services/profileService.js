@@ -3,6 +3,7 @@ import {
   deleteProfileAvatar,
   uploadProfileAvatar,
 } from './storageService.js';
+import { isSupportedCatalogue, resolveCatalogueId } from '../utils/catalogues.js';
 
 const PROFILE_FIELDS = 'id, display_name, avatar_path, created_at, updated_at';
 
@@ -50,6 +51,40 @@ export async function updateCurrentProfile({ displayName }) {
   if (error) throw new Error(`Unable to save your profile: ${error.message}`);
   if (!data) throw new Error('Your profile could not be updated.');
   return data;
+}
+
+/**
+ * Returns the user's preferred color catalogue id. Kept apart from
+ * getCurrentProfile so pages that only need the profile do not depend on it.
+ */
+export async function getColorCatalogue() {
+  const user = await getCurrentUser();
+  const { data, error } = await getSupabaseClient()
+    .from('profiles')
+    .select('color_catalogue')
+    .eq('id', user.id)
+    .maybeSingle();
+
+  if (error) throw new Error(`Unable to load your color catalogue: ${error.message}`);
+  return resolveCatalogueId(data?.color_catalogue);
+}
+
+export async function updateColorCatalogue(catalogueId) {
+  if (!isSupportedCatalogue(catalogueId)) {
+    throw new Error('Choose a supported color catalogue.');
+  }
+
+  const user = await getCurrentUser();
+  const { data, error } = await getSupabaseClient()
+    .from('profiles')
+    .update({ color_catalogue: catalogueId })
+    .eq('id', user.id)
+    .select('color_catalogue')
+    .maybeSingle();
+
+  if (error) throw new Error(`Unable to save your color catalogue: ${error.message}`);
+  if (!data) throw new Error('Your color catalogue could not be saved.');
+  return data.color_catalogue;
 }
 
 export async function replaceCurrentProfileAvatar(file, previousPath) {

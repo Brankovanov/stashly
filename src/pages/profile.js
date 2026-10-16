@@ -4,11 +4,14 @@ import 'bootstrap';
 import '../styles/main.css';
 import { createNavbar } from '../components/navbar.js';
 import {
+  getColorCatalogue,
   getCurrentProfile,
   removeCurrentProfileAvatar,
   replaceCurrentProfileAvatar,
+  updateColorCatalogue,
   updateCurrentProfile,
 } from '../services/profileService.js';
+import { CATALOGUES } from '../utils/catalogues.js';
 import {
   getProfileAvatarUrl,
   validateProfileAvatar,
@@ -22,6 +25,7 @@ const errorState = document.querySelector('#error-state');
 const form = document.querySelector('#profile-form');
 const displayNameInput = form.elements.display_name;
 const submitButton = form.querySelector('button[type="submit"]');
+const catalogueSelect = form.elements.color_catalogue;
 const message = document.querySelector('#profile-message');
 const avatarSection = document.querySelector('.profile-avatar-section');
 const avatarForm = document.querySelector('#avatar-form');
@@ -40,6 +44,10 @@ try {
     currentProfile = await getCurrentProfile();
     document.querySelector('#profile-email').value = currentProfile.email;
     displayNameInput.value = currentProfile.display_name ?? '';
+    for (const catalogue of CATALOGUES) {
+      catalogueSelect.append(new Option(catalogue.label, catalogue.id));
+    }
+    catalogueSelect.value = await getColorCatalogue();
     loadingState.hidden = true;
     form.hidden = false;
     avatarSection.hidden = false;
@@ -88,6 +96,7 @@ async function handleProfileSubmit(event) {
       displayName: displayNameInput.value,
     });
     displayNameInput.value = profile.display_name;
+    await updateColorCatalogue(catalogueSelect.value);
     message.classList.add('text-success');
     message.textContent = 'Your profile has been updated.';
   } catch (error) {
